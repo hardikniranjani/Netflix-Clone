@@ -1,0 +1,87 @@
+/* Banner */
+#banner{
+  color: white;
+  object-fit: contain;
+  height: 844px;
+  background-position: center center;
+  background-size: cover;
+}
+
+#banner::after{
+  position: absolute;
+  top:0; 
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:rgba(0,0,0,0.6);
+  box-shadow: inset 120px 100px 250px #141414
+}
+#banner__contents{
+  margin-left: 70px;
+  padding-top: 538px;
+  height: 190px;
+
+}
+
+#banner__contents_details{
+  margin-top: -150px;
+}
+#banner__title{
+  font-size: 3rem;
+  font-weight: 800;
+  padding-bottom: 0.3rem;
+}
+#banner__description{
+  width: 45rem;
+  line-height: 1.5;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  max-width: 1260px;
+  height: 100px;
+  overflow: hidden;
+}
+#banner__button{
+  cursor: pointer;
+  color: white;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  border-radius: .2vw;
+  padding-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+  margin-right: 1rem;
+  padding-top: .5rem;
+  background-color: rgba(51,51,51,.5);
+  padding-bottom: .5rem;
+}
+#banner__button:hover{
+  color: black;
+  background-color: #e6e6e6;
+  transition: all .3s;
+}
+#banner__fadeBottom{
+  margin-bottom: -600px;
+  width:100vw;
+  height: 19.5rem;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(37,37,37, .61),
+    #111
+  );
+}
+
+  #banner__fadeLeft{
+    width:50%;
+    height: 100%;
+    background: linear-gradient(
+      to left,
+      transparent,
+      rgba(37,37,37, .61),
+      #111
+    );
+
+  }

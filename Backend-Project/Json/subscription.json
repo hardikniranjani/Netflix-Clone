@@ -1,0 +1,47 @@
+[
+    {
+        "_id":1,
+        "Monthly_price":119,
+        "Plan_name":"Mobile-only plan",
+        "Number_of_screen_available":1,
+        "Max_video_quality":"480p",
+        "Devices":["Mobile"],
+        "IsActive":true
+    },
+    {
+        "_id":2,
+        "Monthly_price":449,
+        "Plan_name":"Basic",
+        "Number_of_screen_available":2,
+        "Max_video_quality":"720p",
+        "Devices":["Mobile","Tablet"],
+        "IsActive":true
+    },
+    {
+        "_id":3,
+        "Monthly_price":749,
+        "Plan_name":"Standard ",
+        "Number_of_screen_available":3,
+        "Max_video_quality":"1080p",
+        "Devices":["Mobile","Tablet","Laptop"],
+        "IsActive":true
+    },
+    {
+        "_id":4,
+        "Monthly_price":1199 ,
+        "Plan_name":"Premium",
+        "Number_of_screen_available":7,
+        "Max_video_quality":"2k",
+        "Devices":["Mobile","Tablet","Laptop","TV"],
+        "IsActive":true
+    },    
+    {
+        "_id":5,
+        "Monthly_price":1799,
+        "Plan_name":"Diamond",
+        "Number_of_screen_available":11,
+        "Max_video_quality":"4K",
+        "Devices":["Mobile","Tablet","Laptop","TV"],
+        "IsActive":true
+    }
+]
