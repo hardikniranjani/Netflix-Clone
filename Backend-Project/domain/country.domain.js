@@ -15,8 +15,17 @@ class CountryDomain {
   async createCountry(req, res) {
     var data = req.body;
 
+    const findCountry = await Country.findOne({
+      CountryName: data.CountryName,
+    });
+
+    if (findCountry)
+      return res.status(400).send({ msg: "Country Name already available!!" });
+
+    let allCountries = await Country.find().sort({ _id: -1 });
+    let id = allCountries.length == 0 ? 1 : allCountries[0]._id + 1;
     let country = new Country({
-      _id: data._id,
+      _id: id,
       CountryName: data.CountryName,
       CountryShortForm: data.CountryShortForm,
       CountryCode: data.CountryCode,
