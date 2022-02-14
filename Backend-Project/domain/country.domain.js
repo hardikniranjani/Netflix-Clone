@@ -1,23 +1,20 @@
 const Country = require("../models/country.model");
 
 class CountryDomain {
-
   // create bulk Country
-  async createBulkCountry(req,res){
-    
+  async createBulkCountry(req, res) {
     var countryData = req.body;
-    Country.insertMany(countryData,(err,docs)=>{
-      if(err) res.status(400).send("error while inserting many documents "+err);
+    Country.insertMany(countryData, (err, docs) => {
+      if (err)
+        res.status(400).send("error while inserting many documents " + err);
       res.status(200).send(docs);
-    })
-    
+    });
   }
 
   // create Country
   async createCountry(req, res) {
-   
     var data = req.body;
-    
+
     let country = new Country({
       _id: data._id,
       CountryName: data.CountryName,
@@ -25,23 +22,22 @@ class CountryDomain {
       CountryCode: data.CountryCode,
     });
 
-    try{
+    try {
       const NewCountry = await country.save();
-      console.log(NewCountry,"line 17");
+      console.log(NewCountry, "line 17");
       if (NewCountry) {
         res.status(200).send(NewCountry);
       } else {
         res.send("can't create country");
       }
-    }catch(e){
+    } catch (e) {
       res.status(500).send(e);
     }
-    
   }
 
   // get all country
   async getAllCountry(req, res) {
-    var data = await Country.find({IsActive: true});
+    var data = await Country.find({ IsActive: true });
 
     if (data.length > 0) {
       res.send(data);
@@ -65,7 +61,6 @@ class CountryDomain {
 
   // Soft delete Country by id
   async deleteAnCountry(req, res) {
-
     var id = req.params.id;
     const country = await Country.findById(id);
     if (country) {
@@ -91,19 +86,17 @@ class CountryDomain {
 
   // Hard delete Country by id
   async HardDeleteAnCountry(req, res) {
-  
     var id = req.params.id;
 
     const result = await Country.findByIdAndDelete(id);
 
-    if (result)  res.status(200).send({"msg" : "Successfully deleted"});
-    else res.status(404).send({"err" : "Country not found"});
+    if (result) res.status(200).send({ msg: "Successfully deleted" });
+    else res.status(404).send({ err: "Country not found" });
   }
 
   //  Edit Country
 
   async editAnCountry(req, res) {
-
     var data = req.body;
     var id = req.params.id;
 

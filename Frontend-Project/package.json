@@ -12,6 +12,7 @@
     "@dicebear/avatars": "^4.10.2",
     "@dicebear/avatars-identicon-sprites": "^4.10.2",
     "@dicebear/avatars-male-sprites": "^4.10.2",
+    "@hennge/vue3-pagination": "^1.0.17",
     "@iconicicons/vue": "^1.5.0",
     "@iconicicons/vue3": "^1.5.0",
     "axios": "^0.24.0",

@@ -30,8 +30,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(movie, i) in Movies" :key="movie._id">
-          <th scope="row">{{ i + 1 }}</th>
+        <tr v-for="(movie, i) in pageList" :key="movie._id">
+          <th scope="row">{{ indexs(i) }}</th>
 
           <td>
             <router-link
@@ -81,27 +81,74 @@
       </tbody>
     </table>
   </div>
+  <div>
+    <Pagination
+      v-if="pageNumbers.length > 0"
+      @changePage="changePageNData($event)"
+      :pageNumbers="pageNumbers"
+      :currentPageIndex="currentPageIndex"
+    />
+  </div>
 </template>
 
 <script>
 // import AdminApi from "../../services/admin.service";
 import MoviesApi from "../../../services/movie.service";
+import Pagination from "../../../components/Pagination.vue";
+// import VPagination from "@hennge/vue3-pagination";
+// import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 export default {
   name: "AdminMoviePage",
   data() {
     return {
       Movies: [],
-      image_src: "",
+      pageList: [],
+      currentPageIndex: 1,
+      dataPerPage: 5,
+      pageNumbers: [],
     };
+  },
+  methods: {
+    changePageNData(newPageNumber) {
+      this.pageList = this.Movies.slice(
+        this.dataPerPage * (newPageNumber - 1),
+        newPageNumber * this.dataPerPage
+      );
+      this.currentPageIndex = newPageNumber;
+    },
+    makePartition() {
+      let currentPartition = this.Movies.length / this.dataPerPage;
+      let pagePartition =
+        currentPartition % 1 == 0
+          ? currentPartition
+          : Math.ceil(currentPartition);
+      this.pageNumbers = Array.from({ length: pagePartition }, (_, i) => i + 1);
+    },
+  },
+
+  components: {
+    Pagination,
   },
   created() {
     document.title = `NetflixAdmin - Movies`;
 
     MoviesApi.getAllMovie().then((res) => {
-      console.log(res);
       this.Movies = res.data;
-      this.src = res.data.backdrop_path;
+      this.pageList = this.Movies.slice(0, this.dataPerPage);
+      this.makePartition();
     });
+  },
+
+  computed: {
+    indexs() {
+      return (idx) => {
+        if (this.currentPageIndex == 1) {
+          return idx + 1;
+        } else {
+          return (this.currentPageIndex - 1) * this.dataPerPage + idx + 1;
+        }
+      };
+    },
   },
 };
 </script>

@@ -8,6 +8,7 @@ export default createStore({
     token: "",
     user: {},
     avatar: "",
+    search_str: "",
     // movies:{},
     // series:{},
   },
@@ -27,6 +28,9 @@ export default createStore({
     },
     AVATAR(state, avatarData) {
       state.avatar = avatarData;
+    },
+    SEARCH_STRING(state, str) {
+      state.search_str = str;
     },
     // MOVIES(state, movieData) {
     //   state.movies = { ...movieData };
@@ -51,6 +55,9 @@ export default createStore({
     ADD_HISTORY({ commit }, history) {
       commit("ADD_HISTORY", history);
     },
+    SEARCH_STRING({ commit },str) {
+      commit("SEARCH_STRING",str);
+    }
     // MOVIES({commit},movie_res){
     //   commit("MOVIES",movie_res);
     // },
@@ -61,20 +68,24 @@ export default createStore({
   getters: {
     HistoryMovies(state) {
       let Movies = state.user.watchHistory.Movies;
-      if (Movies.length > 0) return state.user.watchHistory.Movies.map((obj)=>obj._id);
+      if (Movies.length > 0)
+        return state.user.watchHistory.Movies.map((obj) => obj._id);
       else return [];
     },
     HistoryEpisodes(state) {
-      return state.user.watchHistory.Episode.map((obj)=>obj._id);
+      return state.user.watchHistory.Episode.map((obj) => obj._id);
     },
-    mediaDuration : function(state){
-      return (id,media_type)=>{
-        
-        let mediaObj = state.user.watchHistory[media_type].filter((obj)=>obj._id == id);
-        let duration = parseInt(JSON.parse(JSON.stringify(mediaObj))[0]["duration"]);
-        
-      return duration === undefined ? 0 : duration;
-      }
-    } 
+    mediaDuration: function (state) {
+      return (id, media_type) => {
+        let mediaObj = state.user.watchHistory[media_type].filter(
+          (obj) => obj._id == id
+        );
+        let duration = parseInt(
+          JSON.parse(JSON.stringify(mediaObj))[0]["duration"]
+        );
+
+        return duration === undefined ? 0 : duration;
+      };
+    },
   },
 });
