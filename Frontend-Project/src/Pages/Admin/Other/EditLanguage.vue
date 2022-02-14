@@ -10,8 +10,10 @@
               style="z-index: 2"
               >Edit Language</label
             >
+            <h4 class="ms-3 mt-3">Name</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="Name_input"
+              class="form_input form-control ms-3 p-2"
               type="text"
               placeholder="Name"
               :error="errors.GenreName"
@@ -53,7 +55,7 @@ export default {
   },
   data() {
     const validationSchema = object({
-      GenreName: string().required(),
+      Name: string().required(),
     });
 
     const { handleSubmit, setFieldValue, errors } = useForm({
@@ -61,29 +63,29 @@ export default {
       initialValues: {},
     });
 
-    const handleChangeGenre = (event) => {
-      setFieldValue("GenreName", event.target.value);
+    const handleChangeName = (event) => {
+      setFieldValue("Name", event.target.value);
     };
 
-    const { value: GenreName } = useField("GenreName");
+    const { value: Name } = useField("Name");
 
     const submit = handleSubmit((value) => {
       this.error = "";
-      this.AddLanguage(value);
+      this.EditLanguage(value);
     });
 
     return {
-      GenreName,
+      Name,
       submit,
-      handleChangeGenre,
+      handleChangeName,
       errors,
       error: "",
     };
   },
 
   methods: {
-    async AddLanguage(data1) {
-      await LanguageApi.updateLanguage({ data1 })
+    async EditLanguage(data1) {
+      await LanguageApi.updateLanguage({language_id:this.id, data:data1 })
         .then((res) => {
           console.log(res);
         })
@@ -91,6 +93,18 @@ export default {
           console.log(err);
         });
     },
+  },
+  async mounted() {
+    await LanguageApi.getSpokenLanguage({
+      language_id: this.id,
+    })
+      .then((res) => {
+        console.log(res.data);
+        document.getElementById("Name_input").value = res.data.Spoken_Language;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

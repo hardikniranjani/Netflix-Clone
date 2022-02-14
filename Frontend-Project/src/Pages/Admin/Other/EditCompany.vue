@@ -10,10 +10,11 @@
               style="z-index: 2"
               >Edit Company</label
             >
-
+            <h4 class="ms-3 mt-3">Name</h4>
             <input
-              class="form_input form-control m-3 p-2"
-              type="number"
+              id="Name_input"
+              class="form_input form-control ms-3 p-2"
+              type="text"
               placeholder="Name"
               :error="errors.Name"
               :modelValue="Name"
@@ -23,8 +24,10 @@
               errors.Name
             }}</span>
 
+            <h4 class="ms-3 mt-3">Origin Country</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="Country_input"
+              class="form_input form-control ms-3 p-2"
               type="text"
               placeholder="Origin Country"
               :error="errors.Origin_country"
@@ -37,8 +40,10 @@
               >{{ errors.Origin_country }}</span
             >
 
+            <h4 class="ms-3 mt-3">Founded</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="Founded_input"
+              class="form_input form-control ms-3 p-2"
               type="text"
               placeholder="Founded"
               :error="errors.Founded"
@@ -49,8 +54,10 @@
               errors.Founded
             }}</span>
 
+            <h4 class="ms-3 mt-3">Founders</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="Founders_input"
+              class="form_input form-control ms-3 p-2"
               type="text"
               placeholder="Founders"
               :error="errors.Founders"
@@ -61,8 +68,10 @@
               errors.Founders
             }}</span>
 
+            <h4 class="ms-3 mt-3">CEO</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="CEO_input"
+              class="form_input form-control ms-3 p-2"
               type="text"
               placeholder="CEO"
               :error="errors.CEO"
@@ -73,8 +82,24 @@
               errors.CEO
             }}</span>
 
+            <h4 class="ms-3 mt-3">Headquater</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="Headquaters_input"
+              class="form_input form-control ms-3 p-2"
+              type="text"
+              placeholder="Headquater"
+              :error="errors.Headquaters"
+              :modelValue="Headquaters"
+              @change="handleChangeHeadquaters"
+            />
+            <span v-if="errors.Headquaters" class="ms-3 form_error_massage">{{
+              errors.Headquaters
+            }}</span>
+
+            <h4 class="ms-3 mt-3">Address</h4>
+            <textarea
+              id="Address_input"
+              class="form_input form-control ms-3 p-2"
               type="text"
               placeholder="Address"
               :error="errors.Address"
@@ -85,20 +110,10 @@
               errors.Address
             }}</span>
 
-            <input
-              class="form_input form-control m-3 p-2"
-              type="text"
-              placeholder="Headquaters"
-              :error="errors.Headquaters"
-              :modelValue="Headquaters"
-              @change="handleChangeHeadquaters"
-            />
-            <span v-if="errors.Headquaters" class="ms-3 form_error_massage">{{
-              errors.Headquaters
-            }}</span>
-
-            <input
-              class="form_input form-control m-3 p-2"
+            <h4 class="ms-3 mt-3">Description</h4>
+            <textarea
+              id="Description_input"
+              class="form_input form-control ms-3 p-2"
               type="text"
               placeholder="Description"
               :error="errors.Description"
@@ -230,6 +245,19 @@ export default {
           console.log(err);
         });
     },
+  },
+
+  async mounted() {
+    console.log(this.id);
+    await CompanyApi.getAnCompany({
+      company_id: `${this.id}`,
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

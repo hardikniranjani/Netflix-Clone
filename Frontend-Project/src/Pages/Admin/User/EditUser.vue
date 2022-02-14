@@ -11,9 +11,11 @@
               >Edit User</label
             >
             <input
-              class="form_input form-control my-3 ps-3"
+              id="name_input"
+              class="form_input form-control my-3 ps-3 "
               type="text"
               placeholder="Name"
+              Name="Name"
               :error="errors.Name"
               :modelValue="Name"
               @change="handleChangeName"
@@ -22,8 +24,10 @@
               errors.Name
             }}</span>
             <input
-              class="form_input form-control my-3 ps-3"
+              id="email_input"
+              class="form_input form-control my-3 ps-3 "
               type="email"
+              Name="email"
               placeholder="Email"
               :error="errors.Email"
               :modelValue="Email"
@@ -32,18 +36,6 @@
             <span v-if="errors.Email" class="ms-3 form_error_massage">{{
               errors.Email
             }}</span>
-            <input
-              class="form_input form-control my-3 ps-3"
-              type="password"
-              placeholder="Password"
-              :error="errors.Password"
-              :modelValue="Password"
-              @change="handleChangePassword"
-            />
-            <span v-if="errors.Password" class="ms-3 form_error_massage">{{
-              errors.Password
-            }}</span>
-
             <button class="form_input_button btn btn-danger mt-3 p-2 w-100">
               Edit
             </button>
@@ -60,21 +52,28 @@ import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import Footer from "../../..//components/Footer.vue";
-import userApi from "../../../services/user.service";
+import UserApi from "../../../services/user.service";
 export default {
   name: "AdminEditUser",
   components: {
     AdminNavBar,
     Footer,
   },
+  props:{
+    id:String
+  },
   created() {
     document.title = `NetflixAdmin - EditUser`;
+  },
+  mounted(){
+    document.getElementById("name_input").value = "User";
+    document.getElementById("email_input").value = "Email ID";
+
   },
   data() {
     const validationSchema = object({
       Name: string().required().min(2),
       Email: string().required().email(),
-      Password: string().required(),
     });
 
     const { handleSubmit, setFieldValue, errors } = useForm({
@@ -90,29 +89,22 @@ export default {
       setFieldValue("Email", event.target.value);
     };
 
-    const handleChangePassword = (event) => {
-      setFieldValue("Password", event.target.value);
-    };
 
     const { value: Name } = useField("Name");
     const { value: Email } = useField("Email");
-    const { value: Password } = useField("Password");
 
 
     const submit = handleSubmit((value) => {
       this.error = "";
       this.EditUser(value);
-      console.log(`${value.Email}`);
     });
 
     return {
       Name,
       Email,
-      Password,
       submit,
       errors,
       handleChangeEmail,
-      handleChangePassword,
       handleChangeName,
       error: "",
     };
@@ -120,7 +112,7 @@ export default {
 
   methods: {
     async EditUser(data1) {
-      await userApi.updateAnUser({ data1 })
+      await UserApi.updateAnUser({ data1 })
         .then((res) => {
           console.log(res);
         })
