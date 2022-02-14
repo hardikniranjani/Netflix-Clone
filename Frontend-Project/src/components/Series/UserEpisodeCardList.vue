@@ -43,6 +43,8 @@ export default {
   },
   props: {
     data: Array,
+    seasonid: String,
+    episodeid: String,
   },
   methods: {
     async removeHistory(data1) {

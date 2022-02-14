@@ -11,7 +11,9 @@
           v-for="i in Genres"
           :key="i._id"
         >
-          <router-link  style="text-decoration: none; color: inherit;" :to="{ name: 'GenersContent', params: { id: i._id } }"
+          <router-link
+            style="text-decoration: none; color: inherit"
+            :to="{ name: 'GenersContent', params: { id: i._id } }"
             ><SmallCard :Name="i.GenresName"
           /></router-link>
         </span>
@@ -69,5 +71,16 @@ export default {
 }
 .footer {
   margin-top: 470px;
+}
+
+@media screen and (max-width: 788px) {
+  .AllGeners {
+    margin-right: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-decoration: none;
+  }
 }
 </style>

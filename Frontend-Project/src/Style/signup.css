@@ -98,6 +98,7 @@
   @media screen and (max-width: 788px) {
     .signup__body_form{
       width: 100%;
+      margin-top: 30px;
     }
   
     .signup__header > img{
@@ -109,5 +110,8 @@
     .signup__header > button{
       margin-top: -10px;
       margin-right: -30px;
+    }
+    .signup__footer{
+      margin-top: 20px;
     }
   }

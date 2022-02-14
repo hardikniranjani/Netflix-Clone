@@ -1,12 +1,11 @@
 <template>
   <div class="HomePage">
     <div class="nav"><NavBar /></div>
-    <header id="banner">
+    <div id="banner">
       <div id="banner__contents">
         <div id="banner__contents_details">
           <h1 id="banner__title">{{ Banner_Movie.MovieName }}</h1>
           <div id="banner__buttons">
-            <!-- <button id="banner__button">Go to Movie</button> -->
             <button id="banner__button" v-on:click="addToWatchLater()">
               Watch Later
             </button>
@@ -17,7 +16,7 @@
         </div>
       </div>
       <div id="banner__fadeBottom"></div>
-    </header>
+    </div>
 
     <div class="HomePage_body">
       <div class="body_content">

@@ -97,4 +97,10 @@ export default {
 .body_content {
   margin-top: -100px;
 }
+
+@media screen and (max-width: 788px) {
+  .Series_body{
+    margin-top: -180px;
+  }
+}
 </style>

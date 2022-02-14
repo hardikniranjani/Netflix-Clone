@@ -81,7 +81,7 @@
       </tbody>
     </table>
   </div>
-  <div>
+  <div class="d-flex justify-content-center">
     <Pagination
       v-if="pageNumbers.length > 0"
       @changePage="changePageNData($event)"

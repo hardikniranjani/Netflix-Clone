@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="subscritption_body container border mt-5 ms-5 text-start">
+      <div class="subscritption_body container border mt-5 text-start">
         <div class="d-flex">
           <div class="subscritption_body_plan">My Plan</div>
           <div class="subscritption_body_details d-flex">
@@ -325,6 +325,7 @@ export default {
 }
 .subscritption_body,
 .list_body {
+  margin-left: 80px;
   font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   box-shadow: 0px 0px 5px 5px #9c9c9ce3;
   border-radius: 8px;
@@ -373,5 +374,53 @@ export default {
 }
 .footer {
   margin-top: 470px;
+}
+
+@media screen and (max-width: 788px) {
+  .subscritption_body {
+    margin-left: 0px;
+    font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    box-shadow: 0px 0px 5px 5px #9c9c9ce3;
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+    padding-top: 10px;
+  }
+  .subscription_plan_details,
+  .subscription_plan_details_2nd_line {
+    font-size: 10px;
+    font-weight: normal;
+    color: #dfdfdf;
+    transition: all 0.4s;
+  }
+  .subscription_plan_details_2nd_line_device {
+    font-weight: normal;
+    font-size: 11px;
+    color: #d2d2d2;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+  .subscritption_body_plan,
+  .list_body_name {
+    padding-left: 0px;
+    flex: 0.2;
+    
+  }
+  .list_body_details {
+    flex: 0.6;
+  }
+  .subscritption_body_details {
+    flex: 0.81;
+  }
+
+  .subscritption_body_details_name {
+    flex: 1;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(216, 31, 38);
+  }
+  .subscritption_body_details_plan {
+    flex: 0.19;
+  }
 }
 </style>

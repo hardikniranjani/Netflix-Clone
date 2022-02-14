@@ -20,6 +20,7 @@
         <span v-if="Episodes.length > 0">
           <h4>Episodes</h4>
           <UserEpisodeCardList :data="Episodes" />
+        
         </span>
       </div>
       <div v-else>

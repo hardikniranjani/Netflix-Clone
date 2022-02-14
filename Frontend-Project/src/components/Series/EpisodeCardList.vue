@@ -1,5 +1,5 @@
 <template>
-  <div class="categories">
+  <div class="episode_categories">
     <div
       class="categories_card_main"
       v-for="episode in data"
@@ -69,12 +69,12 @@ export default {
 </script>
 
 <style>
-.categories {
+.episode_categories {
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
 }
-.categories {
+.episode_categories {
   padding-bottom: 10px;
   padding-top: 10px;
 }
@@ -124,5 +124,12 @@ export default {
 .categories_card_main:hover .categories_card_bottom {
   opacity: 1;
   cursor: pointer;
+}
+
+@media screen and (max-width: 788px) {
+  .episode_categories{
+    padding-bottom: 0px;
+  padding-top: 10px;
+  }
 }
 </style>

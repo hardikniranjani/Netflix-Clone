@@ -1,107 +1,127 @@
 <template>
-  <div class="nav" style="z-index: 20">
-    <div class="nav__left">
-      <img
-        class="nav_logo"
-        src="../assets/logo.svg"
-        alt="netflix_logo"
-        v-on:click="home"
-      />
-      <nav class="navbar navbar-expand-lg navbar-light p-0">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link class="link" :to="{ name: 'HomePage' }">
-                <a
-                  class="nav_1 nav-link"
-                  style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
-                  aria-current="page"
-                  >Home</a
-                >
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="link" :to="{ name: 'MovieHomePage' }">
-                <a
-                  class="nav_2 nav-link"
-                  style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
-                  >Movies</a
-                >
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="link" :to="{ name: 'SeriesHomePage' }">
-                <a
-                  class="nav_3 nav-link"
-                  style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
-                  >Series</a
-                >
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="link" :to="{ name: 'GenersPage' }">
-                <a
-                  class="nav_3 nav-link"
-                  style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
-                  >Genres</a
-                >
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="link" :to="{ name: 'WishList' }">
-                <a
-                  class="nav_3 nav-link"
-                  style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
-                  >WishList</a
-                >
-              </router-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+  <nav class="nav navbar navbar-expand-lg navbar-light w-100" style="z-index:4">
+    <img
+      class="nav_logo"
+      src="../assets/logo.svg"
+      alt="netflix_logo"
+      v-on:click="home"
+    />
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="nav__right">
-      <div>
-        <input type="search" name="" placeholder="search..." id="">
-      </div>
-      <div
-        class="ms-3 mt-2"
-        id="Profile_image1"
-        v-on:click="userAccount"
-        v-html="user_icon"
-      ></div>
-      <!-- dropdown menu -->
-      <div class="dropdown Profile_dropdown">
-        <button
-          class="dropdown_profile btn w-100 dropdown-toggle"
-          type="button"
-          style="color: rgba(221, 221, 221, 0.87)"
-          data-bs-toggle="dropdown"
-        ></button>
-        <div
-          class="dropdown-menu align-center"
-          style="background-color: #00000054"
-        >
-          <p class="text-white text-center">
-            Hello! {{ this.$store.state.user.Name }}
-          </p>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <router-link class="link" :to="{ name: 'HomePage' }">
+            <a
+              class="nav_1 nav-link"
+              style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
+              aria-current="page"
+              >Home</a
+            >
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="link" :to="{ name: 'MovieHomePage' }">
+            <a
+              class="nav_2 nav-link"
+              style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
+              >Movies</a
+            >
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="link" :to="{ name: 'SeriesHomePage' }">
+            <a
+              class="nav_3 nav-link"
+              style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
+              >Series</a
+            >
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="link" :to="{ name: 'GenersPage' }">
+            <a
+              class="nav_3 nav-link"
+              style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
+              >Genres</a
+            >
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="link" :to="{ name: 'WishList' }">
+            <a
+              class="nav_3 nav-link"
+              style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
+              >WishList</a
+            >
+          </router-link>
+        </li>
+      </ul>
+      <span class="d-flex justify-content-between leptop_view">
+        <form class="form-inline my-2 my-lg-0 form_input">
+          <input
+            class="form-control mr-sm-2 search_input_leptop"
+            type="search"
+            placeholder="Search"
+          />
+        </form>
+        <div class="navbar_bottom">
+          <div
+            class="ms-3 mt-2"
+            id="Profile_image1"
+            v-on:click="userAccount"
+            v-html="user_icon"
+          ></div>
           <button
             type="button"
-            class="logout_btn btn btn-danger"
+            class="logout_btn btn btn-danger mt-2"
             style="background-color: #d81f26"
             v-on:click="logout()"
           >
             Logout
           </button>
         </div>
-      </div>
+      </span>
+      <span class="mobile_view">
+        <form class="form-inline my-2 my-lg-0 form_input_mobile">
+          <input class="form-control search_input_mobile" type="search" placeholder="Search" />
+        </form>
+
+        <div class="navbar_bottom_mobile">
+          <div
+            class="ms-3 mt-2"
+            id="Profile_image1"
+            v-on:click="userAccount"
+            v-html="user_icon"
+          ></div>
+          <button
+            type="button"
+            class="logout_btn_mobile btn btn-danger mt-2"
+            style="background-color: #d81f26"
+            v-on:click="logout()"
+          >
+            Logout
+          </button>
+        </div>
+      </span>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
-
 import { createAvatar } from "@dicebear/avatars";
 // import * as style from "@dicebear/avatars-identicon-sprites";
 import * as style from "@dicebear/adventurer-neutral";
@@ -148,9 +168,6 @@ export default {
 </style>
 
 <style scoped>
-.logout_btn {
-  margin-left: 35px;
-}
 #Profile_image1 {
   border-radius: 8px;
   width: 40px;
@@ -168,12 +185,77 @@ export default {
 .router-link-exact-active {
   color: #fafafa;
   font-weight: bold;
-  text-decoration: none; 
+  text-decoration: none;
   color: inherit;
 }
 
-.link{
-  text-decoration: none; 
+.link {
+  text-decoration: none;
   color: inherit;
+}
+
+.form_input {
+  margin-left: 500px;
+}
+.navbar_bottom {
+  margin-top: -10px;
+  display: flex;
+}
+
+.logout_btn {
+  margin-left: 10px;
+}
+.mobile_view {
+  display: none;
+}
+.leptop_view {
+  display: block;
+}
+.search_input_leptop{
+  background-color:#1414141c;
+    color: #cacaca;
+    border:none;
+    box-shadow: 0px 2px 4px 5px #14141462;
+}
+@media screen and (max-width: 788px) {
+  .nav {
+    background-color: #141414d2;
+  }
+  .navbar_bottom_mobile {
+    display: flex;
+    margin-left: -10px;
+  }
+  .leptop_view {
+    display: none;
+  }
+
+  .form_input_mobile {
+    display: flex;
+    width: 280px;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .navbar_bottom_mobile {
+    margin-top: 10px;
+    display: flex;
+    width: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .logout_btn_mobile {
+    margin-left: 10px;
+  }
+  .mobile_view {
+    margin-top: -40px;
+    display: flex;
+    flex-direction: column;
+  }
+  .search_input_mobile{
+    
+    background-color:#141414c0;
+    color: #cacaca;
+    border:none;
+    box-shadow: 0px 2px 4px 5px #b9b9b962;
+  }
 }
 </style>

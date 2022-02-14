@@ -723,10 +723,10 @@ class UserDomain {
         path: "Episode",
         populate: { path: "SeriesID" },
       })
-      // .populate({
-      //   path: "Episode",
-      //   populate: { path: "SeasonID" },
-      // })
+      .populate({
+        path: "Episode",
+        populate: { path: "SeasonID" },
+      })
       .sort();
 
     if (watchLaterList.length == 0)
