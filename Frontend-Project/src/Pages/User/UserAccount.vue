@@ -171,9 +171,6 @@ export default {
   name: "UserAccount",
 
   data() {
-  
-  
-
     const validationSchema = object({
       Name: string().required().min(2),
     });
@@ -186,9 +183,7 @@ export default {
       setFieldValue("Name", event.target.value);
     };
 
-
     const { value: Name } = useField("Name");
-
 
     const submit = handleSubmit((value) => {
       this.updateUser(value);
@@ -222,7 +217,7 @@ export default {
     // dispatch avatar data in store
     this.$store.dispatch("AVATAR", svg);
 
-    console.log(this.$store.state.user, 'userAccount- line 244')
+    console.log(this.$store.state.user, "userAccount- line 244");
   },
 
   updated() {
@@ -238,12 +233,15 @@ export default {
     // dispatch avatar data in store
     this.$store.dispatch("AVATAR", svg);
 
-    console.log(this.$store.state.user, 'userAccount- line 260')
+    console.log(this.$store.state.user, "userAccount- line 260");
   },
   methods: {
     async updateUser(data) {
       console.log(data, "line179");
-      UserApi.updateAnUser({ name: data.Name, email: this.$store.state.user.Email })
+      UserApi.updateAnUser({
+        name: data.Name,
+        email: this.$store.state.user.Email,
+      })
         .then((res) => {
           alert("Update Successfully!");
           this.$store.dispatch("ADD_USER", res.data);

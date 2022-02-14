@@ -106,7 +106,7 @@ class CountryDomain {
 
     var data = req.body;
     var id = req.params.id;
-
+    console.log(data);
     const country = await Country.findById(id);
 
     if (country) {

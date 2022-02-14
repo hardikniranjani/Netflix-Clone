@@ -7,7 +7,7 @@ export default new (class Company_Service {
     return Http.get(`/company`);
   }
 
-  getAnCompany(company_id) {
+  getAnCompany({company_id}) {
     return Http.get(`/company/${company_id}`);
   }
 
@@ -27,7 +27,7 @@ export default new (class Company_Service {
     });
   }
 
-  deleteCompany(company_id) {
+  deleteCompany({company_id}) {
     return Http.put(
       `/company/delete/${company_id}`,
       {},

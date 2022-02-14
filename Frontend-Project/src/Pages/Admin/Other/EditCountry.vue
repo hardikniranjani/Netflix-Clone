@@ -10,44 +10,51 @@
               style="z-index: 2"
               >Edit Country</label
             >
-
+            <h4 class="ms-3 mt-2">Code</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="Number_input"
+              class="form_input form-control ms-3 mt-2 p-2"
               type="number"
-              placeholder="Code"
-              :error="errors.GenreName"
-              :modelValue="GenreName"
-              @change="handleChangeGenre"
+              placeholder="CountryCode"
+              :error="errors.CountryCode"
+              :modelValue="CountryCode"
+              @change="handleChangeCountryCode"
             />
-            <span v-if="errors.GenreName" class="ms-3 form_error_massage">{{
-              errors.GenreName
+            <span v-if="errors.CountryCode" class="ms-3 form_error_massage">{{
+              errors.CountryCode
             }}</span>
 
+            <h4 class="ms-3 mt-3">Name</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="Name_input"
+              class="form_input form-control ms-3 mt-2 p-2"
               type="text"
               placeholder="Name"
-              :error="errors.GenreName"
-              :modelValue="GenreName"
-              @change="handleChangeGenre"
+              :error="errors.CountryName"
+              :modelValue="CountryName"
+              @change="handleChangeCountryName"
             />
-            <span v-if="errors.GenreName" class="ms-3 form_error_massage">{{
-              errors.GenreName
+            <span v-if="errors.CountryName" class="ms-3 form_error_massage">{{
+              errors.CountryName
             }}</span>
 
+            <h4 class="ms-3 mt-3">ShortForm</h4>
             <input
-              class="form_input form-control m-3 p-2"
+              id="ShortForm_input"
+              class="form_input form-control ms-3 mt-2 p-2"
               type="text"
               placeholder="ShortForm"
-              :error="errors.GenreName"
-              :modelValue="GenreName"
-              @change="handleChangeGenre"
+              :error="errors.CountryShortForm"
+              :modelValue="CountryShortForm"
+              @change="handleChangeCountryShortForm"
             />
-            <span v-if="errors.GenreName" class="ms-3 form_error_massage">{{
-              errors.GenreName
+            <span v-if="errors.CountryShortForm" class="ms-3 form_error_massage">{{
+              errors.CountryShortForm
             }}</span>
 
-            <button class="form_input_button btn btn-danger m-3 p-2 w-100">
+            <button
+              class="form_input_button btn btn-danger mt-3 ms-3 p-2 w-100"
+            >
               Edit
             </button>
           </div>
@@ -78,7 +85,9 @@ export default {
   },
   data() {
     const validationSchema = object({
-      GenreName: string().required(),
+      CountryCode: string(),
+      CountryName: string(),
+      CountryShortForm: string(),
     });
 
     const { handleSubmit, setFieldValue, errors } = useForm({
@@ -86,11 +95,19 @@ export default {
       initialValues: {},
     });
 
-    const handleChangeGenre = (event) => {
-      setFieldValue("GenreName", event.target.value);
+    const handleChangeCountryCode = (event) => {
+      setFieldValue("CountryCode", event.target.value);
+    };
+    const handleChangeCountryName = (event) => {
+      setFieldValue("CountryName", event.target.value);
+    };
+    const handleChangeCountryShortForm = (event) => {
+      setFieldValue("CountryShortForm", event.target.value);
     };
 
-    const { value: GenreName } = useField("GenreName");
+    const { value: CountryCode } = useField("CountryCode");
+    const { value: CountryName } = useField("CountryName");
+    const { value: CountryShortForm } = useField("CountryShortForm");
 
     const submit = handleSubmit((value) => {
       this.error = "";
@@ -98,9 +115,13 @@ export default {
     });
 
     return {
-      GenreName,
+      CountryCode,
+      CountryName,
+      CountryShortForm,
       submit,
-      handleChangeGenre,
+      handleChangeCountryCode,
+      handleChangeCountryName,
+      handleChangeCountryShortForm,
       errors,
       error: "",
     };
@@ -108,7 +129,8 @@ export default {
 
   methods: {
     async EditCountry(data1) {
-      await CountryApi.updateCountry({ data1 })
+      console.log(this.id);
+      await CountryApi.updateCountry({ country_id: this.id, country_data:data1 })
         .then((res) => {
           console.log(res);
         })
@@ -116,6 +138,19 @@ export default {
           console.log(err);
         });
     },
+  },
+  async mounted() {
+    await CountryApi.getCountry({
+      country_id: this.id,
+    })
+      .then((res) => {
+        document.getElementById("Number_input").value = res.data.CountryCode;
+        document.getElementById("Name_input").value = res.data.CountryName;
+        document.getElementById("ShortForm_input").value = res.data.CountryShortForm;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
