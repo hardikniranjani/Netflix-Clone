@@ -161,12 +161,10 @@ export default {
       });
     },
     ChangedMediaData(mediaName, mediaPath, mediaId){
-      console.log(mediaName, mediaPath, mediaId)
        let MovieData = this.Movies.filter((obj)=>{
           return obj._id == mediaId;
         })
         MovieData[0][mediaName] = mediaPath;
-        console.log(MovieData)
     }
   },
 

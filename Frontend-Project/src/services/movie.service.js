@@ -48,8 +48,8 @@ export default new (class Movie_Service {
     );
   }
 
-  uploadMovieImage(movie_id, formdata) {
-    return Http.post(`/movies/upload/image?movie_id=${movie_id}`, formdata, {
+  uploadMovieImage(movie_id,media_field, formdata) {
+    return Http.post(`/movies/upload/image?movie_id=${movie_id}&media_field=${media_field}`, formdata, {
       headers: {
         "x-access-token": token,
       },

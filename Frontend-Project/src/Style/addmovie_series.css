@@ -97,6 +97,20 @@
     border: none;
     outline: none;
 }
+
+.input_checkbox{
+    
+    color: #cccccc;
+    background-color: #333333;
+    border: none;
+}
+
+.input_checkbox:focus{
+    background-color: #333333;
+    color: #cccccc;
+    border: none;
+    outline: none;
+}
 .add_movie_form > button{
     width:100%;
     text-align: center;

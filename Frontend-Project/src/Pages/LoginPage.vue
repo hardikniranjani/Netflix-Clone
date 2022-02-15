@@ -124,7 +124,7 @@ export default {
           if (res.data.Role == "user") {
             this.$router.replace({ name: "HomePage" });
           } else {
-            this.$router.replace({ name: "AdminHomePage" });
+            this.$router.replace({ name: "AdminMoviePage" });
           }
         })
         .catch(() => {

@@ -13,22 +13,6 @@
           
         />
 
-        <label for="language">Select Primary language : </label>
-        <select name="language" id="">
-          <option v-for="lang in language" :key="lang._id">
-            {{ lang.Spoken_Language }}
-          </option>
-        </select>
-
-        <div class="mb-2 form-check">
-          <input
-            type="checkbox"
-            name="checkbox_category"
-            class="box form-check-input"
-            value="Anime"
-          />
-          <label class="form-check-label">Anime</label>
-        </div> -->
 
         <label for="language">Select Primary language : </label>
         <select name="language" id="">
@@ -49,7 +33,7 @@
             <input
               type="checkbox"
               name="checkbox_category "
-              class="box form-check-input"
+              class="box form-check-input input_checkbox"
               :value="genre.GenresName"
             />
             <label class="form-check-label">{{ genre.GenresName }}</label>
@@ -67,8 +51,8 @@
           >
             <input
               type="checkbox"
-              name="checkbox_category"
-              class="box form-check-input m-1"
+              name="checkbox_category "
+              class="box form-check-input m-1 input_checkbox"
               :value="company.Name"
             />
             <label class="form-check-label">{{ company.Name }}</label>
@@ -142,8 +126,8 @@ export default {
       this.Genres = res.data;
     });
     CompanyAPI.getAllCompany().then((res) => {
-      this.companies = res.data.CompanyPlan;
-      console.log(res.data.CompanyPlan);
+      this.companies = res.data.CompanyList;
+      console.log(res.data.CompanyList);
     });
   },
 };
