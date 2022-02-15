@@ -8,7 +8,6 @@
           <p>Max Quality:  <span class="mainContainer_body_txt">{{Quality}} </span></p>
       </div>
       <div class="mainContainer_lower mt-4">
-          <!-- <button class="btn btn-primary me-2 ms-3">Purchase</button> -->
           <button class="btn btn-outline-primary" :onclick="redirect">More Details</button>
       </div>
   </div>
@@ -43,8 +42,6 @@ export default {
     height:300px;
     border:1px solid white;
     border-radius:20px;
-    /* box-shadow: 0px 2px 4px 3px #fafafa; */
-    /* background-color: #757575;  */
     color: lightgrey;
 }
 

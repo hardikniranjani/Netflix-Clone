@@ -118,7 +118,7 @@
                     >,</span
                   >
                 </span>
-                <!-- <span class="border-end me-2 pe-2"></span> -->
+                
               </span>
             </div>
             <div
@@ -134,7 +134,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="list_body container border mt-4 ms-5 w-100"> -->
         <div class="d-flex border-top mt-4 pt-4">
           <div class="list_body_name">My List</div>
           <div class="list_body_details border-start ps-3">
@@ -149,7 +148,7 @@
             >
           </div>
         </div>
-        <!-- </div> -->
+        
       </div>
     </div>
 
@@ -164,7 +163,6 @@ import UserApi from "../../services/user.service";
 import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
 import { createAvatar } from "@dicebear/avatars";
-// import * as style from "@dicebear/avatars-identicon-sprites";
 import * as style from "@dicebear/adventurer-neutral";
 
 export default {
@@ -187,7 +185,6 @@ export default {
 
     const submit = handleSubmit((value) => {
       this.updateUser(value);
-      console.log(value, "line 153");
     });
 
     return {
@@ -216,8 +213,6 @@ export default {
 
     // dispatch avatar data in store
     this.$store.dispatch("AVATAR", svg);
-
-    console.log(this.$store.state.user, "userAccount- line 244");
   },
 
   updated() {
@@ -232,12 +227,9 @@ export default {
 
     // dispatch avatar data in store
     this.$store.dispatch("AVATAR", svg);
-
-    console.log(this.$store.state.user, "userAccount- line 260");
   },
   methods: {
     async updateUser(data) {
-      console.log(data, "line179");
       UserApi.updateAnUser({
         name: data.Name,
         email: this.$store.state.user.Email,
@@ -404,7 +396,6 @@ export default {
   .list_body_name {
     padding-left: 0px;
     flex: 0.2;
-    
   }
   .list_body_details {
     flex: 0.6;

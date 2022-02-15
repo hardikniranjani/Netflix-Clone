@@ -46,7 +46,6 @@ export default {
   },
   async mounted() {
     let genres_res = await GenreApi.getAllGenre();
-    console.log(genres_res);
     this.Genres = genres_res.data;
   },
 };

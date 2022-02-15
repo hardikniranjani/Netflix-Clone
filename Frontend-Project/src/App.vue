@@ -1,17 +1,12 @@
 <template>
   <div>
-    <!-- <UserLoading /> -->
     <router-view />
   </div>
 </template>
 
 <script>
-// import UserLoading from "./components/UserLoading.vue"
 export default {
   name: "App",
-  // components:{
-  //   UserLoading
-  // }
 };
 </script>
 
@@ -21,7 +16,6 @@ export default {
   padding: 0;
 }
 #app {
-  /* background-color: #000000e7; */
   background-color: #141414;
   color: #fafafad3;
   overflow-x: hidden;

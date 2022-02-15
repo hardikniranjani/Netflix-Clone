@@ -33,8 +33,7 @@ export default {
         media_type: this.media_type,
         media_id: series_id,
       })
-        .then((res) => {
-          console.log(res, "line 33 movie banner");
+        .then(() => {
           swal("Successfully added to wish list!");
         })
         .catch((err) => {

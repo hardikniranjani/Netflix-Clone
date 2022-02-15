@@ -185,7 +185,6 @@ export default {
     const { value: Description } = useField("Description");
 
     const submit = handleSubmit((value) => {
-      console.log(value);
       this.error = "";
       this.AddCompany(value);
     });
@@ -210,7 +209,7 @@ export default {
     async AddCompany(data1) {
       await CompanyApi.createCompany({ company_data : data1 })
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
           this.$router.push({ name : 'AdminCompanyPage' })
         })
         .catch((err) => {

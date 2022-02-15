@@ -26,20 +26,7 @@ export default {
     Footer,
   },
   mounted() {
-    document.title = `Netflix - Genres`;
-    // series api
-    // SeriesApi.findSeriesBySearch({
-    //   queryperam: "Genres",
-    //   queryName: this.id,
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.Series = res.data;
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response);
-    //   });
-
+    document.title = `Netflix - Testing`;
   },
 };
 </script>

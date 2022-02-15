@@ -5,9 +5,6 @@
         <div id="banner__contents_details">
           <h1 id="banner__title">{{ Name }}</h1>
           <button id="banner__button" click="">Add Episode</button>
-          <!-- <p id="banner__description">
-            {{ Description }}
-          </p> -->
           <p v-if="Description" id="banner__description">
             {{ Description }}
           </p>
@@ -44,8 +41,7 @@ export default {
         media_type: this.media_type,
         media_id: this.id,
       })
-        .then((res) => {
-          console.log(res, "line 38 series");
+        .then(() => {
           swal("Successfully added to wish list!");
         })
         .catch((err) => {
@@ -72,7 +68,6 @@ export default {
   color: white;
   object-fit: contain;
   height: 844px;
-  /* background-position: center center; */
   background-size: cover;
 }
 

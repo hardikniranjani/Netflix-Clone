@@ -24,8 +24,6 @@
 </template>
 
 <script>
-//import SeasionApi from "../../services/season.service";
-// import swal from "sweetalert";
 export default {
   name: "AdminSeriesBanner",
   data() {
@@ -40,21 +38,6 @@ export default {
     id: String,
     seriesData: {},
   },
-  // methods: {
-  //   async addToWishList() {
-  //     await UserApi.addToWishList({
-  //       media_type: this.media_type,
-  //       media_id: this.id,
-  //     })
-  //       .then((res) => {
-  //         console.log(res, "line 38 series");
-  //         swal("Successfully added to wish list!");
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   },
-  // },
   updated() {
     var banner = document.getElementById("banner");
     banner.style.backgroundImage = "url(" + this.src + ")";

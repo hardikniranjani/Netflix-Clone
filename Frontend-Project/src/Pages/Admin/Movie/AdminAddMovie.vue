@@ -55,22 +55,24 @@
             <label class="form-check-label">{{ genre.GenresName }}</label>
           </div>
         </div>
-        <div class="d-flex row ms-4 mt-2 mb-3">
-          <label style="margin-left: -25px; margin-bottom: 5px">Select Production Companies : </label>
+        <div class="d-flex row mt-2 mb-3" style="margin-left: -12px">
+          <label style="margin-left: 12px; margin-bottom: 5px"
+            >Select Production Companies :
+          </label>
 
-            <div
-              v-for="company in companies"
-              :key="company._id"
-              class="col-3 m-2"
-            >
-              <input
-                type="checkbox"
-                name="checkbox_category"
-                class="box form-check-input m-1"
-                :value="company.Name"
-              />
-              <label class="form-check-label">{{ company.Name }}</label>
-            </div>
+          <div
+            v-for="company in companies"
+            :key="company._id"
+            class="col-3 m-2"
+          >
+            <input
+              type="checkbox"
+              name="checkbox_category"
+              class="box form-check-input m-1"
+              :value="company.Name"
+            />
+            <label class="form-check-label">{{ company.Name }}</label>
+          </div>
         </div>
 
         <!-- relese date -->
@@ -134,16 +136,18 @@ export default {
   },
   beforeCreate() {
     LanguageAPI.getAllSpokenLanguage().then((res) => {
-      // console.log(res.data.languages)
       this.language = res.data.languages;
     });
     GenresAPI.getAllGenre().then((res) => {
       this.Genres = res.data;
-      // console.log(res.data);
     });
     CompanyAPI.getAllCompany().then((res) => {
+<<<<<<< Updated upstream
       this.companies = res.data.CompanyPlan;
       console.log(res.data.CompanyPlan);
+=======
+      this.companies = res.data.CompanyList;
+>>>>>>> Stashed changes
     });
   },
 };

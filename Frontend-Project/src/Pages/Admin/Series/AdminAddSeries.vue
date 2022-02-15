@@ -7,21 +7,22 @@
       <form class="add_movie_form" style="z-index: 2">
         <!-- movie name -->
         <input
-          class="form-control mb-2"
+          class="form-control mb-2 p-2"
           type="text"
           placeholder="Enter Series Name"
           
         />
-
         <label for="language">Select Primary language : </label>
-        <select name="language" id="">
+        <select name="language">
           <option v-for="lang in language" :key="lang._id">
             {{ lang.Spoken_Language }}
           </option>
         </select>
 
-        <div class="d-flex row">
-          <label for="">Selecte Genres for Series :</label>
+        <div class="d-flex row ms-4 mt-2 mb-3">
+          <label style="margin-left: -25px; margin-bottom: 5px"
+            >Selecte Genres for Series :</label
+          >
           <div
             class="mb-2 form-check col-4"
             v-for="genre in Genres"
@@ -29,36 +30,18 @@
           >
             <input
               type="checkbox"
-              name="checkbox_category"
+              name="checkbox_category "
               class="box form-check-input"
               :value="genre.GenresName"
             />
             <label class="form-check-label">{{ genre.GenresName }}</label>
           </div>
         </div>
+        <div class="d-flex row mt-2 mb-3" style="margin-left: -12px">
+          <label style="margin-left: 12px; margin-bottom: 5px"
+            >Select Production Companies :
+          </label>
 
-        <!-- languages  -->
-        <div class="row d-flex">
-          <label for="" class="pb-3"
-            >In which are the language Series is available ?</label
-          >
-          <div
-            class="mb-2 form-check col-4"
-            v-for="lang in language"
-            :key="lang._id"
-          >
-            <input
-              type="checkbox"
-              name="checkbox_category"
-              class="box form-check-input"
-              :value="lang.Spoken_Language"
-            />
-            <label class="form-check-label">{{ lang.Spoken_Language }}</label>
-          </div>
-        </div>
-
-        <label for="language mt-5">Select Production Companies : </label>
-        <div class="d-flex row mb-5">
           <div
             v-for="company in companies"
             :key="company._id"
@@ -81,74 +64,29 @@
               add_movie_form_relese_date_btn
               btn btn-danger
               form-check-label
-              m-2
+              me-2
             "
             >Release date
           </label>
           <input
-            class="add_movie_form_relese_date_input form-control mb-2"
+            class="add_movie_form_relese_date_input form-control mb-2 p-2"
             type="date"
           />
         </div>
 
-        <!-- Rating -->
-        <div class="d-inline-flex w-100">
-          <label
-            class="
-              add_movie_form_relese_date_btn
-              btn btn-danger
-              form-check-label
-              me-2
-            "
-            >Rating</label
-          >
-          <input
-            class="add_movie_form_relese_date_input form-control mb-2"
-            type="number"
-          />
-        </div>
-        <!-- director name -->
-        <input
-          class="form-control mb-2"
-          type="text"
-          placeholder="Director name"
-          id="Director_name"
-        />
-
-        <!-- long discription -->
+        <!-- Discription -->
         <textarea
-          class="form-control mb-2"
-          placeholder="Long Description"
+          class="form-control mb-2 p-2"
+          placeholder="Description"
           id="LongDescription"
+          style="width: 100%; height: 150px"
         ></textarea>
-
-        <!-- select banner -->
-        <label class="text-white" for="img"
-          >Select banner<lable style="color: #f40612">*</lable>:</label
-        >
-        <input
-          class="btn btn-outline-danger"
-          id="image_file"
-          type="file"
-          accept="image/*"
-        />
-
-        <!-- select trailer -->
-        <label class="text-white" for="video">Select Video:</label>
-        <input
-          class="btn btn-outline-danger"
-          type="file"
-          id="video"
-          name="video"
-          accept="video/*"
-        /><br />
 
         <!-- subimt button -->
         <button
-          class="btn btn-danger mt-3"
+          class="btn btn-danger mt-3 p-2"
           type="button"
           style="background-color: #f40612"
-          onclick="add_image()"
         >
           Go
         </button>
@@ -181,16 +119,13 @@ export default {
   },
   beforeCreate() {
     LanguageAPI.getAllSpokenLanguage().then((res) => {
-      // console.log(res.data.languages)
       this.language = res.data.languages;
     });
     GenresAPI.getAllGenre().then((res) => {
       this.Genres = res.data;
-      // console.log(res.data);
     });
     CompanyAPI.getAllCompany().then((res) => {
-      this.companies = res.data.CompanyPlan;
-      console.log(res.data.CompanyPlan);
+      this.companies = res.data.CompanyList;
     });
   },
 };

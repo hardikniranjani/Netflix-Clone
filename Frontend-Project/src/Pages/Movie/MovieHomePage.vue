@@ -91,7 +91,6 @@ export default {
   async mounted() {
     let Allmovies_res = await MovieApi.getAllMovie();
     this.AllMovies = Allmovies_res.data;
-    // console.log(Allmovies_res.data);
     this.Adventure_Movies = this.AllMovies.filter((mov) => {
       return mov.Genres.filter((g) => {
         if (g.GenresName === "Adventure") {

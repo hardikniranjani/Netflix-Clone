@@ -58,7 +58,6 @@ export default {
     document.title = `Netflix - MyWishList`;
 
     UserApi.getWishList().then((res) => {
-      console.log(res.data);
       this.Series = res.data.series;
       this.Movies = res.data.movies;
     });
@@ -67,11 +66,9 @@ export default {
     clearWishList() {
       var result = confirm("Are you sure you want to clear your list?");
       if (result) {
-        UserApi.deleteWishList().then((res) => {
-          console.log(res.data);
+        UserApi.deleteWishList().then(() => {
           this.Series = [];
           this.Movies = [];
-          // location.reload();
         });
       }
     },

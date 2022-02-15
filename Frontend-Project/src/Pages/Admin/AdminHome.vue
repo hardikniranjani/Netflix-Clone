@@ -58,11 +58,6 @@
         </div>
       </div>
       <div class="Admin__Home__Content ms-3">
-        <div>
-          <!-- <div class="text-center align-center display-5 border">
-            Search bar
-          </div> -->
-        </div>
         <router-view></router-view>
       </div>
     </div>
@@ -150,13 +145,6 @@ export default {
   background-color: #d81f26;
 }
 
-/* .Admin_footer {
-   position:absolute;
-   left: 0;
-   bottom: -217px;
-   bottom:0;
-   width: 100vw;
-} */
 .Admin_footer {
   margin-top: 77px;
 }

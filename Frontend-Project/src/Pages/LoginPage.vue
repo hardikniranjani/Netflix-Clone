@@ -108,9 +108,6 @@ export default {
   },
 
   methods: {
-    Submit() {
-      console.log("Submitted");
-    },
     signup() {
       this.$router.replace({ name: "IndexPage" });
     },
@@ -122,7 +119,6 @@ export default {
       userService
         .getAnUser({ email: data.Email, password: data.Password })
         .then((res) => {
-          console.log(res.data.Role);
           this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
           this.$store.dispatch("ADD_USER", res.data);
           if (res.data.Role == "user") {

@@ -41,7 +41,7 @@
           <h3 class="mt-5">Adventure Series</h3>
           <HomeSeriesCardList :data="Adventure_Series" />
         </div>
-        
+
         <div v-if="Crime_Mystry_Movies.length > 0">
           <h3 class="mt-5">Crime Movie</h3>
           <HomeMovieCardList :data="Crime_Mystry_Movies" />
@@ -53,7 +53,6 @@
 </template>
 
 <script>
-// import MovieBanner from "../../components/Movie/Movie_Banner.vue";
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import MovieApi from "../../services/movie.service.js";
@@ -84,7 +83,6 @@ export default {
     Footer,
     HomeMovieCardList,
     HomeSeriesCardList,
-    // MovieBanner
   },
   props: {
     id: String,
@@ -96,8 +94,7 @@ export default {
         media_type: this.media_type,
         media_id: this.Banner_Movie._id,
       })
-        .then((res) => {
-          console.log(res, "line 58 movie banner");
+        .then(() => {
           swal("Successfully added to watch later!");
         })
         .catch((err) => {

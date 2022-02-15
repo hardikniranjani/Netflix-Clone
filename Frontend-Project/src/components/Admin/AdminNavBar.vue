@@ -39,22 +39,6 @@
                 </a>
               </router-link>
             </li>
-            <!-- <li class="nav-item">
-              <router-link class="link" :to="{ name: '' }">
-                <a
-                  class="nav_3 nav-link"
-                  style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
-                  >Genres</a
-                >
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav_3 nav-link"
-                style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
-                >SubscriptionPlan</a
-              >
-            </li> -->
           </ul>
         </div>
       </nav>
@@ -99,7 +83,6 @@
 
 <script>
 import { createAvatar } from "@dicebear/avatars";
-// import * as style from "@dicebear/avatars-identicon-sprites";
 import * as style from "@dicebear/adventurer-neutral";
 
 export default {

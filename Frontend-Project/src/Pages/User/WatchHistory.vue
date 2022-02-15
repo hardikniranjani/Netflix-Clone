@@ -58,6 +58,7 @@ export default {
     clearWatchHistory() {
       var result = confirm("Want to delete watch history?");
       if (result) {
+<<<<<<< Updated upstream
         UserApi.deleteWatchHistory().then((res) => {
           // location.reload();
           this.$store.dispatch("ADD_HISTORY",{
@@ -65,6 +66,11 @@ export default {
             Episode : []
           });
           console.log(res.data);
+=======
+        UserApi.deleteWatchHistory().then(() => {
+          location.reload();
+          
+>>>>>>> Stashed changes
         });
       }
     },
@@ -72,10 +78,14 @@ export default {
   mounted() {
     document.title = `Netflix - WatchHistory`;
     
+<<<<<<< Updated upstream
   },
   updated(){
     console.log(this.Movies,this.Episodes);
+=======
+>>>>>>> Stashed changes
   },
+
   components: {
     NavBar,
     Footer,

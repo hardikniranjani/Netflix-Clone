@@ -225,7 +225,6 @@ export default {
   },
   methods: {
     async updateUser(data) {
-      console.log(data, "line179");
       UserApi.updateAnUser({
         name: data.Name,
         email: this.$store.state.user.Email,

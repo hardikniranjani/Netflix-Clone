@@ -12,7 +12,6 @@ export default new (class Company_Service {
   }
 
   createCompany({company_data}) {
-    console.log(company_data)
     return Http.post(`/company`, company_data, {
       headers: {
         "x-access-token": token ,

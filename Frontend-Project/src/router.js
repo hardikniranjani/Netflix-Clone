@@ -60,7 +60,6 @@ import WishList from "./Pages/User/WishList.vue";
 // Series
 import SeriesHomePage from "./Pages/Series/SeriesHomePage.vue";
 import SeriesPage from "./Pages/Series/SeriesPage.vue";
-import Episode from "./Pages/Series/Episode.vue";
 import EpisodeVideo from "./components/Series/EpisodeVideo.vue";
 
 // Movies
@@ -75,8 +74,6 @@ import GenersContent from "./Pages/Other/GenersContent.vue";
 import SubscriptionPlan from "./Pages/Other/SubscriptionPlan.vue";
 import Subscription from "./Pages/Other/Subscription.vue";
 
-// import ProductionCHomePage from "./Pages/Other/ProductionCHomePage.vue";
-import ProductionCPage from "./Pages/Other/ProductionCPage.vue";
 
 const routes = [
   {
@@ -131,15 +128,6 @@ const routes = [
     path: "/homeseries/series/:id",
     name: "SeriesPage",
     component: SeriesPage,
-    props: true,
-    meta: {
-      requiredAuth: true,
-    },
-  },
-  {
-    path: "/homeseries/series/:id/:seasonid/episode/:episodeid",
-    name: "Episode",
-    component: Episode,
     props: true,
     meta: {
       requiredAuth: true,
@@ -315,13 +303,6 @@ const routes = [
           },
         ],
       },
-
-      {
-        path: "homecompany/company",
-        name: "ProductionCPage",
-        component: ProductionCPage,
-      },
-
       {
         path: "subcription",
         name: "AdminSubscriptionPlan",
@@ -424,18 +405,6 @@ const routes = [
         component: MoviePage,
         props: true,
       },
-      // {
-      //   path: "/homeseries/series/:id",
-      //   name: "SeriesPage",
-      //   component: SeriesPage,
-      //   props: true,
-      // },
-      // {
-      //   path: "/homeseries/series/:id/:seasonid/episode/:episodeid",
-      //   name: "Episode",
-      //   component: Episode,
-      //   props: true,
-      // },
     ],
   },
 ];

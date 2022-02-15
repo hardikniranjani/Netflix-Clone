@@ -22,9 +22,6 @@
       <div class="categories_card_bottom_main">
         <h7 class="categories_card_bottom">{{ episode.EpisodeName }}</h7>
         <div class="categories_card_bottom">
-          <!-- <i
-            class="bi bi-play-circle-fill Episode_categories_card_bottom_icon"
-          ></i> -->
           <i
             class="bi bi-plus-circle Movie_categories_card_bottom_icon"
             v-on:click="addToWatchLater(episode._id)"
@@ -46,7 +43,6 @@ export default {
     };
   },
   props: {
-    // src: String,
     data: Array,
   },
 
@@ -56,8 +52,7 @@ export default {
         media_type: this.media_type,
         media_id: episode_id,
       })
-        .then((res) => {
-          console.log(res, "line 58 movie banner");
+        .then(() => {
           swal("Successfully added to watch later!");
         })
         .catch((err) => {
@@ -127,9 +122,9 @@ export default {
 }
 
 @media screen and (max-width: 788px) {
-  .episode_categories{
+  .episode_categories {
     padding-bottom: 0px;
-  padding-top: 10px;
+    padding-top: 10px;
   }
 }
 </style>

@@ -87,8 +87,7 @@ export default {
         media_type: this.media_type,
         media_id: this.id,
       })
-        .then((res) => {
-          console.log(res, "line 33 movie banner");
+        .then(() => {
           swal("Successfully added to wish list!");
         })
         .catch((err) => {
@@ -101,8 +100,7 @@ export default {
         media_type: this.media_type,
         media_id: this.id,
       })
-        .then((res) => {
-          console.log(res, "line 58 movie banner");
+        .then(() => {
           swal("Successfully added to watch later!");
         })
         .catch((err) => {

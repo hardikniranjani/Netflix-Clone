@@ -56,7 +56,6 @@ export default {
     document.title = `Netflix - WatchLater`;
 
     UserApi.showWatchLater().then((res) => {
-      console.log(res.data);
       this.Episodes = res.data.episodes;
       this.Movies = res.data.movies;
     });

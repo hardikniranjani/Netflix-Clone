@@ -28,7 +28,6 @@ export default new (class Country_Service {
   }
 
   updateCountry({ country_id, country_data }) {
-    console.log(country_data, "country_service - line 31");
     return Http.put(`/country/${country_id}`, country_data, {
       headers: {
         "x-access-token": token,

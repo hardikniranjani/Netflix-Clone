@@ -13,7 +13,7 @@
     />
     <div class="Admin__Series__Body">
       <div class="body_content">
-        <h3>Episodes </h3>
+        <h3>Episodes</h3>
         <div class="Series_body_episodeList">
           <AdminEpisodeCardList :data="SeasonData.Episodes" />
         </div>
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-
 // import SeriesApi from "../../../services/series.service";
 import SeasonApi from "../../../services/season.service";
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
@@ -39,7 +38,7 @@ export default {
       Series: [],
       Seasons: [],
       SeasonData: [],
-      TotalEpisode:"",
+      TotalEpisode: "",
       src: "",
     };
   },
@@ -48,7 +47,6 @@ export default {
     Footer,
     AdminSeasionBanner,
     AdminEpisodeCardList,
-
   },
   props: {
     id: String,
@@ -57,32 +55,15 @@ export default {
   async mounted() {
     document.title = `NetflixAdmin - Season`;
 
-    // await SeriesApi.findSeriesBySearch({
-    //   queryperam: "_id",
-    //   queryName: `${this.id}`,
-    // })
-    //   .then((res) => {
-    //     console.log(res, "line-67 seriesPage");
-    //     this.Series = res.data[0];
-    //     this.Seasons = res.data[0].Seasons;
-    //     console.log(this.Seasons);
-
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     this.$router.replace({ name: "PageNotFound" });
-    //   });
-    console.log(this.id, this.seasonId);
     await SeasonApi.findseasionBySearch({
       queryperam: "_id",
       queryName: `${this.seasonId}`,
       series_id: `${this.id}`,
     })
       .then((res) => {
-        console.log(res.data[0].Banner, "line 74 season data");
         this.SeasonData = res.data[0];
         this.src = res.data[0].Banner;
-        this.TotalEpisode = res.data[0].Episodes.length
+        this.TotalEpisode = res.data[0].Episodes.length;
       })
       .catch((err) => {
         console.error(err);

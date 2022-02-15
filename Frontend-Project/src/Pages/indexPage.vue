@@ -104,11 +104,8 @@ export default {
     const { value: Email } = useField("Email");
 
     const submit = handleSubmit(() => {
-      console.log(Email);
       UserApi.signUpEmail(Email.value)
         .then((res) => {
-          console.log(res);
-
           this.alertMsg = res.data;
           this.typeOfAlert = "primary";
           this.showAlert = true;
@@ -138,9 +135,6 @@ export default {
       typeOfAlert: "",
       alertMsg: "",
     };
-  },
-  mounted() {
-    // console.log(this.$store.state.token, 'line 130 indexpage')
   },
   methods: {
     login() {

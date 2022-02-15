@@ -145,7 +145,6 @@ export default {
     document.title = `NetflixAdmin - Movies`;
 
     MoviesApi.getAllMovie().then((res) => {
-      console.log(res.data);
       this.Movies = res.data;
       this.pageList = this.Movies.slice(0, this.dataPerPage);
       this.makePartition();

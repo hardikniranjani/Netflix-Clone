@@ -30,14 +30,12 @@ export default {
     data: Array,                                   
   },                                   
   methods: {                                   
-    async removeList(data1) {                                   
-      console.log(data1, "userMoviecard");                                   
+    async removeList(data1) {                                                                     
       await UserApi.removeFromWishlist({                                   
         media_id: data1,                                   
         media_type: this.type,                                   
       })                                   
-        .then((res) => {                                   
-          console.log(res.data);                                   
+        .then(() => {                                                                   
           location.reload();                                   
         })                                   
         .catch((err) => {                                   

@@ -17,26 +17,12 @@
         </router-link>
 
         <i class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon" v-on:click="addToWatchLater(i._id )"></i>
-        <!-- <HeartIcon />
-        <VideoIcon />
-        <PlusCircleIcon />        
-        <CloseIcon v-on:click="remove(i.movie_id)" />
-          <CloseIcon /> -->
-        <!-- <div class="categories_card_bottom_icon">
-
-        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import {
-//   // CloseIcon,
-//   VideoIcon,
-//   HeartIcon,
-//   PlusCircleIcon,
-// } from "@iconicicons/vue";
 import UserApi from "../../services/user.service";
 import swal from "sweetalert";
 export default {
@@ -46,15 +32,7 @@ export default {
       media_type: "Movies",
     };
   },
-  // components: {
-  //   // CloseIcon,
-  //   PlusCircleIcon,
-  //   HeartIcon,
-  //   VideoIcon,
-  //   // Card
-  // },
   props: {
-    // src: String,
     id: String,
     data: Array,
   },
@@ -64,8 +42,7 @@ export default {
         media_type: this.media_type,
         media_id: movie_id,
       })
-        .then((res) => {
-          console.log(res, "line 33 movie banner");
+        .then(() => {
           swal("Successfully added to wish list!");
         })
         .catch((err) => {
@@ -78,8 +55,7 @@ export default {
         media_type: this.media_type,
         media_id: movie_id,
       })
-        .then((res) => {
-          console.log(res, "line 58 movie banner");
+        .then(() => {
           swal("Successfully added to watch later!");
         })
         .catch((err) => {

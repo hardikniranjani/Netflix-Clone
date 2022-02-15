@@ -67,7 +67,6 @@ export default {
     document.title = `NetflixAdmin - Users`;
 
     AdminApi.getAllUsers().then((res) => {
-      console.log(res);
       this.Users = res.data;
     });
   },

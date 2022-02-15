@@ -40,7 +40,6 @@ export default {
     };
   },
   props: {
-    // src: String,
     data: Array,
   },
 
@@ -50,8 +49,7 @@ export default {
         media_type: this.media_type,
         media_id: episode_id,
       })
-        .then((res) => {
-          console.log(res, "line 58 movie banner");
+        .then(() => {
           swal("Successfully added to watch later!");
         })
         .catch((err) => {

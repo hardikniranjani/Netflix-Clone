@@ -37,8 +37,6 @@ export default {
   created() {},
   mounted() {
     this.addMovieData();
-    // console.log(this.Movies);
-    // console.log(this.$store.state.token);
   },
   watch: {
     data() {
@@ -48,7 +46,6 @@ export default {
   methods: {
     async addMovieData() {
       this.Movies = [];
-      console.log(this.data);
       this.data.forEach((obj) => {
         MovieApi.getMovie(obj)
           .then((res) => res.data)
@@ -66,12 +63,6 @@ export default {
         media_type: this.type,
       })
         .then((res) => {
-          // console.log(res.data.list);
-          // let userObj = JSON.parse(JSON.stringify(this.$store.state.user));
-          // // console.log("json stringify",JSON.parse(userObj));
-          // userObj.watchHistory = res.data.list;
-          // // location.reload();
-          // console.log(userObj);
           this.$store.dispatch("ADD_HISTORY", res.data.list);
         })
         .catch((err) => {

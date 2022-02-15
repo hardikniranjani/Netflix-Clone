@@ -52,8 +52,7 @@ export default {
         media_id: data1,
         media_type: this.type,
       })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           location.reload();
         })
         .catch((err) => {
@@ -66,8 +65,7 @@ export default {
         media_id: data1,
         media_type: this.type,
       })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           location.reload();
         })
         .catch((err) => {

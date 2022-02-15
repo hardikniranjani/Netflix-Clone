@@ -92,7 +92,6 @@ export default {
     document.title = `NetflixAdmin - Series`;
 
     SeriesApi.getAllSeries().then((res) => {
-      console.log(res);
       this.Series = res.data;
     });
   },

@@ -11,7 +11,7 @@
     <div class="Series_body">
       <div class="body_content">
         <div v-for="season in Seasons" :key="season._id">
-          <h3>{{ season.SeasonName }}</h3> 
+          <h3>{{ season.SeasonName }}</h3>
           <div class="Series_body_episodeList">
             <EpisodeCardList :data="season.Episodes" />
           </div>
@@ -55,10 +55,9 @@ export default {
       queryName: `${this.id}`,
     })
       .then((res) => {
-        console.log(res, "line-67 seriesPage");
         this.Series = res.data[0];
         this.Seasons = res.data[0].Seasons;
-        console.log(this.Seasons);
+
         this.src = res.data[0].backdrop_path;
       })
       .catch((err) => {
@@ -99,7 +98,7 @@ export default {
 }
 
 @media screen and (max-width: 788px) {
-  .Series_body{
+  .Series_body {
     margin-top: -180px;
   }
 }

@@ -43,7 +43,6 @@ export default {
   },
   async mounted() {
     let subscription_res = await SubscriptionApi.getAllSubscription();
-    console.log(subscription_res);
     this.Subscription = subscription_res.data.SubscriptionPlan;
   },
 };

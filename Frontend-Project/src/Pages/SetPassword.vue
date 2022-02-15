@@ -54,7 +54,6 @@
 <script>
 import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
-// import  userService from '../services/user.service';
 
 export default {
   name: "SetPassword",
@@ -86,7 +85,6 @@ export default {
     const submit = handleSubmit((value) => {
       this.error = "";
       this.LoginUser(value);
-      // console.log(`${value.Email}`);
     });
 
     return {
@@ -101,28 +99,12 @@ export default {
   },
 
   methods: {
-    Submit() {
-      console.log("Submitted");
-    },
     login() {
       this.$router.replace({ name: "LogInPage" });
     },
     home() {
       this.$router.replace({ name: "IndexPage" });
     },
-
-    // async LoginUser(data) {
-    //     userService.getAnUser({email: data.Email, password: data.Password})
-    //              .then((res)=>{
-    //                console.log(res);
-    //                this.$store.dispatch("ADD_TOKEN",res.headers["x-access-token"]);
-    //                this.$store.dispatch("ADD_USER",res.data);
-    //                this.$router.replace({ name: "HomePage" });
-    //              })
-    //              .catch(()=>{
-    //                alert("Email or password is incorrect!");
-    //              })
-    // }
   },
 };
 </script>

@@ -58,7 +58,6 @@ export default {
       queryName: this.id,
     })
       .then((res) => {
-        console.log(res);
         this.Series = res.data;
       })
       .catch((err) => {
@@ -71,7 +70,6 @@ export default {
       queryName: this.id,
     })
       .then((res) => {
-        console.log(res);
         this.Movies = res.data;
       })
       .catch((err) => {
@@ -83,7 +81,6 @@ export default {
       genre_id: this.id,
     })
       .then((res) => {
-        console.log(res);
         this.Geners = res.data;
       })
       .catch((err) => {

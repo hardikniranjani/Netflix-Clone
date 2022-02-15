@@ -74,7 +74,6 @@ export default {
     id: String,
   },
   async mounted() {
-    console.log(this.$el, "element", this.$refs);
 
     await SubscriptionApi.getSubscription({
       subscription_id: this.id,
@@ -90,13 +89,11 @@ export default {
   },
   methods: {
     async subscription(data) {
-      // console.log(this.$store.state.user,"Subscription.vue");
       await UserApi.addSubscription({
         plan_id: this.Subscription._id,
         data: data,
       })
         .then((res) => {
-          console.log(res);
           alert(
             `Thank you for Purchaseing ${this.Subscription.Plan_name} plan`
           );

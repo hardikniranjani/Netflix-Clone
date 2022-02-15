@@ -55,10 +55,9 @@ export default {
       queryName: `${this.id}`,
     })
       .then((res) => {
-        console.log(res, "line-67 seriesPage");
         this.Series = res.data[0];
         this.Seasons = res.data[0].Seasons;
-        console.log(this.Seasons);
+
         this.src = res.data[0].backdrop_path;
       })
       .catch((err) => {

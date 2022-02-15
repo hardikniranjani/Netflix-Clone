@@ -82,8 +82,7 @@ export default {
         media_type: this.media_type,
         media_id: this.id,
       })
-        .then((res) => {
-          console.log(res, "line 38 series");
+        .then(() => {
           swal("Successfully added to wish list!");
         })
         .catch((err) => {

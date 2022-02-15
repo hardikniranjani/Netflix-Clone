@@ -99,7 +99,6 @@ export default {
     const submit = handleSubmit((value) => {
       this.error = "";
       this.SignupUser(value);
-      console.log(`${value.Email}`);
     });
 
     return {
@@ -132,7 +131,6 @@ export default {
           this.token
         )
         .then((res) => {
-          console.log(res.headers);
           alert("Registered Successfully!");
           this.$store.dispatch("ADD_USER", res.data);
           this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
