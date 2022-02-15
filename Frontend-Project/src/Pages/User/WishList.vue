@@ -44,7 +44,6 @@ export default {
 
   data() {
     return {
-      MyList: [],
       Series: [],
       Movies: [],
     };
@@ -60,7 +59,6 @@ export default {
 
     UserApi.getWishList().then((res) => {
       console.log(res.data);
-      this.MyList = res.data;
       this.Series = res.data.series;
       this.Movies = res.data.movies;
     });
@@ -71,7 +69,9 @@ export default {
       if (result) {
         UserApi.deleteWishList().then((res) => {
           console.log(res.data);
-          location.reload();
+          this.Series = [];
+          this.Movies = [];
+          // location.reload();
         });
       }
     },

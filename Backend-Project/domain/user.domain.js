@@ -253,6 +253,7 @@ class UserDomain {
         },
       });
 
+      console.log(findUser, "line 256 user domain")
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
         const token = (
@@ -458,16 +459,16 @@ class UserDomain {
         populate: {
           path: "_id",
           model: "episode",
-          // populate: {
-          //   path: "SeriesID",
-          // },
+          populate: {
+            path: "SeriesID",
+          },
         },
-      });
-    // .populate({
-    //   path: "Episode",
-    //   populate: { path: "SeasonID" },
-    // })
-    // .sort();
+      })
+    .populate({
+      path: "Episode",
+      populate: { path: "SeasonID" },
+    })
+    .sort();
 
     if (history.length == 0)
       return res.status(404).send({ msg: "History not available" });
@@ -856,18 +857,13 @@ class UserDomain {
   // remove wishlist of user
   async removeFromWishlist(req, res) {
     const user_id = req.user._id;
-    const media_id = req.query.media_id;
-    let media_type = req.query.media_type;
     const findUser = await wishlist.find({ UserId: user_id });
 
     if (findUser.length == 0) {
       res.status(404).send({ msg: "Empty wishlist!!!" });
     } else {
-      await wishlist.findOneAndUpdate({
+      await wishlist.findOneAndDelete({
         UserId: user_id,
-        $pull: {
-          [media_type]: media_id,
-        },
       });
 
       res.status(200).send({ msg: "Your wishlist deleted successfully." });

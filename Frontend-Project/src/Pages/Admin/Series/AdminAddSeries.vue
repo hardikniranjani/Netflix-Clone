@@ -12,13 +12,6 @@
           placeholder="Enter Series Name"
           id="movie_series_name"
         />
-        <!-- short discription -->
-        <input
-          class="form-control mb-2"
-          type="text"
-          placeholder="Add Description"
-          id="Short_Description"
-        />
 
         <label for="language">Select Primary language : </label>
         <select name="language" id="">

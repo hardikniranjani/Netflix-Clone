@@ -4,7 +4,7 @@
       <AdminNavBar />
     </div>
     <div class="Admin__Home__Body">
-      <div class="Admin__Home__Sidebar w-100">
+      <div class="Admin__Home__Sidebar ">
         <div class="text-center align-center display-5 border pb-2">List</div>
         <div class="Admin_SideBar">
           <router-link
@@ -54,7 +54,7 @@
             :to="{ name: 'AdminSubscriptionPlanPage' }"
           >
             Subscription
-          </router-link> 
+          </router-link>
         </div>
       </div>
       <div class="Admin__Home__Content ms-3">
@@ -138,12 +138,12 @@ export default {
 
 .Admin__Home__Sidebar {
   object-fit: contain;
-  width: 350px;
-  flex: 0.4;
+  width: 150px;
+  flex: 0.1;
 }
 
 .Admin__Home__Content {
-  flex: 0.8;
+  flex: 1;
 }
 .router-link-exact-active {
   color: #fafafa;

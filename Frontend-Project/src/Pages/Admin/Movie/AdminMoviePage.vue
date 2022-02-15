@@ -25,6 +25,10 @@
           <th scope="col">#</th>
           <th scope="col">Movie</th>
           <th scope="col">Movie Name</th>
+          <th scope="col">Banner</th>
+
+          <th scope="col">Video</th>
+          <th scope="col">BackDrop Banner</th>
           <th scope="col">Edit</th>
           <th scope="col">Remove</th>
         </tr>
@@ -47,6 +51,9 @@
             </router-link>
           </td>
           <td>{{ movie.MovieName }}</td>
+          <td><UploadMovie class="nav_link" :media_type="media_Banner" /></td>
+          <td><UploadMovie class="nav_link" :media_type="media_video" /></td>
+          <td><UploadMovie class="nav_link" :media_type="media_BackDrop" /></td>
           <td class="table_td">
             <router-link class="nav_link" :to="{ name: 'AdminAddMovie' }">
               <svg
@@ -93,6 +100,7 @@
 
 <script>
 // import AdminApi from "../../services/admin.service";
+import UploadMovie from "../../../components/Admin/UploadMovie.vue";
 import MoviesApi from "../../../services/movie.service";
 import Pagination from "../../../components/Pagination.vue";
 // import VPagination from "@hennge/vue3-pagination";
@@ -106,6 +114,9 @@ export default {
       currentPageIndex: 1,
       dataPerPage: 5,
       pageNumbers: [],
+      media_video: "Video",
+      media_Banner: "Banner",
+      media_BackDrop: "BackDrop",
     };
   },
   methods: {
@@ -128,11 +139,13 @@ export default {
 
   components: {
     Pagination,
+    UploadMovie,
   },
   created() {
     document.title = `NetflixAdmin - Movies`;
 
     MoviesApi.getAllMovie().then((res) => {
+      console.log(res.data);
       this.Movies = res.data;
       this.pageList = this.Movies.slice(0, this.dataPerPage);
       this.makePartition();
@@ -167,5 +180,8 @@ export default {
   cursor: pointer;
   color: #d81f26;
   /* background-color: #d81f26; */
+}
+.nav_link:hover {
+  cursor: pointer;
 }
 </style>
