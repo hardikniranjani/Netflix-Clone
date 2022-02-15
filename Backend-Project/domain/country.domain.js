@@ -5,8 +5,7 @@ class CountryDomain {
   async createBulkCountry(req, res) {
     var countryData = req.body;
     Country.insertMany(countryData, (err, docs) => {
-      if (err)
-        res.status(400).send("error while inserting many documents " + err);
+      if (err) return res.status(400).send("error while inserting many documents " + err);
       res.status(200).send(docs);
     });
   }

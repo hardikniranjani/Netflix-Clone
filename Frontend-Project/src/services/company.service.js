@@ -11,10 +11,11 @@ export default new (class Company_Service {
     return Http.get(`/company/${company_id}`);
   }
 
-  createCompany(company_data) {
+  createCompany({company_data}) {
+    console.log(company_data)
     return Http.post(`/company`, company_data, {
       headers: {
-        "x-access-token": company_data,
+        "x-access-token": token ,
       },
     });
   }

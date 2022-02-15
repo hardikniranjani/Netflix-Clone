@@ -6,11 +6,18 @@ class CompanyDomain {
   async createAnCompany(req, res) {
     var data = req.body;
 
-    const result = await Company.findById({_id: data._id})
+    const result = await Company.findOne({ Name: data.Name });
 
-    if(result) return res.status(500).send({ msg: `This Company id ${data._id} already exists` });
+    if (result)
+      return res
+        .status(500)
+        .send({ msg: `This Company ${data.Name} already exists` });
 
-    let company = new Company({...data});
+    let allCompany = await Company.find().sort({ _id: -1 });
+
+    let id = allCompany.length == 0 ? 1 : allCompany[0]._id + 1;
+
+    let company = new Company({ _id: id, ...data });
 
     const NewCompany = await company.save();
 
@@ -21,11 +28,11 @@ class CompanyDomain {
 
   // get all Company
   async getAllCompany(req, res) {
-    var data = await Company.find({IsActive: true});
+    var data = await Company.find({ IsActive: true });
 
     if (data.length <= 0)
       return res.status(500).send({ msg: `Company not found` });
-    res.status(200).send({CompanyList: data});
+    res.status(200).send({ CompanyList: data });
   }
 
   // get specific Company by id
@@ -34,7 +41,8 @@ class CompanyDomain {
 
     const result = await Company.findById(id);
 
-    if (!result || !result.IsActive) return res.status(500).send({ msg: `Company not found` });
+    if (!result || !result.IsActive)
+      return res.status(500).send({ msg: `Company not found` });
     res.status(200).send(result);
   }
 
@@ -43,8 +51,7 @@ class CompanyDomain {
     var id = req.params.id;
     const company = await Company.findById(id);
 
-    if (!company)
-      return res.status(500).send({ msg: `Company not found` });
+    if (!company) return res.status(500).send({ msg: `Company not found` });
 
     const result = await Company.findByIdAndUpdate(
       id,
@@ -56,8 +63,7 @@ class CompanyDomain {
       { new: true }
     );
 
-    if (!result)
-      return res.status(500).send({ msg: `Can't delete Company` });
+    if (!result) return res.status(500).send({ msg: `Can't delete Company` });
     res.status(200).send("Successfully deleted");
   }
 
@@ -78,8 +84,7 @@ class CompanyDomain {
 
     const company = await Company.findById(id);
 
-    if (!company)
-      return res.status(500).send({ msg: `Company not found` });
+    if (!company) return res.status(500).send({ msg: `Company not found` });
     const UpdateCompany = await Company.findByIdAndUpdate(
       id,
       {
