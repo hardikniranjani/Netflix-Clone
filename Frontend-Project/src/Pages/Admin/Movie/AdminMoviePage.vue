@@ -26,7 +26,6 @@
           <th scope="col">Movie</th>
           <th scope="col">Movie Name</th>
           <th scope="col">Banner</th>
-
           <th scope="col">Video</th>
           <th scope="col">BackDrop Banner</th>
           <th scope="col">Edit</th>
@@ -51,9 +50,29 @@
             </router-link>
           </td>
           <td>{{ movie.MovieName }}</td>
-          <td><UploadMovie class="nav_link" :media_type="media_Banner" /></td>
-          <td><UploadMovie class="nav_link" :media_type="media_video" /></td>
-          <td><UploadMovie class="nav_link" :media_type="media_BackDrop" /></td>
+          <td>
+            <UploadFile
+              :media_type="media_Banner"
+              Content_Type="Movie"
+              :id="movie._id"
+              @mediaChange ="ChangedMediaData"
+            />
+          </td>
+          <td>
+            <UploadFile
+              :media_type="media_video"
+              Content_Type="Movie"
+              :id="movie._id"
+            />
+          </td>
+          <td>
+            <UploadFile
+              :media_type="media_BackDrop"
+              Content_Type="Movie"
+              :id="movie._id"
+              @mediaChange ="ChangedMediaData"
+            />
+          </td>
           <td class="table_td">
             <router-link class="nav_link" :to="{ name: 'AdminAddMovie' }">
               <svg
@@ -99,12 +118,10 @@
 </template>
 
 <script>
-// import AdminApi from "../../services/admin.service";
-import UploadMovie from "../../../components/Admin/UploadMovie.vue";
+import UploadFile from "../../../components/Admin/UploadFile.vue";
 import MoviesApi from "../../../services/movie.service";
 import Pagination from "../../../components/Pagination.vue";
-// import VPagination from "@hennge/vue3-pagination";
-// import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+
 export default {
   name: "AdminMoviePage",
   data() {
@@ -117,6 +134,7 @@ export default {
       media_video: "Video",
       media_Banner: "Banner",
       media_BackDrop: "BackDrop",
+      Content_Type: "Movie",
     };
   },
   methods: {
@@ -135,20 +153,35 @@ export default {
           : Math.ceil(currentPartition);
       this.pageNumbers = Array.from({ length: pagePartition }, (_, i) => i + 1);
     },
+    async GetAllMovies() {
+      await MoviesApi.getAllMovie().then((res) => {
+        this.Movies = res.data;
+        this.pageList = this.Movies.slice(0, this.dataPerPage);
+        this.makePartition();
+      });
+    },
+    ChangedMediaData(mediaName, mediaPath, mediaId){
+      console.log(mediaName, mediaPath, mediaId)
+       let MovieData = this.Movies.filter((obj)=>{
+          return obj._id == mediaId;
+        })
+        MovieData[0][mediaName] = mediaPath;
+        console.log(MovieData)
+    }
   },
 
   components: {
     Pagination,
-    UploadMovie,
+    UploadFile,
   },
   created() {
     document.title = `NetflixAdmin - Movies`;
-
-    MoviesApi.getAllMovie().then((res) => {
-      this.Movies = res.data;
-      this.pageList = this.Movies.slice(0, this.dataPerPage);
-      this.makePartition();
-    });
+    this.GetAllMovies();
+    // MoviesApi.getAllMovie().then((res) => {
+    //   this.Movies = res.data;
+    //   this.pageList = this.Movies.slice(0, this.dataPerPage);
+    //   this.makePartition();
+    // });
   },
 
   computed: {

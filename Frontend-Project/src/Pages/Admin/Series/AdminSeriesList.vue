@@ -14,7 +14,7 @@
         <router-link class="nav_link" :to="{ name: 'AdminAddSeries' }">
           <button class="btn btn-danger" style="background-color: #d81f26">
             Add Series
-          </button>    
+          </button>
         </router-link>
       </div>
       <div class="me-3 mb-2">Search bar</div>
@@ -25,6 +25,8 @@
           <th scope="col">#</th>
           <th scope="col">Series</th>
           <th scope="col">Series Name</th>
+          <th scope="col">Banner</th>
+          <th scope="col">BackDrop Banner</th>
           <th scope="col">Edit</th>
           <th scope="col">Remove</th>
         </tr>
@@ -33,15 +35,23 @@
         <tr v-for="(series, i) in Series" :key="series._id">
           <th scope="row">{{ i + 1 }}</th>
           <td>
-            <router-link class="nav_link" :to="{ name: 'AdminSeries', params: { id: series._id }}">
-            <img
-              class="Home_Movie_categories_card"
-              :src="series.backdrop_path"
-            />
+            <router-link
+              class="nav_link"
+              :to="{ name: 'AdminSeries', params: { id: series._id } }"
+            >
+              <img
+                class="Home_Movie_categories_card"
+                :src="series.backdrop_path"
+              />
             </router-link>
           </td>
           <td>{{ series.SeriesName }}</td>
-
+          <td>
+            <UploadFile :media_type="media_Banner" :Content_Type="Series" />
+          </td>
+          <td>
+            <UploadFile :media_type="media_BackDrop" :Content_Type="Series" />
+          </td>
           <td class="table_td">
             <router-link class="nav_link" :to="{ name: 'AdminAddSeries' }">
               <svg
@@ -79,14 +89,20 @@
 </template>
 
 <script>
-// import AdminApi from "../../services/admin.service";
+import UploadFile from "../../../components/Admin/UploadFile.vue";
 import SeriesApi from "../../../services/series.service";
 export default {
   name: "AdminSeriesList",
   data() {
     return {
       Series: [],
+      media_Banner: "Banner",
+      media_BackDrop: "BackDrop",
+      Content_Type: "Series",
     };
+  },
+  components: {
+    UploadFile,
   },
   created() {
     document.title = `NetflixAdmin - Series`;
