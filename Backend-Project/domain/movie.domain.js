@@ -46,17 +46,18 @@ class MovieDomain {
   // uplode movie Image
   async uploadMovieImage(req, res) {
     const movie_id = req.query.movie_id;
+    const field = req.query.media_field;
     const findMovie = await MovieModel.findById(movie_id);
-
+    
     if (!findMovie)
       return res
         .status(400)
         .send({ msg: `Can't found movie with id ${movie_id}` });
 
-    if (!req.files.banner)
+    if (!req.files[field])
       return res.status(404).send({ msg: "Kindly upload all necessary data." });
 
-    const banner = req.files.banner;
+    const banner = req.files[field];
 
     const bannerType = banner.mimetype.split("/");
 
@@ -80,7 +81,7 @@ class MovieDomain {
           { _id: movie_id },
           {
             $set: {
-              Banner: result.url,
+              [field]: result.url,
             },
           },
           { new: true }
