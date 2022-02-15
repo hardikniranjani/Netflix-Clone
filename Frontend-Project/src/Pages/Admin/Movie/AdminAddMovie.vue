@@ -9,11 +9,18 @@
         <input
           class="form-control mb-2 p-2"
           type="text"
-          placeholder="Movie Name"
-          id="movie_series_name"
+          placeholder="Enter Movie Name"
+          
         />
 
-        <!-- <div class="mb-2 form-check">
+        <label for="language">Select Primary language : </label>
+        <select name="language" id="">
+          <option v-for="lang in language" :key="lang._id">
+            {{ lang.Spoken_Language }}
+          </option>
+        </select>
+
+        <div class="mb-2 form-check">
           <input
             type="checkbox"
             name="checkbox_category"
@@ -135,8 +142,8 @@ export default {
       // console.log(res.data);
     });
     CompanyAPI.getAllCompany().then((res) => {
-      this.companies = res.data.CompanyList;
-      console.log(res.data.CompanyList);
+      this.companies = res.data.CompanyPlan;
+      console.log(res.data.CompanyPlan);
     });
   },
 };

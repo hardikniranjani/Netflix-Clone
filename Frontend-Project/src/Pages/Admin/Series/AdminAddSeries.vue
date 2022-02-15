@@ -10,7 +10,7 @@
           class="form-control mb-2"
           type="text"
           placeholder="Enter Series Name"
-          id="movie_series_name"
+          
         />
 
         <label for="language">Select Primary language : </label>

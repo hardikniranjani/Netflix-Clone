@@ -8,12 +8,13 @@
           class="btn btn-danger"
           style="background-color: #d81f26"
           @click="clearWatchHistory()"
+          :class="[disableOrEnableButton ? 'disabled' : 'active']"
         >
           Clear History
         </button>
       </div>
-
-      <div v-if="Movies || Episodes">
+      
+      <div v-if="!disableOrEnableButton">
         <span v-if="Movies.length > 0">
           <h4 class="mt-5">Movies</h4>
           <MovieWatchHistoryCardList :data="Movies" />
@@ -23,7 +24,7 @@
           <EpisodeCardList :data="Episodes" />
         </span>
       </div>
-      <div >
+      <div v-else>
         <h2 class="text-center mt-5" style="color: #d81f26">
           You don't have any Watch History
         </h2>
@@ -58,7 +59,11 @@ export default {
       var result = confirm("Want to delete watch history?");
       if (result) {
         UserApi.deleteWatchHistory().then((res) => {
-          location.reload();
+          // location.reload();
+          this.$store.dispatch("ADD_HISTORY",{
+            Movies : [],
+            Episode : []
+          });
           console.log(res.data);
         });
       }
@@ -66,7 +71,7 @@ export default {
   },
   mounted() {
     document.title = `Netflix - WatchHistory`;
-    console.log(this.Movies,this.Episodes);
+    
   },
   updated(){
     console.log(this.Movies,this.Episodes);
@@ -83,7 +88,9 @@ export default {
       Movies: "HistoryMovies",
       Episodes: "HistoryEpisodes",
     }),
-    
+    disableOrEnableButton(){
+      return this.Movies.length == 0 && this.Episodes.length == 0;
+    }
   },
 };
 </script>
