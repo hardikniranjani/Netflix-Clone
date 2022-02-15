@@ -12,7 +12,8 @@
           Clear History
         </button>
       </div>
-      <div v-if="Movies.length > 0 || Episodes.length > 0">
+
+      <div v-if="Movies || Episodes">
         <span v-if="Movies.length > 0">
           <h4 class="mt-5">Movies</h4>
           <MovieWatchHistoryCardList :data="Movies" />
@@ -22,9 +23,9 @@
           <EpisodeCardList :data="Episodes" />
         </span>
       </div>
-      <div v-else>
+      <div >
         <h2 class="text-center mt-5" style="color: #d81f26">
-          You don't have WatchHistory
+          You don't have any Watch History
         </h2>
       </div>
     </div>
@@ -47,8 +48,10 @@ export default {
     getUserHistory() {
       UserApi.showWatchHistory().then((res) => {
         console.log(res.data);
-        this.$store.dispatch("ADD_HISTORY", res.data);
-      });
+        // this.$store.dispatch("ADD_HISTORY", res.data); 
+      }).catch((err)=>{
+        console.log(err.response.data)
+      })
     },
 
     clearWatchHistory() {
@@ -63,7 +66,10 @@ export default {
   },
   mounted() {
     document.title = `Netflix - WatchHistory`;
-    console.log(this.Movies);
+    console.log(this.Movies,this.Episodes);
+  },
+  updated(){
+    console.log(this.Movies,this.Episodes);
   },
   components: {
     NavBar,
@@ -77,6 +83,7 @@ export default {
       Movies: "HistoryMovies",
       Episodes: "HistoryEpisodes",
     }),
+    
   },
 };
 </script>

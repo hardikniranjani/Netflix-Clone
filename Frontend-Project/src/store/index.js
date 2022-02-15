@@ -67,13 +67,21 @@ export default createStore({
   },
   getters: {
     HistoryMovies(state) {
-      let Movies = state.user.watchHistory.Movies;
-      if (Movies.length > 0)
-        return state.user.watchHistory.Movies.map((obj) => obj._id);
+      if(state.user.watchHistory){
+        let Movies = state.user.watchHistory.Movies;
+        if (Movies.length > 0)
+          return state.user.watchHistory.Movies.map((obj) => obj._id);
+        else return [];
+      }
+      
       else return [];
     },
     HistoryEpisodes(state) {
-      return state.user.watchHistory.Episode.map((obj) => obj._id);
+      if(state.user.watchHistory){
+        return state.user.watchHistory.Episode.map((obj) => obj._id);
+      }
+      else return []
+      
     },
     mediaDuration: function (state) {
       return (id, media_type) => {
