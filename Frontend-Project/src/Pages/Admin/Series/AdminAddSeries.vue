@@ -12,15 +12,15 @@
           placeholder="Enter Series Name"
           
         />
-        <label for="language">Select Primary language : </label>
+        <label for="language" class="Page_title">Select Primary language : </label>
         <select name="language">
           <option v-for="lang in language" :key="lang._id">
             {{ lang.Spoken_Language }}
           </option>
         </select>
 
-        <div class="d-flex row ms-4 mt-2 mb-3">
-          <label style="margin-left: -25px; margin-bottom: 5px"
+        <div class="d-flex row ms-4 mt-2 mb-3" >
+          <label class="Page_title" style="margin-left: -25px; margin-bottom: 5px"
             >Selecte Genres for Series :</label
           >
           <div
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="d-flex row mt-2 mb-3" style="margin-left: -12px">
-          <label style="margin-left: 12px; margin-bottom: 5px"
+          <label class="Page_title" style="margin-left: 12px; margin-bottom: 5px"
             >Select Production Companies :
           </label>
 

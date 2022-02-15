@@ -138,7 +138,6 @@
 
 .add_movie_form> div > label{
     color: #cccccc;
-    /* color: #8c8c80; */
 }
 
 .add_movie_form > textarea{
@@ -153,4 +152,11 @@
     /* color: #8c8c80; */
     border: none;
     outline: none;
+}
+
+.Page_title{
+    font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:400px;
+    font-size:25px;
+    color: #e4e4e4 !important;
 }

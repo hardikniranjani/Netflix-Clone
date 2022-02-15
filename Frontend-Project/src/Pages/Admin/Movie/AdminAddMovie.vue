@@ -14,7 +14,7 @@
         />
 
 
-        <label for="language">Select Primary language : </label>
+        <label for="language" class="Page_title" >Select Primary language : </label>
         <select name="language" id="">
           <option v-for="lang in language" :key="lang._id">
             {{ lang.Spoken_Language }}
@@ -22,7 +22,7 @@
         </select>
 
         <div class="d-flex row ms-4 mt-2 mb-3">
-          <label style="margin-left: -25px; margin-bottom: 5px"
+          <label class="Page_title" style="margin-left: -25px; margin-bottom: 5px"
             >Selecte Genres for Series :</label
           >
           <div
@@ -39,15 +39,16 @@
             <label class="form-check-label">{{ genre.GenresName }}</label>
           </div>
         </div>
-        <div class="d-flex row mt-2 mb-3" style="margin-left: -12px">
-          <label style="margin-left: 12px; margin-bottom: 5px"
+
+        <div class="d-flex row mt-2 mb-3" style="margin-left: -10px">
+          <label class="Page_title" style="margin-left: 12px; margin-bottom: 5px"
             >Select Production Companies :
           </label>
 
           <div
             v-for="company in companies"
             :key="company._id"
-            class="col-3 m-2"
+            class="mb-2 form-check col-4"
           >
             <input
               type="checkbox"

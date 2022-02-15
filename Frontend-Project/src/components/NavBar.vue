@@ -1,5 +1,8 @@
 <template>
-  <nav class="nav navbar navbar-expand-lg navbar-light w-100" style="z-index:4">
+  <nav
+    class="nav navbar navbar-expand-lg navbar-light w-100"
+    style="z-index: 4"
+  >
     <img
       class="nav_logo"
       src="../assets/logo.svg"
@@ -97,16 +100,25 @@
       </span>
       <span class="mobile_view">
         <form class="form-inline my-2 my-lg-0 form_input_mobile">
-          <input class="form-control search_input_mobile" type="search" placeholder="Search" />
+          <input
+            class="form-control search_input_mobile"
+            type="search"
+            placeholder="Search"
+          />
         </form>
 
         <div class="navbar_bottom_mobile">
-          <div
-            class="ms-3 mt-2"
-            id="Profile_image1"
-            v-on:click="userAccount"
-            v-html="user_icon"
-          ></div>
+          
+          <li class="nav-item">
+          <router-link class="link" :to="{ name: 'UserAccount' }">
+          <a
+            class="nav_3 nav-link "
+            style="color: rgba(221, 221, 221, 0.87); cursor: pointer ; "
+            >My Account</a
+          >
+          </router-link>
+          </li>
+          
           <button
             type="button"
             class="logout_btn_mobile btn btn-danger mt-2"
@@ -208,15 +220,17 @@ export default {
 .mobile_view {
   display: none;
 }
-.leptop_view {
-  display: block;
+.search_input_leptop {
+  background-color: #1414141c;
+  color: #cacaca;
+  border: none;
+  box-shadow: 0px 2px 4px 5px #14141462;
 }
-.search_input_leptop{
-  background-color:#1414141c;
-    color: #cacaca;
-    border:none;
-    box-shadow: 0px 2px 4px 5px #14141462;
-}
+/* @media screen and (max-width: 1188px) {
+  .leptop_view {
+    display: none;
+  }
+} */
 @media screen and (max-width: 788px) {
   .nav {
     background-color: #141414d2;
@@ -224,6 +238,7 @@ export default {
   .navbar_bottom_mobile {
     display: flex;
     margin-left: -10px;
+    
   }
   .leptop_view {
     display: none;
@@ -234,6 +249,9 @@ export default {
     width: 280px;
     flex-wrap: wrap;
     flex-direction: column;
+  }
+  .nav_3{
+    width: 130px;
   }
   .navbar_bottom_mobile {
     margin-top: 10px;
@@ -250,11 +268,10 @@ export default {
     display: flex;
     flex-direction: column;
   }
-  .search_input_mobile{
-    
-    background-color:#141414c0;
+  .search_input_mobile {
+    background-color: #141414c0;
     color: #cacaca;
-    border:none;
+    border: none;
     box-shadow: 0px 2px 4px 5px #b9b9b962;
   }
 }
