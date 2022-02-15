@@ -13,10 +13,10 @@ function verifyToken(req, res, next) {
     });
     
     req.user = decoded;
-    // console.log(req.user,"line 13 auth.middleware");
+    
     next();
   } catch (err) {
-    console.log("err",err);
+    
     res.status(400).send({msg : "Please login again!!!"});
   }
 };

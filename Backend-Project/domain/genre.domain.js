@@ -35,7 +35,7 @@ class GenreDomain {
   // get specific Genre by id
   async getAnGenre(req, res) {
     var id = req.params.id;
-    console.log( "line-38 genre " ,id);
+    
     const result = await Genre.findById(id);
 
     if (result) {

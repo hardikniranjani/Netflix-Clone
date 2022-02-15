@@ -53,8 +53,6 @@ class UserDomain {
       const token = (
         await this.generateToken({ _id: newAdmin._id, role: "admin" }, "7200m")
       ).token;
-
-      console.log(token);
       res.header("x-access-token", token).send(result);
     } catch (e) {
       res.send(e.message);
@@ -197,7 +195,6 @@ class UserDomain {
         },
         "7200m"
       );
-      console.log(token);
       res.header("x-access-token", token).send(result);
     } catch (e) {
       res.send(e.message);
@@ -253,7 +250,7 @@ class UserDomain {
         },
       });
 
-      console.log(findUser, "line 256 user domain")
+    
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
         const token = (
@@ -464,11 +461,11 @@ class UserDomain {
           },
         },
       })
-    .populate({
-      path: "Episode",
-      populate: { path: "SeasonID" },
-    })
-    .sort();
+      .populate({
+        path: "Episode",
+        populate: { path: "SeasonID" },
+      })
+      .sort();
 
     if (history.length == 0)
       return res.status(404).send({ msg: "History not available" });
@@ -633,8 +630,7 @@ class UserDomain {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-    // media_type = media_type.charAt(0).toUpperCase() + media_type.slice(1);
-    // console.log([media_type]);
+     
     const library = await watchLater.find({ User: User_id, IsActive: true });
 
     if (library.length == 0) {
@@ -895,7 +891,6 @@ class UserDomain {
   }
 
   async createOrder(req, res) {
-    // console.log("amount ",req.query.amount);
     var order = await razorpay.orders.create({
       amount: req.query.amount,
       currency: process.env.RAZORPAY_DEFAULT_CURRENCY,
@@ -915,9 +910,9 @@ class UserDomain {
     const user_id = req.user._id;
     const plan_id = Number(req.query.plan_id);
     const data = req.body.data;
-    console.log(data);
+    
     const getPlan = await SubscriptionModel.findById(plan_id);
-    // console.log(getPlan);
+    
     if (!getPlan)
       return res.status(404).send({ msg: `Plan id ${plan_id} not found` });
 

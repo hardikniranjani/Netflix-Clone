@@ -184,7 +184,7 @@ class episodeDomain {
     cloudinary.uploader
       .upload(banner.tempFilePath, { public_id: pathForCloudinary })
       .then(async (result) => {
-        console.log("uploaded", "line 186 episode.domain");
+        
         const updateEpisode = await episode_Model.findOneAndUpdate(
           { _id: episode_id },
           {

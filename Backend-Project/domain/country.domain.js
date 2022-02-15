@@ -32,7 +32,7 @@ class CountryDomain {
 
     try {
       const NewCountry = await country.save();
-      console.log(NewCountry, "line 17");
+      
       if (NewCountry) {
         res.status(200).send(NewCountry);
       } else {
@@ -107,7 +107,6 @@ class CountryDomain {
   async editAnCountry(req, res) {
     var data = req.body;
     var id = req.params.id;
-    console.log(data);
     const country = await Country.findById(id);
 
     if (country) {

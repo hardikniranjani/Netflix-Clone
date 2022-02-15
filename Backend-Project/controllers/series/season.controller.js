@@ -37,7 +37,7 @@ class SeasonController {
 
   // get all episodes of season
   static getAllEpisodesOfSeason(req, res) {
-    console.log("all episode")
+    
     const seasonDomain = new SeasonDomain();
     seasonDomain.getAllEpisodesOfSeason(req, res);
   }
