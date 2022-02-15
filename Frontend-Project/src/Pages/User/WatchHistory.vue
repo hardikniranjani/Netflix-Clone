@@ -13,7 +13,7 @@
           Clear History
         </button>
       </div>
-      
+
       <div v-if="!disableOrEnableButton">
         <span v-if="Movies.length > 0">
           <h4 class="mt-5">Movies</h4>
@@ -47,43 +47,29 @@ export default {
 
   methods: {
     getUserHistory() {
-      UserApi.showWatchHistory().then((res) => {
-        console.log(res.data);
-        // this.$store.dispatch("ADD_HISTORY", res.data); 
-      }).catch((err)=>{
-        console.log(err.response.data)
-      })
+      UserApi.showWatchHistory()
+        .then(() => {
+          // this.$store.dispatch("ADD_HISTORY", res.data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
     },
 
     clearWatchHistory() {
       var result = confirm("Want to delete watch history?");
       if (result) {
-<<<<<<< Updated upstream
-        UserApi.deleteWatchHistory().then((res) => {
-          // location.reload();
-          this.$store.dispatch("ADD_HISTORY",{
-            Movies : [],
-            Episode : []
-          });
-          console.log(res.data);
-=======
         UserApi.deleteWatchHistory().then(() => {
-          location.reload();
-          
->>>>>>> Stashed changes
+          this.$store.dispatch("ADD_HISTORY", {
+            Movies: [],
+            Episode: [],
+          });
         });
       }
     },
   },
   mounted() {
     document.title = `Netflix - WatchHistory`;
-    
-<<<<<<< Updated upstream
-  },
-  updated(){
-    console.log(this.Movies,this.Episodes);
-=======
->>>>>>> Stashed changes
   },
 
   components: {
@@ -98,9 +84,9 @@ export default {
       Movies: "HistoryMovies",
       Episodes: "HistoryEpisodes",
     }),
-    disableOrEnableButton(){
+    disableOrEnableButton() {
       return this.Movies.length == 0 && this.Episodes.length == 0;
-    }
+    },
   },
 };
 </script>

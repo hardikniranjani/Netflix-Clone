@@ -142,12 +142,8 @@ export default {
       this.Genres = res.data;
     });
     CompanyAPI.getAllCompany().then((res) => {
-<<<<<<< Updated upstream
       this.companies = res.data.CompanyPlan;
       console.log(res.data.CompanyPlan);
-=======
-      this.companies = res.data.CompanyList;
->>>>>>> Stashed changes
     });
   },
 };
