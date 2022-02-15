@@ -13,11 +13,12 @@
 
             <input
               class="form_input form-control m-3 p-2"
-              type="number"
+              type="text"
               placeholder="Name"
               :error="errors.Name"
               :modelValue="Name"
-              @change="handleChangeName"
+              name="Name"
+              @change="handleChange"
             />
             <span v-if="errors.Name" class="ms-3 form_error_massage">{{
               errors.Name
@@ -29,7 +30,8 @@
               placeholder="Origin Country"
               :error="errors.Origin_country"
               :modelValue="Origin_country"
-              @change="handleChangeOrigin_country"
+              name="Origin_country"
+              @change="handleChange"
             />
             <span
               v-if="errors.Origin_country"
@@ -43,7 +45,8 @@
               placeholder="Founded"
               :error="errors.Founded"
               :modelValue="Founded"
-              @change="handleChangeFounded"
+              name="Founded"
+              @change="handleChange"
             />
             <span v-if="errors.Founded" class="ms-3 form_error_massage">{{
               errors.Founded
@@ -55,7 +58,8 @@
               placeholder="Founders"
               :error="errors.Founders"
               :modelValue="Founders"
-              @change="handleChangeFounders"
+              name="Founders"
+              @change="handleChange"
             />
             <span v-if="errors.Founders" class="ms-3 form_error_massage">{{
               errors.Founders
@@ -67,7 +71,8 @@
               placeholder="CEO"
               :error="errors.CEO"
               :modelValue="CEO"
-              @change="handleChangeCEO"
+              name="CEO"
+              @change="handleChange"
             />
             <span v-if="errors.CEO" class="ms-3 form_error_massage">{{
               errors.CEO
@@ -79,7 +84,8 @@
               placeholder="Address"
               :error="errors.Address"
               :modelValue="Address"
-              @change="handleChangeAddress"
+              name="Address"
+              @change="handleChange"
             />
             <span v-if="errors.Address" class="ms-3 form_error_massage">{{
               errors.Address
@@ -91,7 +97,8 @@
               placeholder="Headquaters"
               :error="errors.Headquaters"
               :modelValue="Headquaters"
-              @change="handleChangeHeadquaters"
+              name="Headquaters"
+              @change="handleChange"
             />
             <span v-if="errors.Headquaters" class="ms-3 form_error_massage">{{
               errors.Headquaters
@@ -103,7 +110,8 @@
               placeholder="Description"
               :error="errors.Description"
               :modelValue="Description"
-              @change="handleChangeDescription"
+              name="Description"
+              @change="handleChange"
             />
             <span v-if="errors.Description" class="ms-3 form_error_massage">{{
               errors.Description
@@ -121,7 +129,7 @@
 </template>
 
 <script>
-import { string, object } from "yup";
+import { string, object, array } from "yup";
 import { useField, useForm } from "vee-validate";
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import Footer from "../../..//components/Footer.vue";
@@ -137,14 +145,17 @@ export default {
   },
   data() {
     const validationSchema = object({
-      Name: string().required(),
-      Origin_country: string().required(),
-      Founded: string().required(),
-      Founders: string().required(),
-      CEO: string().required(),
+      Name: string()
+        .required()
+        .min(5)
+        .matches(/[A-Za-z]/, "Must Contain Characters Only."),
+      Origin_country: string().required().matches(/[A-Za-z]/, "Must Contain Characters Only."),
+      Founded: string().required().min(5),
+      Founders: array().required().min(1),
+      CEO: string().required().min(5).matches(/[A-Za-z]/, "Must Contain Characters Only."),
       Address: string().required(),
-      Headquaters: string().required(),
-      Description: string().required(),
+      Headquaters: array().required(),
+      Description: string().required().min(50),
     });
 
     const { handleSubmit, setFieldValue, errors } = useForm({
@@ -152,30 +163,14 @@ export default {
       initialValues: {},
     });
 
-    const handleChangeName = (event) => {
-      setFieldValue("Name", event.target.value);
-    };
-
-    const handleChangeOrigin_country = (event) => {
-      setFieldValue("Origin_country", event.target.value);
-    };
-    const handleChangeFounded = (event) => {
-      setFieldValue("Founded", event.target.value);
-    };
-    const handleChangeFounders = (event) => {
-      setFieldValue("Founders", event.target.value);
-    };
-    const handleChangeCEO = (event) => {
-      setFieldValue("CEO", event.target.value);
-    };
-    const handleChangeAddress = (event) => {
-      setFieldValue("Address", event.target.value);
-    };
-    const handleChangeHeadquaters = (event) => {
-      setFieldValue("Headquaters", event.target.value);
-    };
-    const handleChangeDescription = (event) => {
-      setFieldValue("Description", event.target.value);
+    const handleChange = (event) => {
+      let fieldName = event.target.name;
+      let fieldValue = event.target.value;
+      if (fieldName === "Founders" || fieldName === "Headquaters") {
+        setFieldValue(fieldName, fieldValue.split(","));
+      } else {
+        setFieldValue(fieldName, fieldValue);
+      }
     };
 
     const { value: Name } = useField("Name");
@@ -190,6 +185,7 @@ export default {
     const { value: Description } = useField("Description");
 
     const submit = handleSubmit((value) => {
+      console.log(value);
       this.error = "";
       this.AddCompany(value);
     });
@@ -204,14 +200,7 @@ export default {
       Headquaters,
       Description,
       submit,
-      handleChangeName,
-      handleChangeOrigin_country,
-      handleChangeFounded,
-      handleChangeFounders,
-      handleChangeCEO,
-      handleChangeAddress,
-      handleChangeHeadquaters,
-      handleChangeDescription,
+      handleChange,
       errors,
       error: "",
     };
@@ -219,9 +208,10 @@ export default {
 
   methods: {
     async AddCompany(data1) {
-      await CompanyApi.createCompany({ data1 })
+      await CompanyApi.createCompany({ company_data : data1 })
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
+          this.$router.push({ name : 'AdminCompanyPage' })
         })
         .catch((err) => {
           console.log(err);

@@ -17,8 +17,9 @@
               type="number"
               placeholder="CountryCode"
               :error="errors.CountryCode"
-              :modelValue="CountryCode"
-              @change="handleChangeCountryCode"
+              v-model="country.CountryCode"
+              @change="handleChange"
+              name="CountryCode"
             />
             <span v-if="errors.CountryCode" class="ms-3 form_error_massage">{{
               errors.CountryCode
@@ -31,8 +32,9 @@
               type="text"
               placeholder="Name"
               :error="errors.CountryName"
-              :modelValue="CountryName"
-              @change="handleChangeCountryName"
+              v-model="country.CountryName"
+              @change="handleChange"
+              name="CountryName"
             />
             <span v-if="errors.CountryName" class="ms-3 form_error_massage">{{
               errors.CountryName
@@ -45,15 +47,19 @@
               type="text"
               placeholder="ShortForm"
               :error="errors.CountryShortForm"
-              :modelValue="CountryShortForm"
-              @change="handleChangeCountryShortForm"
+              v-model="country.CountryShortForm"
+              @change="handleChange"
+              name="CountryShortForm"
             />
-            <span v-if="errors.CountryShortForm" class="ms-3 form_error_massage">{{
-              errors.CountryShortForm
-            }}</span>
-
+            <span
+              v-if="errors.CountryShortForm"
+              class="ms-3 form_error_massage"
+              >{{ errors.CountryShortForm }}</span
+            >
+            
             <button
               class="form_input_button btn btn-danger mt-3 ms-3 p-2 w-100"
+              :class="[checkValuesChanged ? 'active' : 'disabled']"
             >
               Edit
             </button>
@@ -66,11 +72,12 @@
 </template>
 
 <script>
-import { string, object } from "yup";
+import { string, object, number } from "yup";
 import { useField, useForm } from "vee-validate";
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import Footer from "../../..//components/Footer.vue";
 import CountryApi from "../../../services/country.service";
+
 export default {
   name: "AdminEditCountry",
   components: {
@@ -85,7 +92,7 @@ export default {
   },
   data() {
     const validationSchema = object({
-      CountryCode: string(),
+      CountryCode: number(),
       CountryName: string(),
       CountryShortForm: string(),
     });
@@ -95,14 +102,8 @@ export default {
       initialValues: {},
     });
 
-    const handleChangeCountryCode = (event) => {
-      setFieldValue("CountryCode", event.target.value);
-    };
-    const handleChangeCountryName = (event) => {
-      setFieldValue("CountryName", event.target.value);
-    };
-    const handleChangeCountryShortForm = (event) => {
-      setFieldValue("CountryShortForm", event.target.value);
+    const handleChange = (event) => {
+      setFieldValue(event.target.name, event.target.value);
     };
 
     const { value: CountryCode } = useField("CountryCode");
@@ -115,22 +116,42 @@ export default {
     });
 
     return {
-      CountryCode,
-      CountryName,
-      CountryShortForm,
+      country: {
+        CountryCode,
+        CountryName,
+        CountryShortForm,
+      },
       submit,
-      handleChangeCountryCode,
-      handleChangeCountryName,
-      handleChangeCountryShortForm,
+      handleChange,
       errors,
       error: "",
+      previousValues: {
+        CountryCode,
+        CountryName,
+        CountryShortForm,
+      },
     };
+  },
+  computed: {
+    checkValuesChanged() {
+      let change = false;
+      // console.log(this.previousValues)
+      for (const property in this.previousValues) {
+        if (this.country[property] !== this.previousValues[property]) {
+          change = true;
+        }
+      }
+      return change;
+    },
   },
 
   methods: {
     async EditCountry(data1) {
       console.log(this.id);
-      await CountryApi.updateCountry({ country_id: this.id, country_data:data1 })
+      await CountryApi.updateCountry({
+        country_id: this.id,
+        country_data: data1,
+      })
         .then((res) => {
           console.log(res);
         })
@@ -139,14 +160,21 @@ export default {
         });
     },
   },
+
   async mounted() {
     await CountryApi.getCountry({
       country_id: this.id,
     })
       .then((res) => {
-        document.getElementById("Number_input").value = res.data.CountryCode;
-        document.getElementById("Name_input").value = res.data.CountryName;
-        document.getElementById("ShortForm_input").value = res.data.CountryShortForm;
+        // this.country.CountryCode = res.data.CountryCode;
+        // this.country.CountryName = res.data.CountryName;
+        // this.country.CountryShortForm = res.data.CountryShortForm;
+        this.country = { ...res.data };
+        this.previousValues = { ...res.data };
+
+        // document.getElementById("Number_input").value = res.data.CountryCode;
+        // document.getElementById("Name_input").value = res.data.CountryName;
+        // document.getElementById("ShortForm_input").value = res.data.CountryShortForm;
       })
       .catch((err) => {
         console.log(err);

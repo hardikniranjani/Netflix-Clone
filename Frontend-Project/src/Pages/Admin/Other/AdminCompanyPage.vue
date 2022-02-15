@@ -13,7 +13,7 @@
       <div class="ms-2 pb-2">
         <router-link class="nav_link" :to="{ name: 'AdminAddCompany' }">
           <button class="btn btn-danger" style="background-color: #d81f26">
-            Add Country
+            Add Company
           </button>
         </router-link>
       </div>
@@ -41,7 +41,10 @@
           <td>{{ company.Founded }}</td>
 
           <td class="table_td">
-            <router-link class="nav_link" :to="{ name: 'AdminEditCompany', params: { id: company._id }}">
+            <router-link
+              class="nav_link"
+              :to="{ name: 'AdminEditCompany', params: { id: company._id } }"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -64,6 +67,7 @@
               fill="currentColor"
               class="bi bi-trash-fill"
               viewBox="0 0 16 16"
+              @click="removeCompany(company._id)"
             >
               <path
                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
@@ -88,12 +92,25 @@ export default {
   },
   created() {
     document.title = `NetflixAdmin - Country`;
-
+    this.allCompanies();
     // console.log(this.$store.state);
-    CompanyApi.getAllCompany().then((res) => {
-      console.log(res);
-      this.Companies = res.data.CompanyList;
-    });
+  },
+  methods: {
+    removeCompany(id) {
+      CompanyApi.deleteCompany({
+        company_id: id,
+      }).then(() => {
+        this.allCompanies();
+      })
+      .catch((err)=>{
+        console.log(err.response.data)
+      })
+    },
+    allCompanies() {
+      CompanyApi.getAllCompany().then((res) => {
+        this.Companies = res.data.CompanyList;
+      });
+    },
   },
 };
 </script>
