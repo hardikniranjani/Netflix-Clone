@@ -97,7 +97,7 @@ export default {
     await LanguageApi.getSpokenLanguage({
       language_id: this.id,
     })
-      .then(() => {
+      .then((res) => {
         document.getElementById("Name_input").value = res.data.Spoken_Language;
       })
       .catch((err) => {
