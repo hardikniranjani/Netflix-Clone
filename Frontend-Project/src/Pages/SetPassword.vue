@@ -54,10 +54,14 @@
 <script>
 import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
+import UserApi from "../services/user.service";
 
 export default {
   name: "SetPassword",
   components: {},
+  props: {
+    token: String,
+  },
   created() {
     document.title = "Netflix - Set Password";
   },
@@ -75,7 +79,7 @@ export default {
     const handleChangePassword1 = (event) => {
       setFieldValue("Password1", event.target.value);
     };
-        const handleChangePassword2 = (event) => {
+    const handleChangePassword2 = (event) => {
       setFieldValue("Password2", event.target.value);
     };
 
@@ -84,7 +88,7 @@ export default {
 
     const submit = handleSubmit((value) => {
       this.error = "";
-      this.LoginUser(value);
+      this.SetPassword(value.Password1);
     });
 
     return {
@@ -104,6 +108,15 @@ export default {
     },
     home() {
       this.$router.replace({ name: "IndexPage" });
+    },
+   async SetPassword(password) {
+     await UserApi.changePassword({ token: this.token, password: password })
+        .then(() => {
+          this.$router.replace({ name: "LogInPage" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
