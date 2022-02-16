@@ -17,6 +17,47 @@ const razorpay = new Razorpay({
 });
 
 class UserDomain {
+  //encrypt password
+  async encryptPassword(password) {
+    const salt = await bcrypt.genSalt(10);
+    return { password: await bcrypt.hash(password, salt) };
+  }
+
+  //Generate a token
+  async generateToken(payload, expiryTime) {
+    const token = jwt.sign({ ...payload }, process.env.ACCESS_TOKEN_SECRET, {
+      algorithm: "HS256",
+      expiresIn: expiryTime,
+    });
+    return { token: token };
+  }
+
+  async sendMail(email, subject, htmlMessage, response, msg) {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.gmail_user,
+        pass: process.env.gmail_password,
+      },
+      from: process.env.gmail_user,
+    });
+
+    let mailOptions = {
+      from: process.env.gmail_user,
+      to: email,
+      subject: subject,
+      html: htmlMessage,
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        response.status(500).send({ err: err.message });
+      } else {
+        response.status(200).send({ msg: msg });
+      }
+    });
+  }
+
   // create Admin
   async createAnAdmin(req, res) {
     const admin = req.body;
@@ -77,41 +118,6 @@ class UserDomain {
     this.sendMail(email, subject, htmlMessage, response, msg);
   }
 
-  async sendMail(email, subject, htmlMessage, response, msg) {
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "dilipkumavat1807@gmail.com",
-        pass: process.env.gmail,
-      },
-      from: "dilipkumavat1807@gmail.com",
-    });
-
-    let mailOptions = {
-      from: "dilipkumavat1807@gmail.com",
-      to: email,
-      subject: subject,
-      html: htmlMessage,
-    };
-
-    transporter.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        response.status(500).send({ err: err.message });
-      } else {
-        response.status(200).send({ msg: msg });
-      }
-    });
-  }
-
-  //Generate a token
-  async generateToken(payload, expiryTime) {
-    const token = jwt.sign({ ...payload }, process.env.ACCESS_TOKEN_SECRET, {
-      algorithm: "HS256",
-      expiresIn: expiryTime,
-    });
-    return { token: token };
-  }
-
   //forgot password email
   async forgotPasswordMail(req, res) {
     const email = req.body.email;
@@ -130,12 +136,6 @@ class UserDomain {
 
     let msg = "We have sent a mail to Reset your Password";
     this.sendMail(email, subject, htmlMessage, res, msg);
-  }
-
-  //encrypt password
-  async encryptPassword(password) {
-    const salt = await bcrypt.genSalt(10);
-    return { password: await bcrypt.hash(password, salt) };
   }
 
   //change password
@@ -250,7 +250,6 @@ class UserDomain {
         },
       });
 
-    
     if (findUser && findUser.IsActive) {
       if (bcrypt.compareSync(user.password, findUser.Password)) {
         const token = (
@@ -630,7 +629,7 @@ class UserDomain {
     let User_id = req.user._id;
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
-     
+
     const library = await watchLater.find({ User: User_id, IsActive: true });
 
     if (library.length == 0) {
@@ -910,9 +909,9 @@ class UserDomain {
     const user_id = req.user._id;
     const plan_id = Number(req.query.plan_id);
     const data = req.body.data;
-    
+
     const getPlan = await SubscriptionModel.findById(plan_id);
-    
+
     if (!getPlan)
       return res.status(404).send({ msg: `Plan id ${plan_id} not found` });
 
