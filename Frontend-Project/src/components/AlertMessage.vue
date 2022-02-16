@@ -12,6 +12,9 @@
 <script>
 export default {
   name: "Alert",
+  created(){
+    console.log(this.message,this.typeAlert);
+  },
   data() {},
   props: {
     message: {
@@ -26,12 +29,7 @@ export default {
       type: String,
       required: true,
     },
-  },
-  computed: {
-    isDanger() {
-      return this.typeAlert == "danger";
-    },
-  },
+  }
 };
 </script>
 

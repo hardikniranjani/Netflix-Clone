@@ -17,6 +17,7 @@
         <h1 class="head1 display-3 mx-auto my-auto text-white">
           Unlimited movies, TV shows and more.
         </h1>
+
         <h4 class="head2 mx-auto my-auto text-white mt-2">
           Watch anywhere. Cancel anytime.
         </h4>
@@ -26,7 +27,12 @@
             membership.
           </p>
           <div v-if="showAlert">
-            <Alert :message="alertMsg" :typeAlert="typeOfAlert" />
+            <Alert
+              v-if="alertMsg"
+              :message="alertMsg"
+              :typeAlert="typeOfAlert"
+              :icon="icon"
+            />
           </div>
           <form @submit="submit">
             <fieldset>
@@ -42,8 +48,14 @@
                   :modelValue="Email"
                   @change="handleChangeEmail"
                 />
-
-                <button class="btn btn-danger p-3 text-white">
+                <div v-if="loading">
+                  <img
+                    class="my-2"
+                    :src="require('../../public/loading.gif')"
+                    style="width: 100%; height: 40px"
+                  />
+                </div>
+                <button  v-else class="btn btn-danger p-3 text-white">
                   Get Started >
                 </button>
               </div>
@@ -72,6 +84,7 @@ import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
 import UserApi from "../services/user.service";
 import Alert from "../components/AlertMessage.vue";
+
 export default {
   name: "indexPage",
   components: {
@@ -104,21 +117,26 @@ export default {
     const { value: Email } = useField("Email");
 
     const submit = handleSubmit(() => {
+      this.loading = true;
       UserApi.signUpEmail(Email.value)
         .then((res) => {
           this.alertMsg = res.data;
           this.typeOfAlert = "primary";
           this.showAlert = true;
+          this.icon = "success";
         })
         .catch((err) => {
           this.typeOfAlert = "danger";
           this.alertMsg = err.response.data;
           this.showAlert = true;
+          this.icon = "warning";
         })
         .finally(() => {
+          this.loading = false;
           setTimeout(() => {
             this.showAlert = false;
             this.alertMsg = "";
+            
           }, 5 * 1000);
         });
       this.error = "";
@@ -134,6 +152,7 @@ export default {
       showAlert: false,
       typeOfAlert: "",
       alertMsg: "",
+      icon: "",
     };
   },
   methods: {

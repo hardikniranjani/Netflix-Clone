@@ -4,44 +4,51 @@
     <div class="container-fluid index__body_mid">
       <!-- Form -->
       <h1 class="form_title display-5">Add Movie</h1>
-      <form class="add_movie_form" style="z-index: 2">
+      <form class="add_movie_form" style="z-index: 2" @submit="submit">
         <!-- movie name -->
         <input
           class="form-control mb-2 p-2"
           type="text"
           placeholder="Enter Movie Name"
-          
+          name="MovieName"
+          @change="handleChange"
         />
 
-
-        <label for="language" class="Page_title" >Select Primary language : </label>
-        <select name="language" id="">
+        <label for="language" class="Page_title"
+          >Select Primary language :
+        </label>
+        <select name="Original_language" id="" @change="handleChange">
           <option v-for="lang in language" :key="lang._id">
             {{ lang.Spoken_Language }}
           </option>
         </select>
 
         <div class="d-flex row ms-4 mt-2 mb-3">
-          <label class="Page_title" style="margin-left: -25px; margin-bottom: 5px"
+          <label
+            class="Page_title"
+            style="margin-left: -25px; margin-bottom: 5px"
             >Selecte Genres for Series :</label
           >
           <div
             class="mb-2 form-check col-4"
-            v-for="genre in Genres"
+            v-for="genre in Genres_array"
             :key="genre._id"
           >
             <input
               type="checkbox"
-              name="checkbox_category "
+              name="Genres"
               class="box form-check-input input_checkbox"
-              :value="genre.GenresName"
+              :value="genre._id"
+              @change="handleChange"
             />
             <label class="form-check-label">{{ genre.GenresName }}</label>
           </div>
         </div>
 
         <div class="d-flex row mt-2 mb-3" style="margin-left: -10px">
-          <label class="Page_title" style="margin-left: 12px; margin-bottom: 5px"
+          <label
+            class="Page_title"
+            style="margin-left: 12px; margin-bottom: 5px"
             >Select Production Companies :
           </label>
 
@@ -52,9 +59,9 @@
           >
             <input
               type="checkbox"
-              name="checkbox_category "
               class="box form-check-input m-1 input_checkbox"
               :value="company.Name"
+              name="Production_companies"
             />
             <label class="form-check-label">{{ company.Name }}</label>
           </div>
@@ -65,6 +72,7 @@
           <input
             class="add_movie_form_relese_date_input form-control mb-2 p-2"
             type="date"
+            name="ReleaseDate"
           />
           <label
             class="
@@ -87,9 +95,8 @@
         <!-- subimt button -->
         <button
           class="btn btn-danger mt-3 p-2"
-          type="button"
           style="background-color: #f40612"
-          onclick="add_image()"
+          type="submit"
         >
           Go
         </button>
@@ -104,16 +111,66 @@ import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import LanguageAPI from "../../../services/spoken_language.service";
 import GenresAPI from "../../../services/genre.service";
 import CompanyAPI from "../../../services/company.service";
+import { string, object, array, number, date } from "yup";
+import { useField, useForm } from "vee-validate";
+import MovieApi from "../../../services/movie.service";
+
 export default {
   name: "AdminAddMovie",
   components: {
     AdminNavBar,
   },
   data() {
+    const validationSchema = object({
+      MovieName: string().required(),
+      Original_language: string().required(),
+      Spoken_languages: array().required(),
+      Description: string().min(50).required(),
+      Genres: array().of(number()).required(),
+      ReleaseDate: date().required(),
+      Production_companies: array().of(number()).required(),
+    });
+
+    const { value: MovieName } = useField("MovieName");
+    const { value: Original_language } = useField("Original_language");
+    const { value: Spoken_languages } = useField("Spoken_languages");
+    const { value: Description } = useField("Description");
+    const { value: Genres } = useField("Genres");
+    const { value: ReleaseDate } = useField("ReleaseDate");
+    const { value: Production_companies } = useField("Production_companies");
+
+    const { handleSubmit, setFieldValue, errors } = useForm({
+      validationSchema,
+      initialValues: {},
+    });
+
+    const handleChange = (event) => {
+      const fieldName = event.target.name;
+      const fieldValue = event.target.value;
+
+      setFieldValue(fieldName, fieldValue);
+    };
+
+    const submit = handleSubmit((value) => {
+      console.log(value);
+      this.error = "";
+      this.createMovie(value);
+    });
     return {
       language: [],
-      Genres: [],
+      Genres_array: [],
       companies: [],
+      MovieName,
+      Original_language,
+      Spoken_languages,
+      Description,
+      Genres,
+      ReleaseDate,
+      Production_companies,
+      handleChange,
+      error: "",
+      errors,
+      submit,
     };
   },
   mounted() {
@@ -124,12 +181,19 @@ export default {
       this.language = res.data.languages;
     });
     GenresAPI.getAllGenre().then((res) => {
-      this.Genres = res.data;
+      this.Genres_array = res.data;
     });
     CompanyAPI.getAllCompany().then((res) => {
       this.companies = res.data.CompanyList;
       console.log(res.data.CompanyList);
     });
+  },
+  methods: {
+    async createMovie(movie_data) {
+      await MovieApi.createAnMovie(movie_data).then((res) => {
+        console.log(res);
+      });
+    },
   },
 };
 </script>

@@ -48,13 +48,16 @@ const movieSchema = new mongoose.Schema({
     type: Number,
   },
   Video_path : {
-    type : String
+    type : String,
+    defalut : ""
   },
   Banner: {
     type: String,
+    default : ""
   },
   backdrop_path: {
     type: String,
+    default : ""
   },
   IsActive: {
     type: Boolean,
