@@ -83,7 +83,6 @@ export default {
     async AddLanguage(data1) {
       await LanguageApi.createSpokenLanguage({ data1 })
         .then((res) => {
-          console.log(res);
           this.Languge = res.data;
         })
         .catch((err) => {

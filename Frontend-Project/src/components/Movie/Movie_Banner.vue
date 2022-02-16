@@ -1,6 +1,6 @@
 <template>
   <div id="movie_body">
-    <header id="banner">
+    <div id="banner">
       <div id="banner__fadeLeft">
         <div id="banner__contents">
           <div id="banner__contents_details">
@@ -40,7 +40,7 @@
         </div>
         <div id="banner__fadeBottom"></div>
       </div>
-    </header>
+    </div>
     <div class="mobile_view">
       <h4 class="ms-2">Description</h4>
       <p id="banner__description_mobile">

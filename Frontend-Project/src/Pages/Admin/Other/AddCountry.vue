@@ -106,8 +106,7 @@ export default {
   methods: {
     async AddCountry(data1) {
       await CountryApi.createCountry({ data1 })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
         })
         .catch((err) => {
           console.log(err);

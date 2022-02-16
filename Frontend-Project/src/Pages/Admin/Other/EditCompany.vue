@@ -238,8 +238,7 @@ export default {
   methods: {
     async EditCompany(data1) {
       await CompanyApi.updateCompany({ data1 })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
         })
         .catch((err) => {
           console.log(err);
@@ -248,12 +247,10 @@ export default {
   },
 
   async mounted() {
-    console.log(this.id);
     await CompanyApi.getAnCompany({
       company_id: `${this.id}`,
     })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
       })
       .catch((err) => {
         console.log(err);

@@ -86,8 +86,7 @@ export default {
   methods: {
     async EditGenres(data1) {
       await GenresApi.updateGenre({ genres: data1.GenreName })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
         })
         .catch((err) => {
           console.log(err);
@@ -99,7 +98,6 @@ export default {
       genre_id: this.id,
     })
       .then((res) => {
-        console.log(res.data);
         document.getElementById("Name_input").value = res.data.GenresName;
       })
       .catch((err) => {

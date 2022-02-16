@@ -1,6 +1,6 @@
 <template>
   <div>
-            <div
+    <div
       class="
         text-center
         align-center
@@ -12,7 +12,9 @@
     >
       <div class="ms-2 mb-2">
         <router-link class="nav_link" :to="{ name: 'AdminAddLanguage' }">
-          <button class="btn btn-danger" style="background-color:#D81F26">Add Language</button>
+          <button class="btn btn-danger" style="background-color: #d81f26">
+            Add Language
+          </button>
         </router-link>
       </div>
       <div class="me-3 mb-2">Search bar</div>
@@ -32,7 +34,10 @@
           <td>{{ language.Spoken_Language }}</td>
 
           <td class="table_td">
-            <router-link class="nav_link" :to="{ name: 'AdminEditLanguage', params: { id: language._id }}">
+            <router-link
+              class="nav_link"
+              :to="{ name: 'AdminEditLanguage', params: { id: language._id } }"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -80,9 +85,7 @@ export default {
   created() {
     document.title = `NetflixAdmin - Languges`;
 
-    // console.log(this.$store.state);
     LanguageApi.getAllSpokenLanguage().then((res) => {
-      console.log(res);
       this.Languages = res.data;
     });
   },

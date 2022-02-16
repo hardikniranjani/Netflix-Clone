@@ -172,8 +172,7 @@ export default {
   methods: {
     async EditCountry(data1) {
       await CountryApi.updateCountry({ data1 })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
         })
         .catch((err) => {
           console.log(err);

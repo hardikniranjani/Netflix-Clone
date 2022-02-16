@@ -78,8 +78,7 @@ export default {
 
   methods: {
     async AddGenres(data1) {
-      await GenresApi.createGenre({genres: data1.GenreName}).then((res) => {
-        console.log(res);
+      await GenresApi.createGenre({genres: data1.GenreName}).then(() => {
       }).catch((err) => {
         console.log(err);
       })

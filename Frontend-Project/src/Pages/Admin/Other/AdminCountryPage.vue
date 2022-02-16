@@ -85,9 +85,7 @@ export default {
   created() {
     document.title = `NetflixAdmin - Country`;
 
-    // console.log(this.$store.state);
     CountryApi.getAllCountry().then((res) => {
-      console.log(res);
       this.Countries = res.data;
     });
   },

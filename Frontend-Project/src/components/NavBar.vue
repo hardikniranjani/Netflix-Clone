@@ -75,13 +75,8 @@
       </ul>
       <span class="d-flex justify-content-between leptop_view">
         <form class="form-inline my-2 my-lg-0 form_input">
-          <input
-            class="form-control mr-sm-2 search_input_leptop"
-            type="search"
-            placeholder="Search"
-          />
         </form>
-        <div class="navbar_bottom">
+        <div class="navbar_bottom ">
           <div
             class="ms-3 mt-2"
             id="Profile_image1"
@@ -99,20 +94,12 @@
         </div>
       </span>
       <span class="mobile_view">
-        <form class="form-inline my-2 my-lg-0 form_input_mobile">
-          <input
-            class="form-control search_input_mobile"
-            type="search"
-            placeholder="Search"
-          />
-        </form>
-
         <div class="navbar_bottom_mobile">
           
           <li class="nav-item">
           <router-link class="link" :to="{ name: 'UserAccount' }">
           <a
-            class="nav_3 nav-link "
+            class="nav_3 nav-link my_account"
             style="color: rgba(221, 221, 221, 0.87); cursor: pointer ; "
             >My Account</a
           >
@@ -211,6 +198,7 @@ export default {
 }
 .navbar_bottom {
   margin-top: -10px;
+  margin-left:180px !important; ;
   display: flex;
 }
 
@@ -226,11 +214,7 @@ export default {
   border: none;
   box-shadow: 0px 2px 4px 5px #14141462;
 }
-/* @media screen and (max-width: 1188px) {
-  .leptop_view {
-    display: none;
-  }
-} */
+
 @media screen and (max-width: 788px) {
   .nav {
     background-color: #141414d2;
@@ -241,7 +225,7 @@ export default {
     
   }
   .leptop_view {
-    display: none;
+    display: none !important;
   }
 
   .form_input_mobile {
@@ -252,6 +236,10 @@ export default {
   }
   .nav_3{
     width: 130px;
+  }
+  .my_account{
+    margin-top:30px !important;
+    margin-left:-5px !important;
   }
   .navbar_bottom_mobile {
     margin-top: 10px;

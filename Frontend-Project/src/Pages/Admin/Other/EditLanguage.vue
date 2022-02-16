@@ -86,8 +86,7 @@ export default {
   methods: {
     async EditLanguage(data1) {
       await LanguageApi.updateLanguage({language_id:this.id, data:data1 })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
         })
         .catch((err) => {
           console.log(err);
@@ -99,7 +98,6 @@ export default {
       language_id: this.id,
     })
       .then((res) => {
-        console.log(res.data);
         document.getElementById("Name_input").value = res.data.Spoken_Language;
       })
       .catch((err) => {

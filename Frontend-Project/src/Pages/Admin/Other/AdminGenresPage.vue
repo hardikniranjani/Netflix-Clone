@@ -82,9 +82,7 @@ export default {
   created() {
     document.title = `NetflixAdmin - Genres`;
 
-    // console.log(this.$store.state);
     GenreApi.getAllGenre().then((res) => {
-      console.log(res);
       this.Genres = res.data;
     });
   },
