@@ -13,7 +13,11 @@ function verifyToken(req, res, next) {
     });
     
     req.user = decoded;
+<<<<<<< Updated upstream
     
+=======
+     console.log(req.user,"line 13 auth.middleware");
+>>>>>>> Stashed changes
     next();
   } catch (err) {
     

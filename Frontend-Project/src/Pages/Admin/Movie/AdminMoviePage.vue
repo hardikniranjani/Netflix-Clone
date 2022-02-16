@@ -161,10 +161,18 @@ export default {
       });
     },
     ChangedMediaData(mediaName, mediaPath, mediaId){
+<<<<<<< Updated upstream
+=======
+      console.log(mediaName, mediaPath, mediaId)
+>>>>>>> Stashed changes
        let MovieData = this.Movies.filter((obj)=>{
           return obj._id == mediaId;
         })
         MovieData[0][mediaName] = mediaPath;
+<<<<<<< Updated upstream
+=======
+        console.log(MovieData)
+>>>>>>> Stashed changes
     }
   },
 
