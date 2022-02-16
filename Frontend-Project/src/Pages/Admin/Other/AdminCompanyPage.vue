@@ -93,7 +93,6 @@ export default {
   created() {
     document.title = `NetflixAdmin - Country`;
     this.allCompanies();
-    // console.log(this.$store.state);
   },
   methods: {
     removeCompany(id) {

@@ -70,9 +70,6 @@
             <router-link class="nav_link" :to="{ name: 'AdminMoviePage' }"
               ><p>Show Movies</p></router-link
             >
-            <router-link class="nav_link" :to="{ name: 'AdminEditMovie' }"
-              ><p>Edit Movies</p></router-link
-            >
           </div>
         </div>
         <!-- <div class="list_body container border mt-4 ms-5 w-100"> -->
@@ -82,11 +79,8 @@
             <router-link class="nav_link" :to="{ name: 'AdminAddSeries' }"
               ><p>Add Series</p></router-link
             >
-            <router-link class="nav_link" :to="{ name: 'AdminSeriesPage' }"
+            <router-link class="nav_link" :to="{ name: 'AdminSeriesList' }"
               ><p>Show Series</p></router-link
-            >
-            <router-link class="nav_link" :to="{ name: 'AdminEditSeries' }"
-              ><p>Edit Series</p></router-link
             >
           </div>
         </div>
@@ -103,28 +97,22 @@
         <div class="d-flex border-top mt-4 pt-4">
           <div class="list_body_name">Genres</div>
           <div class="list_body_details border-start ps-3">
-            <router-link class="nav_link" :to="{ name: 'WatchHistory' }"
+            <router-link class="nav_link" :to="{ name: 'AdminAddGenres' }"
               ><p>Add Genres</p></router-link
             >
-            <router-link class="nav_link" :to="{ name: 'WishList' }"
+            <router-link class="nav_link" :to="{ name: 'AdminGenresPage' }"
               ><p>Show Genres</p></router-link>
-            <router-link class="nav_link" :to="{ name: 'WatchLater' }"
-              ><p>Edit Genres</p></router-link
-            >
           </div>
         </div>
 
         <div class="d-flex border-top mt-4 pt-4">
           <div class="list_body_name">Countries</div>
           <div class="list_body_details border-start ps-3">
-            <router-link class="nav_link" :to="{ name: 'WatchHistory' }"
+            <router-link class="nav_link" :to="{ name: 'AdminAddCountry' }"
               ><p>Add Countries</p></router-link
             >
-            <router-link class="nav_link" :to="{ name: 'WishList' }"
+            <router-link class="nav_link" :to="{ name: 'AdminCountryPage' }"
               ><p>Show Countries</p></router-link
-            >
-            <router-link class="nav_link" :to="{ name: 'WatchLater' }"
-              ><p>Edit Countries</p></router-link
             >
           </div>
         </div>
@@ -132,14 +120,11 @@
         <div class="d-flex border-top mt-4 pt-4">
           <div class="list_body_name">Languages</div>
           <div class="list_body_details border-start ps-3">
-            <router-link class="nav_link" :to="{ name: 'WatchHistory' }"
+            <router-link class="nav_link" :to="{ name: 'AdminAddLanguage' }"
               ><p>Add Languages</p></router-link
             >
-            <router-link class="nav_link" :to="{ name: 'WishList' }"
+            <router-link class="nav_link" :to="{ name: 'AdminLanguagePage' }"
               ><p>Show Languages</p></router-link
-            >
-            <router-link class="nav_link" :to="{ name: 'WatchLater' }"
-              ><p>Edit Languages</p></router-link
             >
           </div>
         </div>

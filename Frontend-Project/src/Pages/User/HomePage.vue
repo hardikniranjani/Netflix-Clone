@@ -195,25 +195,33 @@ export default {
 }
 
 @media screen and (max-width: 788px) {
-  #banner__contents {
-    height: 25%;
-    width: 50vw;
+   #banner__contents {
+    height: 25% !important;
+    width: 50vw !important;
   }
   #banner {
-    height: 25%;
-    width: 100vw;
+    height: 544px !important;
+    color: white;
+    object-fit: contain;
+    background-position: center center;
+    background-size: cover;
+  }
+  #banner__contents_details {
+    margin-top: -350px !important;
+    margin-left: -50px;
   }
   #banner__title {
-    font-size: 10px;
-    font-weight: 500;
+    font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.5rem !important;
+    font-weight: 100;
     padding-bottom: 0.3rem;
   }
   #banner__description {
-    width: 45rem;
+    width: 45rem !important;
     line-height: 1.5;
     padding-top: 1rem;
     font-size: 0.9rem;
-    max-width: 260px;
+    max-width: 260px !important;
     height: 100px;
     overflow: hidden;
   }

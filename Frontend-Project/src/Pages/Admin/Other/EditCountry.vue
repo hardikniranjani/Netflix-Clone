@@ -135,7 +135,6 @@ export default {
   computed: {
     checkValuesChanged() {
       let change = false;
-      // console.log(this.previousValues)
       for (const property in this.previousValues) {
         if (this.country[property] !== this.previousValues[property]) {
           change = true;
@@ -147,13 +146,11 @@ export default {
 
   methods: {
     async EditCountry(data1) {
-      console.log(this.id);
       await CountryApi.updateCountry({
         country_id: this.id,
         country_data: data1,
       })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
         })
         .catch((err) => {
           console.log(err);
@@ -166,15 +163,8 @@ export default {
       country_id: this.id,
     })
       .then((res) => {
-        // this.country.CountryCode = res.data.CountryCode;
-        // this.country.CountryName = res.data.CountryName;
-        // this.country.CountryShortForm = res.data.CountryShortForm;
         this.country = { ...res.data };
         this.previousValues = { ...res.data };
-
-        // document.getElementById("Number_input").value = res.data.CountryCode;
-        // document.getElementById("Name_input").value = res.data.CountryName;
-        // document.getElementById("ShortForm_input").value = res.data.CountryShortForm;
       })
       .catch((err) => {
         console.log(err);

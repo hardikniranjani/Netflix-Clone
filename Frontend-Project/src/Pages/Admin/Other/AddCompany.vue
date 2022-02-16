@@ -208,8 +208,7 @@ export default {
   methods: {
     async AddCompany(data1) {
       await CompanyApi.createCompany({ company_data : data1 })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.$router.push({ name : 'AdminCompanyPage' })
         })
         .catch((err) => {
