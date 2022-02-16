@@ -18,6 +18,12 @@
             <label class="text-white mx-auto my-auto mb-3" style="z-index: 2"
               >Login</label
             >
+            <Alert
+              v-if="alertMsg"
+              :message="alertMsg"
+              :typeAlert="typeOfAlert"
+              :icon="icon"
+            />
             <input
               class="form-control my-3 ps-3"
               type="email"
@@ -36,8 +42,14 @@
               @change="handleChangePassword"
             />
             <span>{{ errors.Password }}</span>
-
-            <button class="btn btn-danger my-3">Login</button>
+            <div v-if="loading">
+                  <img
+                    class="my-2"
+                    :src="require('../../public/loading.gif')"
+                    style="width: 100%; height: 40px"
+                  />
+                </div>
+            <button v-else class="btn btn-danger my-3">Login</button>
 
             <p style="float: left; z-index: 2">
               Forgot your password ?
@@ -62,10 +74,12 @@
 import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
 import userService from "../services/user.service";
-
+import Alert from "../components/AlertMessage.vue";
 export default {
   name: "LoginPage",
-  components: {},
+  components: {
+    Alert
+  },
   created() {
     document.title = "Netflix - Login";
   },
@@ -104,7 +118,12 @@ export default {
       handleChangeEmail,
       handleChangePassword,
       error: "",
-    };
+      icon : '',
+      typeOfAlert : '',
+      alertMsg : '',
+      showAlert : false,
+      loading : false
+    }; 
   },
 
   methods: {
@@ -116,9 +135,11 @@ export default {
     },
 
     async LoginUser(data) {
+      this.loading = true;
       userService
         .getAnUser({ email: data.Email, password: data.Password })
         .then((res) => {
+          
           this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
           this.$store.dispatch("ADD_USER", res.data);
           if (res.data.Role == "user") {
@@ -128,8 +149,20 @@ export default {
           }
         })
         .catch(() => {
-          alert("Email or password is incorrect!");
-        });
+          this.alertMsg = "Email or password is incorrect!"
+          this.showAlert = true;
+          this.typeOfAlert = "danger"
+          this.icon = "warning"
+        }).
+        finally(()=>{
+          this.loading = false;
+          setTimeout(() => {
+            this.showAlert = false;
+            this.alertMsg = "";
+            this.icon = "";
+            this.typeOfAlert = ""
+          }, 5*1000);
+        })
     },
   },
 };

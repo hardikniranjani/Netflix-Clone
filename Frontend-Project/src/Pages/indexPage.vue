@@ -136,7 +136,8 @@ export default {
           setTimeout(() => {
             this.showAlert = false;
             this.alertMsg = "";
-            
+            this.icon = "";
+            this.typeOfAlert = ""
           }, 5 * 1000);
         });
       this.error = "";
