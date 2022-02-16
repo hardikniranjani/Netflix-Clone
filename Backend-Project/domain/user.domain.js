@@ -151,9 +151,11 @@ class UserDomain {
       res.Password = hashedPassword;
       await res.save();
       return res;
-    });
+    }).catch((err)=>{
+      res.status(500).send(err.message);
+    })
 
-    res.status(200).send(findUser);
+    res.status(200).send({msg : "Password Changed Successfully. Kindly do login again. You will be redirected to Login Page after 5 seconds."});
   }
 
   // create new user, signup path

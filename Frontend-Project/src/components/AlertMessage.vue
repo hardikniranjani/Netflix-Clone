@@ -5,17 +5,14 @@
     role="alert"
   >
     <img :src="require(`../assets/${icon}-icon.svg`)" class="me-1"/>
-    <div class="msg">{{ message }}</div>
+    <h6 class="msg">{{ message }}</h6>
   </div>
 </template>
 
 <script>
 export default {
   name: "Alert",
-  created(){
-    console.log(this.message,this.typeAlert);
-  },
-  data() {},
+
   props: {
     message: {
       type: String,

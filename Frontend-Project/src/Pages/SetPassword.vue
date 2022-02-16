@@ -14,7 +14,14 @@
       </div>
       <form @submit="submit">
         <fieldset>
+          
           <div class="login__body_form p-5 mb-5" style="z-index: 2">
+            <AlertMessage
+            v-if="showAlert"
+            :message="msg"
+            :typeAlert="typeAlert"
+            :icon="icon"
+          />
             <h3 class="text-white mx-auto my-auto mb-3" style="z-index: 2">
               Set Password
             </h3>
@@ -22,7 +29,7 @@
             <input
               class="form-control my-3 ps-3"
               type="password"
-              placeholder="Enter your Password"
+              placeholder="Enter Password"
               :error="errors.Password1"
               :modelValue="Password1"
               @change="handleChangePassword1"
@@ -32,14 +39,20 @@
             <input
               class="form-control my-3 ps-3"
               type="password"
-              placeholder="Confrom your Password"
+              placeholder="Confirm Password"
               :error="errors.Password2"
               :modelValue="Password2"
               @change="handleChangePassword2"
             />
             <span>{{ errors.Password2 }}</span>
-
-            <button class="btn btn-danger my-3">Submit</button>
+            <div v-if="loading">
+              <img
+                class="my-2"
+                :src="require('../../public/loading.gif')"
+                style="width: 100%; height: 30px"
+              />
+            </div>
+            <button v-else class="btn btn-danger my-3">Submit</button>
           </div>
         </fieldset>
       </form>
@@ -55,10 +68,12 @@
 import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
 import UserApi from "../services/user.service";
-
+import AlertMessage from "../components/AlertMessage.vue";
 export default {
   name: "SetPassword",
-  components: {},
+  components: {
+    AlertMessage,
+  },
   props: {
     token: String,
   },
@@ -87,6 +102,15 @@ export default {
     const { value: Password2 } = useField("Password2");
 
     const submit = handleSubmit((value) => {
+      
+      if (Password1.value !== Password2.value) {
+        this.showAlert = true;
+        this.msg = "Password and Confirm Password must be same.";
+        this.icon = "warning";
+        this.typeAlert = "danger";
+        setTimeout(this.clearAlert, 8 * 1000);
+        return;
+      }
       this.error = "";
       this.SetPassword(value.Password1);
     });
@@ -99,6 +123,11 @@ export default {
       handleChangePassword1,
       handleChangePassword2,
       error: "",
+      showAlert: false,
+      msg: "",
+      typeAlert: "",
+      icon: "",
+      loading : false
     };
   },
 
@@ -109,14 +138,37 @@ export default {
     home() {
       this.$router.replace({ name: "IndexPage" });
     },
-   async SetPassword(password) {
-     await UserApi.changePassword({ token: this.token, password: password })
-        .then(() => {
-          this.$router.replace({ name: "LogInPage" });
+    async SetPassword(password) {
+      this.loading = true;
+      await UserApi.changePassword({ token: this.token, password: password })
+        .then((res) => {
+          this.Password1 = "";
+          this.Password2 = "";
+          this.msg = res.data.msg;
+          this.icon = "warning";
+          this.typeAlert = "danger";
+          this.showAlert = true;
+          setTimeout(() => {
+            this.$router.replace({ name: "LogInPage" })
+          }, 8*1000);
         })
         .catch((err) => {
-          console.log(err);
-        });
+          this.msg = err.response.data.msg;
+          this.icon = "warning";
+          this.typeAlert = "danger";
+          this.showAlert = true;
+          this.Password1 = "";
+          this.Password2 = "";
+          setTimeout(this.clearAlert, 5 * 1000);
+        }).finally(()=>{
+          this.loading =false;
+        })
+    },
+    clearAlert() {
+      this.msg = "";
+      this.icon = "";
+      this.typeAlert = "";
+      this.showAlert = false;
     },
   },
 };
