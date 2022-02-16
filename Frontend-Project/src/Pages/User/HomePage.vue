@@ -10,6 +10,9 @@
               Watch Later
             </button>
           </div>
+          <div v-if="showAlert">
+            <Alert/>
+          </div>
           <p id="banner__description">
             {{ Banner_Movie.Description }}
           </p>
@@ -61,6 +64,7 @@ import UserApi from "../../services/user.service";
 import swal from "sweetalert";
 import HomeMovieCardList from "../../components/Movie/HomeMovieCardList.vue";
 import HomeSeriesCardList from "../../components/Series/HomeSeriesCardList.vue";
+import Alert from '../../components/AlertMessage.vue';
 export default {
   name: "HomePage",
   data() {
@@ -76,6 +80,7 @@ export default {
       src: "",
       Banner_src: "",
       media_type: "Movies",
+      showAlert : false
     };
   },
   components: {
@@ -83,6 +88,7 @@ export default {
     Footer,
     HomeMovieCardList,
     HomeSeriesCardList,
+    Alert
   },
   props: {
     id: String,
@@ -98,7 +104,7 @@ export default {
           swal("Successfully added to watch later!");
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data.msg);
         });
     },
   },

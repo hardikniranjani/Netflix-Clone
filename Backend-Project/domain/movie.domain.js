@@ -14,21 +14,17 @@ class MovieDomain {
   async createAnMovie(req, res) {
     var data = req.body;
 
+    const findMovie = await MovieModel.findOne({MovieName : data.MovieName});
+
+    if (findMovie)
+      return res.status(400).send({ msg: `Movie ${data.MovieName} already  available` });
+
+    let allMovies = await MovieModel.find().sort({_id : -1});
+
+    let id = allMovies.length == 0 ? 1 : allMovies[0]._id + 1;
     let Movie = new MovieModel({
-      _id: data._id,
-      MovieName: data.MovieName,
-      Original_language: data.Original_language,
-      Spoken_languages: data.Spoken_languages,
-      Description: data.Description,
-      Genres: data.Genres,
-      ReleaseDate: data.ReleaseDate,
-      Popularity: data.Popularity,
-      Production_companies: data.Production_companies,
-      Vote_average: data.Vote_average,
-      Vote_count: data.Vote_count,
-      Video_path: "",
-      Banner: data.Banner,
-      backdrop_path: data.backdrop_path,
+      _id: id,
+      ...data
     });
 
     try {
