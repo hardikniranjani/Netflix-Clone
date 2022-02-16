@@ -13,7 +13,6 @@
           Clear History
         </button>
       </div>
-
       <div v-if="!disableOrEnableButton">
         <span v-if="Movies.length > 0">
           <h4 class="mt-5">Movies</h4>
