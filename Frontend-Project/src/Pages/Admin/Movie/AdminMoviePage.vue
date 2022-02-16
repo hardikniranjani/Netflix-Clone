@@ -161,18 +161,10 @@ export default {
       });
     },
     ChangedMediaData(mediaName, mediaPath, mediaId){
-<<<<<<< Updated upstream
-=======
-      console.log(mediaName, mediaPath, mediaId)
->>>>>>> Stashed changes
        let MovieData = this.Movies.filter((obj)=>{
           return obj._id == mediaId;
         })
         MovieData[0][mediaName] = mediaPath;
-<<<<<<< Updated upstream
-=======
-        console.log(MovieData)
->>>>>>> Stashed changes
     }
   },
 
@@ -183,11 +175,6 @@ export default {
   created() {
     document.title = `NetflixAdmin - Movies`;
     this.GetAllMovies();
-    // MoviesApi.getAllMovie().then((res) => {
-    //   this.Movies = res.data;
-    //   this.pageList = this.Movies.slice(0, this.dataPerPage);
-    //   this.makePartition();
-    // });
   },
 
   computed: {

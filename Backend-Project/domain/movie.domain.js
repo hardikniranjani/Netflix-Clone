@@ -52,15 +52,9 @@ class MovieDomain {
 
     if (!req.files[field])
       return res.status(404).send({ msg: "Kindly upload all necessary data." });
-<<<<<<< Updated upstream
 
     const banner = req.files[field];
 
-=======
-    console.log(req.files.banner, "line 63 movie.domain");
-    const banner = req.files.banner;
-    console.log(banner);
->>>>>>> Stashed changes
     const bannerType = banner.mimetype.split("/");
 
     if (bannerType[0] !== "image")
