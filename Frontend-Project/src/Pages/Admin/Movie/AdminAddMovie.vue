@@ -14,6 +14,10 @@
           @change="handleChange"
         />
 
+        <span v-if="errors.MovieName" class="ms-3 text-danger">{{
+          errors.MovieName
+        }}</span>
+
         <label for="language" class="Page_title"
           >Select Primary language :
         </label>
@@ -22,8 +26,15 @@
             {{ lang.Spoken_Language }}
           </option>
         </select>
+        <span v-if="errors.Original_language" class="ms-3 text-danger">{{
+          errors.Original_language
+        }}</span>
+
 
         <div class="d-flex row ms-4 mt-2 mb-3">
+          <span v-if="errors.Genres" class="ms-3 text-danger">{{
+            errors.Genres
+          }}</span>
           <label
             class="Page_title"
             style="margin-left: -25px; margin-bottom: 5px"
@@ -39,6 +50,7 @@
               name="Genres"
               class="box form-check-input input_checkbox"
               :value="genre._id"
+              
               @change="handleChange"
             />
             <label class="form-check-label">{{ genre.GenresName }}</label>
@@ -46,6 +58,9 @@
         </div>
 
         <div class="d-flex row mt-2 mb-3" style="margin-left: -10px">
+          <span v-if="errors.Production_companies" class="ms-3 text-danger">{{
+            errors.Production_companies
+          }}</span>
           <label
             class="Page_title"
             style="margin-left: 12px; margin-bottom: 5px"
@@ -60,8 +75,9 @@
             <input
               type="checkbox"
               class="box form-check-input m-1 input_checkbox"
-              :value="company.Name"
+              :value="company._id"
               name="Production_companies"
+              @change="handleChange"
             />
             <label class="form-check-label">{{ company.Name }}</label>
           </div>
@@ -69,10 +85,14 @@
 
         <!-- relese date -->
         <div class="d-inline-flex w-100">
+          <span v-if="errors.ReleaseDate" class="ms-3 text-danger">{{
+            errors.ReleaseDate
+          }}</span>
           <input
             class="add_movie_form_relese_date_input form-control mb-2 p-2"
             type="date"
             name="ReleaseDate"
+            @change="handleChange"
           />
           <label
             class="
@@ -85,11 +105,16 @@
           </label>
         </div>
         <!-- Discription -->
+        <span v-if="errors.Description" class="ms-3 text-danger">{{
+          errors.Description
+        }}</span>
         <textarea
           class="form-control mb-2 p-2"
           placeholder="Description"
           id="LongDescription"
           style="width: 100%; height: 150px"
+          name="Description"
+          @change="handleChange"
         ></textarea>
 
         <!-- subimt button -->
@@ -111,9 +136,10 @@ import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import LanguageAPI from "../../../services/spoken_language.service";
 import GenresAPI from "../../../services/genre.service";
 import CompanyAPI from "../../../services/company.service";
-import { string, object, array, number, date } from "yup";
+import { string, object, array,number } from "yup";
 import { useField, useForm } from "vee-validate";
 import MovieApi from "../../../services/movie.service";
+
 
 export default {
   name: "AdminAddMovie",
@@ -122,33 +148,40 @@ export default {
   },
   data() {
     const validationSchema = object({
-      MovieName: string().required(),
+      MovieName: string().required().min(3),
       Original_language: string().required(),
       Spoken_languages: array().required(),
       Description: string().min(50).required(),
       Genres: array().of(number()).required(),
-      ReleaseDate: date().required(),
-      Production_companies: array().of(number()).required(),
+      ReleaseDate: string().required(),
+      Production_companies: array().required(),
+    });
+
+    const { handleSubmit, setFieldValue, errors } = useForm({
+      validationSchema,
+      initialValues: {}
     });
 
     const { value: MovieName } = useField("MovieName");
     const { value: Original_language } = useField("Original_language");
     const { value: Spoken_languages } = useField("Spoken_languages");
     const { value: Description } = useField("Description");
-    const { value: Genres } = useField("Genres");
+    const { value: Genres=[] } = useField("Genres");
     const { value: ReleaseDate } = useField("ReleaseDate");
     const { value: Production_companies } = useField("Production_companies");
-
-    const { handleSubmit, setFieldValue, errors } = useForm({
-      validationSchema,
-      initialValues: {},
-    });
 
     const handleChange = (event) => {
       const fieldName = event.target.name;
       const fieldValue = event.target.value;
-
-      setFieldValue(fieldName, fieldValue);
+      if (fieldName == "Genres" || fieldName == "Production_companies") {
+        // setFieldValue(fieldName,[...[fieldName],fieldValue]);
+        setFieldValue(fieldName,parseInt(fieldValue));
+        // console.log(fieldName)
+        
+      } else {
+        // console.log(fieldName, fieldValue);
+        setFieldValue(fieldName, fieldValue);
+      }
     };
 
     const submit = handleSubmit((value) => {
@@ -185,7 +218,6 @@ export default {
     });
     CompanyAPI.getAllCompany().then((res) => {
       this.companies = res.data.CompanyList;
-      console.log(res.data.CompanyList);
     });
   },
   methods: {

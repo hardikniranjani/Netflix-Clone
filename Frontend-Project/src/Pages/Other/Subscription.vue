@@ -50,7 +50,7 @@
 <script>
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
-
+// import Alert from '../../components/AlertMessage.vue';
 import SubscriptionApi from "../../services/subscription.service";
 import UserApi from "../../services/user.service";
 
@@ -64,11 +64,16 @@ export default {
       Subscription: {},
       Devices: "",
       app: document.getElementById("app"),
+      msg : "",
+      typeAlert : '',
+      icon : '',
+      showAlert : false
     };
   },
   components: {
     NavBar,
     Footer,
+    // Alert
   },
   props: {
     id: String,
@@ -77,6 +82,7 @@ export default {
 
     await SubscriptionApi.getSubscription({
       subscription_id: this.id,
+
     })
       .then((res) => {
         this.Subscription = res.data;
@@ -94,6 +100,7 @@ export default {
         data: data,
       })
         .then((res) => {
+          console.log(res);
           alert(
             `Thank you for Purchaseing ${this.Subscription.Plan_name} plan`
           );
@@ -127,7 +134,7 @@ export default {
         "https://checkout.razorpay.com/v1/checkout.js"
       );
       if (!result) {
-        alert("Failed to load payment script");
+        alert("Failed to load payment page.");
         return;
       }
       UserApi.createOrder(this.Subscription["Monthly_price"] * 100)

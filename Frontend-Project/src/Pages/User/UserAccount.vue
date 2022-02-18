@@ -190,7 +190,7 @@ export default {
     return {
       Name,
       handleChangeName,
-      submit,
+      submit
     };
   },
   components: {
