@@ -9,7 +9,6 @@ const nodemailer = require("nodemailer");
 const Razorpay = require("razorpay");
 const SubscriptionModel = require("../models/subscription.model");
 const shortid = require("shortid");
-const { response } = require("express");
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_ID,
@@ -32,7 +31,7 @@ class UserDomain {
     return { token: token };
   }
 
-  async sendMail(email, subject, htmlMessage, response, msg) {
+  async sendMail(email, subject, htmlMessage, res, msg) {
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -51,9 +50,9 @@ class UserDomain {
 
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        response.status(500).send({ err: err.message });
+        res.status(500).send({ err: err.message });
       } else {
-        response.status(200).send({ msg: msg });
+        res.status(200).send({ msg: msg });
       }
     });
   }
@@ -115,7 +114,7 @@ class UserDomain {
     let subject = "Ottplatform Account signup";
     let htmlMessage = `<p>Hey, We have received a request to sing up on <a href=${baseLink}>ottplatform.com</a>, so if you have requested that, then please <a href=${link}>click here</a> to verify account</p>`;
     let msg = "We have sent you a Email to Verify account.";
-    this.sendMail(email, subject, htmlMessage, response, msg);
+    this.sendMail(email, subject, htmlMessage, res, msg);
   }
 
   //forgot password email
@@ -147,15 +146,21 @@ class UserDomain {
     let findUser = await UserModel.findOne({
       Email: userEmail,
       IsActive: true,
-    }).then(async (res) => {
-      res.Password = hashedPassword;
-      await res.save();
-      return res;
-    }).catch((err)=>{
-      res.status(500).send(err.message);
     })
+      .then(async (res) => {
+        res.Password = hashedPassword;
+        await res.save();
+        return res;
+      })
+      .catch((err) => {
+        res.status(500).send(err.message);
+      });
 
-    res.status(200).send({msg : "Password Changed Successfully. Kindly do login again. You will be redirected to Login Page after 5 seconds."});
+    res
+      .status(200)
+      .send({
+        msg: "Password Changed Successfully. Kindly do login again. You will be redirected to Login Page after 5 seconds.",
+      });
   }
 
   // create new user, signup path
