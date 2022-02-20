@@ -5,6 +5,7 @@
       <!-- Form -->
       <h1 class="form_title display-5">Add Movie</h1>
       <form class="add_movie_form" style="z-index: 2" @submit="submit">
+        <div>
         <!-- movie name -->
         <input
           class="form-control mb-2 p-2"
@@ -17,7 +18,7 @@
         <span v-if="errors.MovieName" class="ms-3 text-danger">{{
           errors.MovieName
         }}</span>
-
+        </div>
         <label for="language" class="Page_title"
           >Select Primary language :
         </label>
@@ -32,9 +33,7 @@
 
 
         <div class="d-flex row ms-4 mt-2 mb-3">
-          <span v-if="errors.Genres" class="ms-3 text-danger">{{
-            errors.Genres
-          }}</span>
+
           <label
             class="Page_title"
             style="margin-left: -25px; margin-bottom: 5px"
@@ -55,12 +54,13 @@
             />
             <label class="form-check-label">{{ genre.GenresName }}</label>
           </div>
+                    <span v-if="errors.Genres" class="ms-3 text-danger">{{
+            errors.Genres
+          }}</span>
         </div>
 
         <div class="d-flex row mt-2 mb-3" style="margin-left: -10px">
-          <span v-if="errors.Production_companies" class="ms-3 text-danger">{{
-            errors.Production_companies
-          }}</span>
+
           <label
             class="Page_title"
             style="margin-left: 12px; margin-bottom: 5px"
@@ -81,13 +81,13 @@
             />
             <label class="form-check-label">{{ company.Name }}</label>
           </div>
+                    <span v-if="errors.Production_companies" class="ms-3 text-danger">{{
+            errors.Production_companies
+          }}</span>
         </div>
 
         <!-- relese date -->
         <div class="d-inline-flex w-100">
-          <span v-if="errors.ReleaseDate" class="ms-3 text-danger">{{
-            errors.ReleaseDate
-          }}</span>
           <input
             class="add_movie_form_relese_date_input form-control mb-2 p-2"
             type="date"
@@ -104,10 +104,11 @@
             >Release date
           </label>
         </div>
+                  <span v-if="errors.ReleaseDate" class="ms-3 text-danger">{{
+            errors.ReleaseDate
+          }}</span>
         <!-- Discription -->
-        <span v-if="errors.Description" class="ms-3 text-danger">{{
-          errors.Description
-        }}</span>
+       
         <textarea
           class="form-control mb-2 p-2"
           placeholder="Description"
@@ -116,7 +117,9 @@
           name="Description"
           @change="handleChange"
         ></textarea>
-
+ <span v-if="errors.Description" class="ms-3 text-danger">{{
+          errors.Description
+        }}</span>
         <!-- subimt button -->
         <button
           class="btn btn-danger mt-3 p-2"

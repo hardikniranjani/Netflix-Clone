@@ -11,9 +11,9 @@
     <div class="Series_body">
       <div class="body_content">
         <div v-for="season in Seasons" :key="season._id">
-          <h3>{{ season.SeasonName }}</h3>
+          <h3 class="Home_List_Title">{{ season.SeasonName }}</h3>
           <div class="Series_body_episodeList">
-            <EpisodeCardList :data="season.Episodes" />
+            <EpisodeCardList class="Home_List_Title" :data="season.Episodes" />
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default {
   margin-top: 0px;
 }
 .Series_footer {
-  margin-top: 470px;
+  margin-top: 70px;
 }
 .body_content {
   margin-top: -100px;

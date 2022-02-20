@@ -1,8 +1,5 @@
 <template>
-  <nav
-    class="nav navbar navbar-expand-lg navbar-light w-100"
-    style="z-index: 4"
-  >
+  <nav class="nav navbar navbar-expand-lg w-100 user_navbar" style="z-index: 4">
     <img
       class="nav_logo"
       src="../assets/logo.svg"
@@ -18,7 +15,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon usernav_ico"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -74,9 +71,8 @@
         </li>
       </ul>
       <span class="d-flex justify-content-between leptop_view">
-        <form class="form-inline my-2 my-lg-0 form_input">
-        </form>
-        <div class="navbar_bottom ">
+        <form class="form-inline my-2 my-lg-0 form_input"></form>
+        <div class="navbar_bottom">
           <div
             class="ms-3 mt-2"
             id="Profile_image1"
@@ -95,17 +91,16 @@
       </span>
       <span class="mobile_view">
         <div class="navbar_bottom_mobile">
-          
           <li class="nav-item">
-          <router-link class="link" :to="{ name: 'UserAccount' }">
-          <a
-            class="nav_3 nav-link my_account"
-            style="color: rgba(221, 221, 221, 0.87); cursor: pointer ; "
-            >My Account</a
-          >
-          </router-link>
+            <router-link class="link" :to="{ name: 'UserAccount' }">
+              <a
+                class="nav_3 nav-link my_account"
+                style="color: rgba(221, 221, 221, 0.87); cursor: pointer"
+                >My Account</a
+              >
+            </router-link>
           </li>
-          
+
           <button
             type="button"
             class="logout_btn_mobile btn btn-danger mt-2"
@@ -122,7 +117,6 @@
 
 <script>
 import { createAvatar } from "@dicebear/avatars";
-// import * as style from "@dicebear/avatars-identicon-sprites";
 import * as style from "@dicebear/adventurer-neutral";
 
 export default {
@@ -140,13 +134,16 @@ export default {
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
   },
-
+  mounted() {
+    this.navActive();
+  },
   updated() {
     let svg = createAvatar(style, {
       seed: `${this.$store.state.user.Name}`,
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
+    this.navActive();
   },
   methods: {
     home() {
@@ -159,6 +156,12 @@ export default {
       this.$store.dispatch("REMOVE_TOKEN");
       this.$router.replace({ name: "IndexPage" });
     },
+    navActive() {
+      window.addEventListener("scroll", function () {
+        var nav = document.querySelector(".user_navbar");
+        nav.classList.toggle("nav_active", window.scrollY > 0);
+      });
+    },
   },
 };
 </script>
@@ -167,6 +170,13 @@ export default {
 </style>
 
 <style scoped>
+.nav {
+  padding-left: 70px;
+}
+
+.user_navbar.nav_active {
+  background-color: #000000ec;
+}
 #Profile_image1 {
   border-radius: 8px;
   width: 40px;
@@ -194,11 +204,11 @@ export default {
 }
 
 .form_input {
-  margin-left: 500px;
+  margin-left: 450px;
 }
 .navbar_bottom {
   margin-top: -10px;
-  margin-left:180px !important; ;
+  margin-left: 180px !important;
   display: flex;
 }
 
@@ -217,12 +227,20 @@ export default {
 
 @media screen and (max-width: 788px) {
   .nav {
-    background-color: #141414d2;
+    padding-left: 20px;
+    background-color: #000000ec;
   }
+  .usernav_ico{
+    border:1px solid black;
+    border-radius:5px;
+  }
+
+.usernav_ico:focus{
+  border:none;
+}
   .navbar_bottom_mobile {
     display: flex;
     margin-left: -10px;
-    
   }
   .leptop_view {
     display: none !important;
@@ -234,12 +252,12 @@ export default {
     flex-wrap: wrap;
     flex-direction: column;
   }
-  .nav_3{
+  .nav_3 {
     width: 130px;
   }
-  .my_account{
-    margin-top:30px !important;
-    margin-left:-5px !important;
+  .my_account {
+    margin-top: 30px !important;
+    margin-left: -5px !important;
   }
   .navbar_bottom_mobile {
     margin-top: 10px;

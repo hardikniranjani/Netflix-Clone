@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100vw; height: 100vh">
     <video
       ref="myvideo"
       style="width: 100vw; height: 100vh"

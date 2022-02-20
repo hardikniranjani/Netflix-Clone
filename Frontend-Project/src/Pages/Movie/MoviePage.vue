@@ -85,6 +85,6 @@ export default {
   margin-top: 200px;
 }
 .Movie_footer {
-  margin-top: 0px;
+  margin-top: 70px;
 }
 </style>

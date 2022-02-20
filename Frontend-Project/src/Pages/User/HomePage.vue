@@ -2,8 +2,9 @@
   <div class="HomePage">
     <div class="nav"><NavBar /></div>
     <div id="banner">
+      <div id="banner__fadeLeft">
       <div id="banner__contents">
-        <div id="banner__contents_details">
+        <div id="Home_banner__contents_details">
           <h1 id="banner__title">{{ Banner_Movie.MovieName }}</h1>
           <div id="banner__buttons">
             <button id="banner__button" v-on:click="addToWatchLater()">
@@ -11,48 +12,51 @@
             </button>
           </div>
           <div v-if="showAlert">
-            <Alert/>
+            <Alert />
           </div>
           <p id="banner__description">
             {{ Banner_Movie.Description }}
           </p>
         </div>
       </div>
-      <div id="banner__fadeBottom"></div>
+      <div id="Home_banner__fadeBottom"></div>
+      </div>
     </div>
 
     <div class="HomePage_body">
       <div class="body_content">
-        <h3>Movies</h3>
-        <HomeMovieCardList :data="movie_data" />
+        <h3 class="Home_List_Title">Movies</h3>
+        <HomeMovieCardList  class="Home_List_Title"  :data="movie_data" />
 
-        <h3 class="mt-5">Series</h3>
-        <HomeSeriesCardList :data="series_data" />
+        <h3  class="Home_List_Title">Series</h3>
+        <HomeSeriesCardList  class="Home_List_Title" :data="series_data" />
 
-        <h3 class="mt-5">Adventure Movie</h3>
-        <HomeMovieCardList :data="Adventure_movie" />
+        <h3  class="Home_List_Title">Adventure Movie</h3>
+        <HomeMovieCardList  class="Home_List_Title" :data="Adventure_movie" />
 
         <div v-if="Drama_Series.length > 0">
-          <h3 class="mt-5">Drama Series</h3>
-          <HomeSeriesCardList :data="Drama_Series" />
+          <h3  class="Home_List_Title">Drama Series</h3>
+          <HomeSeriesCardList  class="Home_List_Title" :data="Drama_Series" />
         </div>
 
-        <h3 class="mt-5">Romentic movie</h3>
-        <HomeMovieCardList :data="Romentic_movie" />
+        <h3  class="Home_List_Title">Romentic movie</h3>
+        <HomeMovieCardList  class="Home_List_Title" :data="Romentic_movie" />
 
-        <div v-if="Adventure_Series.length > 0">
-          <h3 class="mt-5">Adventure Series</h3>
-          <HomeSeriesCardList :data="Adventure_Series" />
+        <div v-if="Adventure_Series.length < 0">
+          <h3  class="Home_List_Title">Adventure Series</h3>
+          <HomeSeriesCardList  class="Home_List_Title" :data="Adventure_Series" />
         </div>
 
         <div v-if="Crime_Mystry_Movies.length > 0">
-          <h3 class="mt-5">Crime Movie</h3>
-          <HomeMovieCardList :data="Crime_Mystry_Movies" />
+          <h3  class="Home_List_Title">Crime Movie</h3>
+          <HomeMovieCardList  class="Home_List_Title" :data="Crime_Mystry_Movies" />
         </div>
       </div>
     </div>
     <div class="Home_footer"><Footer /></div>
+
   </div>
+
 </template>
 
 <script>
@@ -64,7 +68,7 @@ import UserApi from "../../services/user.service";
 import swal from "sweetalert";
 import HomeMovieCardList from "../../components/Movie/HomeMovieCardList.vue";
 import HomeSeriesCardList from "../../components/Series/HomeSeriesCardList.vue";
-import Alert from '../../components/AlertMessage.vue';
+import Alert from "../../components/AlertMessage.vue";
 export default {
   name: "HomePage",
   data() {
@@ -80,7 +84,7 @@ export default {
       src: "",
       Banner_src: "",
       media_type: "Movies",
-      showAlert : false
+      showAlert: false,
     };
   },
   components: {
@@ -88,7 +92,7 @@ export default {
     Footer,
     HomeMovieCardList,
     HomeSeriesCardList,
-    Alert
+    Alert,
   },
   props: {
     id: String,
@@ -114,7 +118,7 @@ export default {
     // Banner _Movie
     await MovieApi.findMovieBySearch({
       queryperam: "_id",
-      queryName: "17",
+      queryName: "19",
     }).then((res) => {
       var banner = document.getElementById("banner");
       banner.style.backgroundImage = "url(" + res.data[0].backdrop_path + ")";
@@ -182,6 +186,9 @@ export default {
 <style scoped src="../../Style/Banner.css">
 </style>
 <style >
+.Home_List_Title{
+  margin-left:70px;
+}
 .HomePage {
   width: 100vw;
   height: 100%;
@@ -200,8 +207,25 @@ export default {
   margin-top: -100px;
 }
 
+#Home_banner__fadeBottom{
+  margin-bottom: -600px;
+  width:100vw;
+  height: 19.5rem;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(37,37,37, .61),
+    #111
+  );
+}
+#Home_banner__contents_details{
+  margin-top: -150px;
+}
 @media screen and (max-width: 788px) {
-   #banner__contents {
+  .Home_List_Title{
+  margin-left:20px;
+}
+  #banner__contents {
     height: 25% !important;
     width: 50vw !important;
   }
@@ -212,7 +236,7 @@ export default {
     background-position: center center;
     background-size: cover;
   }
-  #banner__contents_details {
+  #Home_banner__contents_details {
     margin-top: -350px !important;
     margin-left: -50px;
   }
@@ -247,5 +271,16 @@ export default {
     background-color: rgba(51, 51, 51, 0.5);
     padding-bottom: 0.5rem;
   }
+  #Home_banner__fadeBottom{
+  margin-top: -75px ;
+  width:100vw;
+  height: 5.5rem;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(37,37,37, .61),
+    #111
+  );
+}
 }
 </style>

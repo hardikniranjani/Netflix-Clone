@@ -12,11 +12,12 @@
             :Price="i.Monthly_price"
             :Screen="i.Number_of_screen_available"
             :Quality="i.Max_video_quality"
+            :device="i.Devices"
           />
         </div>
       </div>
     </div>
-    <div class="footer"><Footer /></div>
+    <div class="plan_footer"><Footer /></div>
   </div>
 </template>
 
@@ -44,6 +45,7 @@ export default {
   async mounted() {
     let subscription_res = await SubscriptionApi.getAllSubscription();
     this.Subscription = subscription_res.data.SubscriptionPlan;
+    console.log( this.Subscription )
   },
 };
 </script>
@@ -54,6 +56,7 @@ export default {
   height: 100%;
 }
 .AllPlans {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   text-decoration: none;
@@ -74,6 +77,7 @@ export default {
 }
 .SubscriptionPlan_body {
   margin-top: 150px;
+  width: 100vw;
 }
 .footer {
   margin-top: 470px;

@@ -1,14 +1,21 @@
 <template>
   <div class="mainContainer"> 
       <div class="upper">
-          <h3 class="display-7 text-center mt-3">{{Name}}</h3>
+          <h3 class="display-7 text-center pt-3 mb-4 ">{{Name}}</h3>
       </div>
       <div class="mainContainer_body d-inline-flex">
-          <p>Monthly Price: <span class="mainContainer_body_txt">{{Price}} </span></p>
-          <p>Max Quality:  <span class="mainContainer_body_txt">{{Quality}} </span></p>
+          <p>Monthly Price: <span class="mainContainer_body_txt"><i class="fa fa-rupee ms-1"></i>{{Price}} </span></p>
+          <p>Max Quality:  <span class="mainContainer_body_txt ms-1">{{Quality}} </span></p>
+          <p>Devices:  <span class="mainContainer_body_txt ms-1"> <span
+              v-for="(i, index) in device"
+              :key="i"
+              
+              >{{ i }}
+              <span v-if="index + 1 != device.length">,</span>
+            </span> </span></p>
       </div>
       <div class="mainContainer_lower mt-4">
-          <button class="btn btn-outline-primary" :onclick="redirect">More Details</button>
+          <button class="btn btn-outline-primary" @click="createOrder"> Purchase</button>
       </div>
   </div>
 
@@ -22,7 +29,8 @@ export default {
         Price:Number,
         Screen:Number,
         Quality:String,
-        id:Number
+        id:Number,
+        device:[]
     },
 
     methods: {
@@ -38,16 +46,17 @@ export default {
 
 .mainContainer{
     font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width:250px;
+    margin-right: 80px !important;
+    margin-bottom: 80px !important;
+    width:280px;
     height:300px;
-    border:1px solid white;
+    box-shadow: 0px 2px 4px 4px #fafafa;
+    border:none;
     border-radius:20px;
     color: lightgrey;
 }
 
 .mainContainer_body{
-    margin-top:50px;
-    margin-bottom:20px;
     padding-left:10px;
     flex-direction: column;
 }
@@ -64,4 +73,5 @@ export default {
     align-items: center;
     text-align: center;
 }
+
 </style>

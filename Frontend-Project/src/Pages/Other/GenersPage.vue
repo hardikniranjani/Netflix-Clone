@@ -3,7 +3,7 @@
   <div class="GenersPage">
     <div class="nav"><NavBar /></div>
     <div class="body">
-      <h2 class="display-3 mt-0">Genres</h2>
+      <h2 class="d-flex justify-content-center Geners_title">Genres</h2>
 
       <div class="AllGeners">
         <span
@@ -19,7 +19,7 @@
         </span>
       </div>
     </div>
-    <div class="footer"><Footer /></div>
+    <div class="genres_footer"><Footer /></div>
   </div>
 </template>
 
@@ -72,6 +72,14 @@ export default {
   margin-top: 470px;
 }
 
+.genres_footer {
+  margin-top: 120px;
+}
+.Geners_title {
+  font-size: 3rem;
+  font-weight: 800;
+  padding-bottom: 0.3rem;
+}
 @media screen and (max-width: 788px) {
   .AllGeners {
     margin-right: 50px;
@@ -80,6 +88,13 @@ export default {
     flex-direction: column;
     flex-wrap: wrap;
     text-decoration: none;
+  }
+  .Geners_title {
+    margin-bottom: 2rem;
+    margin-top: -4rem;
+    font-size: 2rem;
+    font-weight: 800 !important;
+    padding-bottom: 0.3rem;
   }
 }
 </style>

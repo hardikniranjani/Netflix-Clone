@@ -16,7 +16,7 @@
             },
           }"
         >
-          <img class="Series_categories_card" :src="episode.Banner" />
+          <img class="Episode_categories_card" :src="episode.Banner" />
         </router-link>
       </div>
       <div class="categories_card_bottom_main">
@@ -85,10 +85,10 @@ export default {
 .Episode_categories_card_main_background {
   overflow: hidden;
 }
-.Series_categories_card {
+.Episode_categories_card {
   object-fit: contain;
   max-width: 210px;
-  max-height: 250px;
+  max-height: 120px;
 }
 
 .categories_card_bottom_main {

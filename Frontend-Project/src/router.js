@@ -29,32 +29,30 @@ import AdminUserPage from "./Pages/Admin/User/AdminUserPage.vue";
 import AdminEditUser from "./Pages/Admin/User/EditUser.vue";
 
 // Admin - Other
-import AdminGenresPage from "./Pages/Admin/Other/AdminGenresPage.vue";
-import AdminCountryPage from "./Pages/Admin/Other/AdminCountryPage.vue";
-import AdminLanguagePage from "./Pages/Admin/Other/AdminLanguagePage.vue";
-import AdminCompanyPage from "./Pages/Admin/Other/AdminCompanyPage.vue";
-import AdminSubscriptionPlanPage from "./Pages/Admin/Other/AdminSubscriptionPlanPage.vue";
+import AdminGenresPage from "./Pages/Admin/Other/AdminGenresPage.vue";         
+import AdminCountryPage from "./Pages/Admin/Other/AdminCountryPage.vue";         
+import AdminLanguagePage from "./Pages/Admin/Other/AdminLanguagePage.vue";         
+import AdminCompanyPage from "./Pages/Admin/Other/AdminCompanyPage.vue";         
+import AdminSubscriptionPlanPage from "./Pages/Admin/Other/AdminSubscriptionPlanPage.vue";         
 
+import AdminAddCountry from "./Pages/Admin/Other/AddCountry.vue";         
+import AdminAddGenres from "./Pages/Admin/Other/AddGenres.vue";         
+import AdminAddLanguage from "./Pages/Admin/Other/AddLanguage.vue";         
+import AdminAddCompany from "./Pages/Admin/Other/AddCompany.vue";         
 
+import AdminEditCountry from "./Pages/Admin/Other/EditCountry.vue";         
+import AdminEditGenres from "./Pages/Admin/Other/EditGenres.vue";         
+import AdminEditLanguage from "./Pages/Admin/Other/EditLanguage.vue";         
+import AdminEditCompany from "./Pages/Admin/Other/EditCompany.vue";         
 
-import AdminAddCountry from "./Pages/Admin/Other/AddCountry.vue";
-import AdminAddGenres from "./Pages/Admin/Other/AddGenres.vue";
-import AdminAddLanguage from "./Pages/Admin/Other/AddLanguage.vue";
-import AdminAddCompany from "./Pages/Admin/Other/AddCompany.vue";
+// User         
+import UserMain from "./Pages/User/UserMain.vue";         
+import UserAccount from "./Pages/User/UserAccount.vue";         
 
-import AdminEditCountry from "./Pages/Admin/Other/EditCountry.vue";
-import AdminEditGenres from "./Pages/Admin/Other/EditGenres.vue";
-import AdminEditLanguage from "./Pages/Admin/Other/EditLanguage.vue";
-import AdminEditCompany from "./Pages/Admin/Other/EditCompany.vue";
+import HomePage from "./Pages/User/HomePage.vue";         
 
-// User
-import UserMain from "./Pages/User/UserMain.vue";
-import UserAccount from "./Pages/User/UserAccount.vue";
-
-import HomePage from "./Pages/User/HomePage.vue";
-
-import WatchHistory from "./Pages/User/WatchHistory.vue";
-import WatchLater from "./Pages/User/WatchLater.vue";
+import WatchHistory from "./Pages/User/WatchHistory.vue";         
+import WatchLater from "./Pages/User/WatchLater.vue";         
 import WishList from "./Pages/User/WishList.vue";
 
 // Series
@@ -73,7 +71,6 @@ import GenersContent from "./Pages/Other/GenersContent.vue";
 
 import SubscriptionPlan from "./Pages/Other/SubscriptionPlan.vue";
 import Subscription from "./Pages/Other/Subscription.vue";
-
 
 const routes = [
   {
@@ -192,9 +189,9 @@ const routes = [
     component: SubscriptionPlan,
   },
   {
-    path: "/subscription/:id",
-    name: "Subscription",
-    component: Subscription,
+    path: "/subscription/:id",  
+    name: "Subscription",       
+    component: Subscription,    
     props: true,
   },
   // user section

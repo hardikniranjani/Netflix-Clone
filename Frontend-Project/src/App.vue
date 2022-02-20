@@ -1,12 +1,18 @@
 <template>
   <div>
+    <!-- <CardList /> -->
     <router-view />
   </div>
 </template>
 
 <script>
+
+//  import CardList from "./Pages/Cardlist.vue"
 export default {
   name: "App",
+  components: {
+    // CardList
+  }
 };
 </script>
 
@@ -16,7 +22,8 @@ export default {
   padding: 0;
 }
 #app {
-  background-color: #141414;
+  /* background-color: #141414; */
+  background-color: #000000;
   color: #fafafad3;
   overflow-x: hidden;
 }

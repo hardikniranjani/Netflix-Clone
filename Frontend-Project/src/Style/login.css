@@ -86,9 +86,10 @@
   
   .login__footer {
     width: 100vw;
-    background-color: #0000006b;
-    z-index: 2;
+    background-color: #000000e1;
+    z-index: 22 !important;
     text-align: center;
+   padding-left: 250px;
   }
   
   .login__footer > p {
@@ -147,5 +148,6 @@
     }
     .login__footer{
       margin-top: 20px;
+      margin-left: 50px;
     }
   }

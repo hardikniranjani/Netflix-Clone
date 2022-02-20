@@ -42,12 +42,12 @@
       </div>
     </div>
     <div class="mobile_view">
-      <h4 class="ms-2">Description</h4>
-      <p id="banner__description_mobile">
+      <h4 class="ms-3">Description</h4>
+      <p  class="ms-3" id="banner__description_mobile">
         {{ Description }}
       </p>
-      <h4 class="ms-2">Category</h4>
-      <div class="ms-2" v-for="c in movieData.Genres" :key="c">
+      <h4 class="ms-3">Category</h4>
+      <div class="ms-3" v-for="c in movieData.Genres" :key="c">
         <li>
           <router-link
             class="GenrasList"
@@ -109,8 +109,8 @@ export default {
     },
   },
   updated() {
-    var banner = document.getElementById("banner");
-    banner.style.backgroundImage = "url(" + this.src + ")";
+      var banner = document.getElementById("banner");
+      banner.style.backgroundImage = "url(" + this.src + ")";
   },
   mounted() {
     var banner = document.getElementById("banner");

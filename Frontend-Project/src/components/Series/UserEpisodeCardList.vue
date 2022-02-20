@@ -1,34 +1,41 @@
 <template>
-  <div class="categories">
-    <div class="categories_card_main" v-for="i in data" :key="i">
-      <router-link
-        :to="{
-          name: 'EpisodeVideo',
-          params: {
-            id: i.seriesid,
-            episodeid: i._id,
-            seasonid: i.seasonid,
-          },
-        }"
-      >
-        <img class="Episode_WatchHistory_categories_card" :src="i.Banner" />
-      </router-link>
-      <h7 class="categories_card_bottom">{{ i.episode_name }}</h7>
-      <div class="categories_card_bottom">
-        <div class="categories_card_bottom_icon">
-          <div v-if="i.WatchHistory_id">
-            <CloseIcon v-on:click="removeHistory(i._id)" />
-          </div>
-          <div v-else-if="i.WatchLater_id">
-            <CloseIcon v-on:click="removeWatchLater(i._id)" />
+  <carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+    <slide class="categories_card_main_series" v-for="i in data" :key="i">
+      <div class="carousel__item">
+        <router-link
+          :to="{
+            name: 'EpisodeVideo',
+            params: {
+              id: i.seriesid,
+              episodeid: i._id,
+              seasonid: i.seasonid,
+            },
+          }"
+        >
+          <img class="Series_categories_card" :src="i.Banner" />
+        </router-link>
+        <h7 class="categories_card_bottom">{{ i.episode_name }}</h7>
+        <div class="categories_card_bottom">
+          <div class="categories_card_bottom_icon">
+            <div v-if="i.WatchHistory_id">
+              <CloseIcon v-on:click="removeHistory(i._id)" />
+            </div>
+            <div v-else-if="i.WatchLater_id">
+              <CloseIcon v-on:click="removeWatchLater(i._id)" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </slide>
+    <template #addons>
+      <navigation />
+    </template>
+  </carousel>
 </template>
 
 <script>
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Navigation } from "vue3-carousel";
 import UserApi from "../../services/user.service";
 import { CloseIcon } from "@iconicicons/vue";
 export default {
@@ -36,10 +43,89 @@ export default {
   data() {
     return {
       type: "Episode",
+      settings: {
+        itemsToShow: 6.1,
+        snapAlign: "center",
+      },
+      breakpoints: {
+        // 300px and up
+        300: {
+          itemsToShow: 1.4,
+          snapAlign: "start",
+        },
+        // 375px and up
+        375: {
+          itemsToShow: 1.6,
+          snapAlign: "start",
+        },
+        // 390px and up
+        390: {
+          itemsToShow: 1.7,
+          snapAlign: "start",
+        },
+        // 400px and up
+        400: {
+          itemsToShow: 1.8,
+          snapAlign: "start",
+        },
+        // 500px and up
+        500: {
+          itemsToShow: 2.3,
+          snapAlign: "start",
+        },
+        // 600px and up
+        600: {
+          itemsToShow: 2.7,
+          snapAlign: "start",
+        },
+        // 700px and up
+        700: {
+          itemsToShow: 3.2,
+          snapAlign: "start",
+        },
+        // 768px and up
+        768: {
+          itemsToShow: 3.4,
+          snapAlign: "start",
+        },
+        // 800px and up
+        800: {
+          itemsToShow: 3.4,
+          snapAlign: "start",
+        },
+        // 900px and up
+        900: {
+          itemsToShow: 3.9,
+          snapAlign: "start",
+        },
+        // 1024 and up
+        1024: {
+          itemsToShow: 4.4,
+          snapAlign: "start",
+        },
+        // 1366 and up
+        1366: {
+          itemsToShow: 5.9,
+          snapAlign: "start",
+        },
+        // 1440 and up
+        1440: {
+          itemsToShow: 6.3,
+          snapAlign: "start",
+        },
+        // 2560 and up
+        2560: {
+          itemsToShow: 11,
+          snapAlign: "start",
+        },
+      },
     };
   },
   components: {
     CloseIcon,
+    Carousel,
+    Slide,
+    Navigation,
   },
   props: {
     data: Array,

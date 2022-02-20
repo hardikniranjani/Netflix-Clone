@@ -1,7 +1,13 @@
 <template>
   <div class="categories">
     <div class="categories_card_main" v-for="i in Movies" :key="i">
-      <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
+               <router-link
+            class="Home_Movie_categories_card_bottom_icon"
+            :to="{
+              name: 'MovieVideo',
+              params: { id: i._id },
+            }"
+          >
         <img
           class="Movie_WatchHistory_categories_card"
           :src="i.backdrop_path"

@@ -25,7 +25,7 @@
               :icon="icon"
             />
             <input
-              class="form-control my-3 ps-3"
+              class="form-control my-3 ps-3" 
               type="email"
               placeholder="Email"
               :error="errors.Email"
@@ -62,10 +62,8 @@
           </div>
         </fieldset>
       </form>
-
-      <div class="login__footer">
-        <p class="p-4 mb-0 text-white">@Ott Platform</p>
-      </div>
+        
+      
     </div>
   </div>
 </template>
@@ -78,7 +76,8 @@ import Alert from "../components/AlertMessage.vue";
 export default {
   name: "LoginPage",
   components: {
-    Alert
+    Alert,
+    
   },
   created() {
     document.title = "Netflix - Login";

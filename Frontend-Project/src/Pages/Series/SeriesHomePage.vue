@@ -3,37 +3,36 @@
     <div class="nav"><NavBar /></div>
 
     <div class="body">
-      <h2 class="text-center">Series Home</h2>
-      
+      <h2 class="d-flex justify-content-center series_title">Series</h2>
     </div>
     <div v-if="Allseries.length > 0">
-      <h3 class="mt-5">Series</h3>
-      <SeriesCardList :data="Allseries" />
+      <h3 class="Home_List_Title">Series</h3>
+      <SeriesCardList class="ms-5" :data="Allseries" />
     </div>
 
     <div v-if="Adventure_Series.length > 0">
-      <h3 class="mt-5">Adventure Series</h3>
-      <SeriesCardList :data="Adventure_Series" />
+      <h3 class="Home_List_Title">Adventure Series</h3>
+      <SeriesCardList class="ms-5" :data="Adventure_Series" />
     </div>
 
     <div v-if="Drama_Series.length > 0">
-      <h3 class="mt-5">Drama Series</h3>
-      <SeriesCardList :data="Drama_Series" />
+      <h3 class="Home_List_Title">Drama Series</h3>
+      <SeriesCardList class="ms-5" :data="Drama_Series" />
     </div>
 
     <div v-if="Thriller_Series.length > 0">
-      <h3 class="mt-5">Thriller Series</h3>
-      <SeriesCardList :data="Thriller_Series" />
+      <h3 class="Home_List_Title">Thriller Series</h3>
+      <SeriesCardList class="ms-5" :data="Thriller_Series" />
     </div>
 
     <div v-if="Action_Series.length > 0">
-      <h3 class="mt-5">Action Series</h3>
-      <SeriesCardList :data="Action_Series" />
+      <h3 class="Home_List_Title">Action Series</h3>
+      <SeriesCardList class="ms-5" :data="Action_Series" />
     </div>
 
     <div v-if="Horror_Series.length > 0">
-      <h3 class="mt-5">Horror Series</h3>
-      <SeriesCardList :data="Horror_Series" />
+      <h3 class="Home_List_Title">Horror Series</h3>
+      <SeriesCardList class="ms-5" :data="Horror_Series" />
     </div>
 
     <div class="Series_footer"><Footer /></div>
@@ -114,6 +113,8 @@ export default {
 </script>
 
 <style scoped src="../../Style/card.css">
+</style>
+<style scoped>
 .SeriesHomePage {
   width: 100vw;
   height: 100vh;
@@ -127,5 +128,19 @@ export default {
 }
 .Series_footer {
   margin-top: 150px;
+}
+.series_title {
+  font-size: 3rem;
+  font-weight: 800 !important;
+  padding-bottom: 0.3rem;
+}
+@media screen and (max-width: 788px) {
+  .series_title {
+    margin-bottom:2rem;
+    margin-top:-4rem;
+  font-size: 2rem;
+  font-weight: 800 !important;
+  padding-bottom: 0.3rem;
+}
 }
 </style>

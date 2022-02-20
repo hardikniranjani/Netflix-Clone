@@ -3,21 +3,21 @@
     <div class="nav"><NavBar /></div>
     <div class="body">
       <div>
-        <h1>{{ Geners.GenresName }}</h1>
+        <h1 class="d-flex justify-content-center Geners_title" >{{ Geners.GenresName }}</h1>
       </div>
       <div v-if="Movies.length > 0">
-        <h2>Movies</h2>
-        <MovieCardList  :data="Movies" />
+        <h2 class="Home_List_Title">Movies</h2>
+        <MovieCardList class="ms-5"  :data="Movies" />
       </div>
       <div v-else></div>
 
       <div v-if="Series.length > 0">
-        <h2>Series</h2>
-        <SeriesCardList :data="Series" />
+        <h2 class="Home_List_Title">Series</h2>
+        <SeriesCardList class="ms-5" :data="Series" />
       </div>
       <div v-else></div>
     </div>
-    <div class="footer"><Footer /></div>
+    <div class="genres_footer"><Footer /></div>
   </div>
 </template>
 
@@ -92,6 +92,9 @@ export default {
 </script>
 
 <style scoped src="../../Style/card.css">
+
+</style>
+<style scoped>
 .Gener {
   width: 100%;
   height: 100%;
@@ -108,7 +111,21 @@ export default {
 .body {
   margin-top: 200px;
 }
-.footer {
-  margin-top: 470px;
+.genres_footer {
+  margin-top: 120px;
+}
+.Geners_title{
+  font-size: 3rem;
+  font-weight: 800;
+  padding-bottom: 0.3rem;
+}
+@media screen and (max-width: 788px) {
+  .Geners_title {
+    margin-bottom:2rem;
+    margin-top:-4rem;
+  font-size: 2rem;
+  font-weight: 800 !important;
+  padding-bottom: 0.3rem;
+}
 }
 </style>

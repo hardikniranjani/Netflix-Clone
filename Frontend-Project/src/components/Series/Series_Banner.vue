@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="mobile_view">
-      <h4 class="ms-2">Category</h4>
+      <h4>Category</h4>
       <div class="d-inline-flex  flex-wrap mb-3 ">
         <div v-for="c in seriesData.Genres" :key="c">
           <div class="ms-2 w-100">
@@ -46,12 +46,12 @@
               style=""
               :to="{ name: 'GenersContent', params: { id: c._id } }"
             >
-              <div class="ms-2 me-2">{{ c.GenresName }}</div>
+              <div class="ms-3 me-2">{{ c.GenresName }}</div>
             </router-link>
           </div>
         </div>
       </div>
-      <h4 class="ms-2">Description</h4>
+      <h4>Description</h4>
       <p id="banner__description_mobile">
         {{ Description }}
       </p>
@@ -132,6 +132,12 @@ export default {
   .mobile_view {
     display: block;
     margin-top: -120px;
+  }
+  .mobile_view h4{
+    margin-left: 20px;
+  }
+  #banner__description_mobile{
+    margin-left:18px;
   }
   #banner__description {
     display: none;
