@@ -34,7 +34,7 @@ const movieSchema = new mongoose.Schema({
   },
   Popularity: {
     type: Number,
-    required: true,
+  
   },
   Production_companies: {
     type: [Number],

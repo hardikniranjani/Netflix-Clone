@@ -46,6 +46,7 @@
               <img
                 class="Home_Movie_categories_card"
                 :src="movie.backdrop_path"
+                :alt="movie.MovieName"
               />
             </router-link>
           </td>
@@ -55,7 +56,7 @@
               :media_type="media_Banner"
               Content_Type="Movie"
               :id="movie._id"
-              @mediaChange ="ChangedMediaData"
+              @mediaChange="ChangedMediaData"
             />
           </td>
           <td>
@@ -70,7 +71,8 @@
               :media_type="media_BackDrop"
               Content_Type="Movie"
               :id="movie._id"
-              @mediaChange ="ChangedMediaData"
+              @mediaChange="ChangedMediaData"
+              
             />
           </td>
           <td class="table_td">
@@ -121,7 +123,6 @@
 import UploadFile from "../../../components/Admin/UploadFile.vue";
 import MoviesApi from "../../../services/movie.service";
 import Pagination from "../../../components/Pagination.vue";
-
 export default {
   name: "AdminMoviePage",
   data() {
@@ -160,12 +161,12 @@ export default {
         this.makePartition();
       });
     },
-    ChangedMediaData(mediaName, mediaPath, mediaId){
-       let MovieData = this.Movies.filter((obj)=>{
-          return obj._id == mediaId;
-        })
-        MovieData[0][mediaName] = mediaPath;
-    }
+    ChangedMediaData(mediaName, mediaPath, mediaId) {
+      let MovieData = this.Movies.filter((obj) => {
+        return obj._id == mediaId;
+      });
+      MovieData[0][mediaName] = mediaPath;
+    },
   },
 
   components: {
@@ -176,6 +177,7 @@ export default {
     document.title = `NetflixAdmin - Movies`;
     this.GetAllMovies();
   },
+
 
   computed: {
     indexs() {

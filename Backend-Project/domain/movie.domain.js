@@ -4,16 +4,16 @@ const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 cloudinary.config({
-  cloud_name: process.env.cloud_name,
-  api_key: process.env.api_key,
-  api_secret: process.env.api_secret,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 class MovieDomain {
   // create movie
   async createAnMovie(req, res) {
     var data = req.body;
-
+    console.log(data)
     const findMovie = await MovieModel.findOne({MovieName : data.MovieName});
 
     if (findMovie)
@@ -35,6 +35,7 @@ class MovieDomain {
         return res.status(400).send("We can't create a new Movie");
       }
     } catch (e) {
+      console.log(e.message);
       res.status(500).send(`some error ${e}`);
     }
   }
@@ -155,7 +156,7 @@ class MovieDomain {
       .populate("Spoken_languages")
       .populate("Production_companies");
     if (Movie_data.length > 0) {
-      res.send(Movie_data);
+      res.send(Movie_data.reverse());
     } else {
       res.send("not found");
     }

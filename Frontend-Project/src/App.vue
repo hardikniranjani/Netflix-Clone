@@ -2,6 +2,7 @@
   <div>
     <!-- <CardList /> -->
     <router-view />
+    <notifications position="top center" width="500px"/>
   </div>
 </template>
 

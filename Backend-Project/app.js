@@ -16,7 +16,7 @@ const certificationController = require('./controllers/certification.controller'
 const mongoose = require("mongoose");
 const fileupload = require("express-fileupload");
 mongoose
-  .connect(process.env.db_path, {
+  .connect(process.env.DB_PATH, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

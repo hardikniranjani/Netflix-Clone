@@ -43,12 +43,12 @@
             />
             <span>{{ errors.Password }}</span>
             <div v-if="loading">
-                  <img
-                    class="my-2"
-                    :src="require('../../public/loading.gif')"
-                    style="width: 100%; height: 40px"
-                  />
-                </div>
+              <img
+                class="my-2"
+                :src="require('../../public/loading.gif')"
+                style="width: 100%; height: 40px"
+              />
+            </div>
             <button v-else class="btn btn-danger my-3">Login</button>
 
             <p style="float: left; z-index: 2">
@@ -77,7 +77,6 @@ export default {
   name: "LoginPage",
   components: {
     Alert,
-    
   },
   created() {
     document.title = "Netflix - Login";
@@ -117,51 +116,74 @@ export default {
       handleChangeEmail,
       handleChangePassword,
       error: "",
-      icon : '',
-      typeOfAlert : '',
-      alertMsg : '',
-      showAlert : false,
-      loading : false
-    }; 
+      icon: "",
+      typeOfAlert: "",  
+      alertMsg: "",
+      showAlert: false,
+      loading: false,
+    };
   },
 
   methods: {
+    splitDate(date) {
+      return date.split("/");
+    },
     signup() {
       this.$router.replace({ name: "IndexPage" });
     },
     home() {
       this.$router.replace({ name: "IndexPage" });
     },
+    compareDates(expiryDate) {
+      let currentDateArray = this.splitDate(new Date().toLocaleDateString());
+      let expiryDateArray = this.splitDate(
+        new Date(expiryDate).toLocaleDateString()
+      );
+      let year = currentDateArray[2] <= expiryDateArray[2];
+      let month = currentDateArray[0] <= expiryDateArray[0];
+      let date = currentDateArray[1] <= expiryDateArray[1];
 
+      
+      if (year && month && date) {
+        return true;
+      }
+      return false;
+    },
     async LoginUser(data) {
       this.loading = true;
       userService
         .getAnUser({ email: data.Email, password: data.Password })
         .then((res) => {
-          
-          this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
-          this.$store.dispatch("ADD_USER", res.data);
-          if (res.data.Role == "user") {
-            this.$router.replace({ name: "HomePage" });
+          // let flag = this.compareDates(res.data.Plan_Expiry_Date_Time);
+          let flag = true;  
+          if (flag) {
+            this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
+            this.$store.dispatch("ADD_USER", res.data);
+            if (res.data.Role == "user") {
+              this.$router.replace({ name: "HomePage" });
+            } else {
+              this.$router.replace({ name: "AdminMoviePage" });
+            }
           } else {
-            this.$router.replace({ name: "AdminMoviePage" });
+            this.$router.replace({ name: "SubscriptionPlan" });
           }
         })
-        .catch(() => {
-          this.alertMsg = "Email or password is incorrect!"
+        .catch((err) => {
+          console.log(err);
+          this.alertMsg = "Email or password is incorrect!";
           this.showAlert = true;
-          this.typeOfAlert = "danger"
-          this.icon = "warning"
-        }).
-        finally(()=>{
+          this.typeOfAlert = "danger";
+          this.icon = "warning";
+        })
+        .finally(() => {
           this.loading = false;
           setTimeout(() => {
             this.showAlert = false;
             this.alertMsg = "";
             this.icon = "";
-            this.typeOfAlert = ""
-          }, 5*1000);
-        })
+            this.typeOfAlert = "";
+          }, 5 * 1000);
+        });
     },
   },
 };

@@ -17,8 +17,8 @@
               <button id="banner__button" v-on:click="addToWishList()">
                 My List
               </button>
-              <button id="banner__button" v-on:click="addToWatchLater()">
-                WatchLater
+              <button id="banner__button" v-on:click="updateWatchLater()" >
+                <i class="bi" :class="classList" ref="watchLater"></i>
               </button>
             </div>
             <p id="banner__description">
@@ -65,13 +65,13 @@
 <script>
 import UserApi from "../../services/user.service";
 import swal from "sweetalert";
-
 export default {
   name: "Movie_Banner",
   data() {
     return {
       Banner_Movie: {},
       media_type: "Movies",
+      availableInWatchLater : false
     };
   },
   props: {
@@ -94,23 +94,59 @@ export default {
           console.log(err);
         });
     },
-
     async addToWatchLater() {
       await UserApi.addToWatchLater({
         media_type: this.media_type,
         media_id: this.id,
       })
-        .then(() => {
+        .then((res) => {
+          console.log(res.data);
+          this.availableInWatchLater = true;
+          this.$store.dispatch("ADD_WATCH_LATER",res.data.updatedLibrary);
+          this.availableInWatchLater = true;
           swal("Successfully added to watch later!");
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    async removeFromWatchLater(){
+      await UserApi.removeFromWatchLater({
+        media_type: this.media_type,
+        media_id: this.id,
+      }).then((res)=>{
+        console.log(res.data);
+        this.availableInWatchLater = false;
+        this.$store.dispatch("ADD_WATCH_LATER",res.data.list);
+        this.availableInWatchLater = false;
+
+        swal("Removed from watch later !!");
+      })
+    },
+    updateWatchLater(){
+      console.log(this.availableInWatchLater);
+      if(this.availableInWatchLater){
+        this.removeFromWatchLater();
+      }
+      else {
+        this.addToWatchLater();
+      }
+    }
   },
-  updated() {
-      var banner = document.getElementById("banner");
-      banner.style.backgroundImage = "url(" + this.src + ")";
+  computed : {
+    classList(){
+      
+      return this.availableInWatchLater ? "bi-bookmark-check" : "bi-bookmark";
+    }
+  },
+ 
+  async updated() {
+    var banner = document.getElementById("banner");
+    banner.style.backgroundImage = "url(" + this.src + ")";
+    let isAvailable = this.$store.getters.availableInWatchLater(parseInt(this.id),"Movies");
+    console.log(isAvailable,this.$refs["watchLater"]["classList"].value);
+    this.availableInWatchLater = isAvailable;
+    
   },
   mounted() {
     var banner = document.getElementById("banner");

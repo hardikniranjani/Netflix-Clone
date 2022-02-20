@@ -1,7 +1,8 @@
 <template>
   <span v-if="Content_Type == 'Movie'">
     <label v-if="media_type == 'Banner'">
-      <i class="bi bi-file-arrow-up-fill file_icon">
+      <img v-if="loading" :src="require('../../assets/loading.gif')" class="loading_class">
+      <i v-else class="bi bi-file-arrow-up-fill file_icon">
         <input
           class="input-file file_upload"
           id="file-input"
@@ -18,7 +19,8 @@
     </label>
 
     <label v-else-if="media_type == 'Video'">
-      <i class="bi bi-cloud-upload-fill file_icon">
+      <img v-if="loading" :src="require('../../assets/loading.gif')" class="loading_class">
+      <i v-else class="bi bi-cloud-upload-fill file_icon">
         <input
           class="file_upload"
           id="file-input"
@@ -35,7 +37,8 @@
     </label>
 
     <label v-else-if="media_type == 'BackDrop'">
-      <i class="bi bi-upload file_icon">
+      <img v-if="loading" :src="require('../../assets/loading.gif')" class="loading_class">
+      <i v-else class="bi bi-upload file_icon">
         <input
           class="file_upload"
           id="file-input"
@@ -91,10 +94,15 @@
 import MovieApi from "../../services/movie.service";
 export default {
   name: "UploadFile",
+  data(){
+    return {
+      loading : false
+    }
+  },
   props: {
     media_type: String,
     Content_Type: String,
-    id: String,
+    id: Number,
   },
   methods: {
     filesChange(fieldName, fileList) {
@@ -102,6 +110,7 @@ export default {
       if (!fileList.length) return;
       formData.append(fieldName, fileList[0]);
       if (fieldName == "video") {
+        this.loading = true;
         MovieApi.uploadMovieVideo(this.id, formData).then((res) => {
           console.log(res)
           this.$emit(
@@ -110,8 +119,18 @@ export default {
             res.data.movie.Video_path,
             this.id
           );
-        });
+        })
+        .finally(()=>{
+          this.loading = false;
+        })
+        this.$notify({
+          text : 'Video uploaded Successfully!!',
+          type : 'success',
+          duration : 5000,
+          speed : 2000
+        })
       } else {
+        this.loading = true;
         MovieApi.uploadMovieImage(this.id, fieldName, formData).then((res) => {
           this.$emit(
             "mediaChange",
@@ -119,7 +138,15 @@ export default {
             res.data.movie[fieldName],
             this.id
           );
-        });
+          this.$notify({
+          text : 'Image uploaded Successfully!!',
+          type : 'success',
+          duration : 5000,
+          speed : 2000
+        })
+        }).finally(()=>{
+          this.loading = false;
+        })
       }
     },
   },
@@ -127,6 +154,9 @@ export default {
 </script>
 
 <style>
+.loading_class {
+  height: 35px;
+}
 .file_upload {
   display: none;
 }

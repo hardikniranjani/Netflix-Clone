@@ -35,14 +35,14 @@ class UserDomain {
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.gmail_user,
-        pass: process.env.gmail_password,
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASSWORD,
       },
-      from: process.env.gmail_user,
+      from: process.env.GMAIL_USER,
     });
 
     let mailOptions = {
-      from: process.env.gmail_user,
+      from: process.env.GMAIL_USER,
       to: email,
       subject: subject,
       html: htmlMessage,

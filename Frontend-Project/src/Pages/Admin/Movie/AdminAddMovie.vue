@@ -12,7 +12,7 @@
           type="text"
           placeholder="Enter Movie Name"
           name="MovieName"
-          @change="handleChange"
+          v-model="Movie.MovieName"
         />
 
         <span v-if="errors.MovieName" class="ms-3 text-danger">{{
@@ -20,9 +20,13 @@
         }}</span>
         </div>
         <label for="language" class="Page_title"
-          >Select Primary language :
+          >Select Primary language 
         </label>
-        <select name="Original_language" id="" @change="handleChange">
+        <select
+          name="Original_language"
+          id=""
+          v-model="Movie.Original_language"
+        >
           <option v-for="lang in language" :key="lang._id">
             {{ lang.Spoken_Language }}
           </option>
@@ -30,7 +34,6 @@
         <span v-if="errors.Original_language" class="ms-3 text-danger">{{
           errors.Original_language
         }}</span>
-
 
         <div class="d-flex row ms-4 mt-2 mb-3">
 
@@ -92,7 +95,7 @@
             class="add_movie_form_relese_date_input form-control mb-2 p-2"
             type="date"
             name="ReleaseDate"
-            @change="handleChange"
+            v-model="Movie.ReleaseDate"
           />
           <label
             class="
@@ -115,7 +118,7 @@
           id="LongDescription"
           style="width: 100%; height: 150px"
           name="Description"
-          @change="handleChange"
+          v-model="Movie.Description"
         ></textarea>
  <span v-if="errors.Description" class="ms-3 text-danger">{{
           errors.Description
@@ -139,71 +142,89 @@ import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import LanguageAPI from "../../../services/spoken_language.service";
 import GenresAPI from "../../../services/genre.service";
 import CompanyAPI from "../../../services/company.service";
-import { string, object, array,number } from "yup";
+import { string, object, array } from "yup";
 import { useField, useForm } from "vee-validate";
 import MovieApi from "../../../services/movie.service";
-
-
 export default {
   name: "AdminAddMovie",
   components: {
     AdminNavBar,
   },
   data() {
+    let Movie = {
+      MovieName: "",
+      Original_language: "",
+      Description: "",
+      Genres: [],
+      ReleaseDate: "",
+      Production_companies: [],
+    };
     const validationSchema = object({
       MovieName: string().required().min(3),
       Original_language: string().required(),
-      Spoken_languages: array().required(),
       Description: string().min(50).required(),
-      Genres: array().of(number()).required(),
+      Genres: array().required(),
       ReleaseDate: string().required(),
       Production_companies: array().required(),
     });
 
-    const { handleSubmit, setFieldValue, errors } = useForm({
+    const { handleSubmit, errors } = useForm({
       validationSchema,
-      initialValues: {}
+      initialValues: {},
     });
 
     const { value: MovieName } = useField("MovieName");
     const { value: Original_language } = useField("Original_language");
-    const { value: Spoken_languages } = useField("Spoken_languages");
     const { value: Description } = useField("Description");
-    const { value: Genres=[] } = useField("Genres");
+    const { value: Genres} = useField("Genres");
     const { value: ReleaseDate } = useField("ReleaseDate");
     const { value: Production_companies } = useField("Production_companies");
 
     const handleChange = (event) => {
+      
       const fieldName = event.target.name;
-      const fieldValue = event.target.value;
-      if (fieldName == "Genres" || fieldName == "Production_companies") {
-        // setFieldValue(fieldName,[...[fieldName],fieldValue]);
-        setFieldValue(fieldName,parseInt(fieldValue));
-        // console.log(fieldName)
-        
-      } else {
-        // console.log(fieldName, fieldValue);
-        setFieldValue(fieldName, fieldValue);
+      const fieldValue = parseInt(event.target.value);
+      const isChecked = event.target.checked;
+      if(!Movie[fieldName].value && isChecked){
+        Movie[fieldName].value = [fieldValue];
       }
+      else {
+         if(isChecked){
+           Movie[fieldName].value.push(fieldValue);
+         }
+         else {
+           let index = Movie[fieldName].value.indexOf(fieldValue);
+           Movie[fieldName].value.splice(index,1);
+         }
+      }   
     };
 
-    const submit = handleSubmit((value) => {
-      console.log(value);
+    Movie.MovieName = MovieName;
+    Movie.Original_language = Original_language;
+    Movie.Description = Description;
+    Movie.Genres = Genres;
+    Movie.ReleaseDate = ReleaseDate;
+    Movie.Production_companies = Production_companies;
+
+    const submit = handleSubmit((values) => {
       this.error = "";
-      this.createMovie(value);
+      this.createMovie(values);
+    },(anyError)=>{
+      console.log(anyError);
     });
     return {
       language: [],
       Genres_array: [],
       companies: [],
-      MovieName,
-      Original_language,
-      Spoken_languages,
-      Description,
-      Genres,
-      ReleaseDate,
-      Production_companies,
+      // MovieName,
+      // Original_language,
+      // Spoken_languages,
+      // Description,
+      // Genres,
+      // ReleaseDate,
+      // Production_companies,
       handleChange,
+      Movie,
       error: "",
       errors,
       submit,
