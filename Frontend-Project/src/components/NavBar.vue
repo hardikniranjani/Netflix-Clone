@@ -293,6 +293,31 @@ export default {
   margin-left: 450px;
 }
 }
+@media screen and (min-width: 1439px) {
+.form_input {
+  margin-left: 520px;
+}
+}
+@media screen and (min-width: 1465px) {
+.form_input {
+  margin-left: 580px;
+}
+}
+@media screen and (min-width: 1565px) {
+.form_input {
+  margin-left: 680px;
+}
+}
+@media screen and (min-width: 1665px) {
+.form_input {
+  margin-left: 780px;
+}
+}
+@media screen and (min-width: 1765px) {
+.form_input {
+  margin-left: 880px;
+}
+}
 @media screen and (min-width: 2420px) {
 .form_input {
   margin-left: 1600px;
