@@ -109,26 +109,17 @@ const routes = [
     path: "/home",
     name: "HomePage",
     component: HomePage,
-    meta: {
-      requiredAuth: true,
-    },
   },
   {
     path: "/homeseries",
     name: "SeriesHomePage",
     component: SeriesHomePage,
-    meta: {
-      requiredAuth: true,
-    },
   },
   {
     path: "/homeseries/series/:id",
     name: "SeriesPage",
     component: SeriesPage,
     props: true,
-    meta: {
-      requiredAuth: true,
-    },
   },
   {
     path: "/homeseries/series/:id/:seasonid/episode/:episodeid/play",
@@ -143,18 +134,12 @@ const routes = [
     path: "/homemovie",
     name: "MovieHomePage",
     component: MovieHomePage,
-    meta: {
-      requiredAuth: true,
-    },
   },
   {
     path: "/homemovie/movie/:id",
     name: "MoviePage",
     component: MoviePage,
     props: true,
-    meta: {
-      requiredAuth: true,
-    },
   },
   {
     path: "/homemovie/movie/:id/play",
@@ -170,18 +155,12 @@ const routes = [
     path: "/geners",
     name: "GenersPage",
     component: GenersPage,
-    meta: {
-      requiredAuth: true,
-    },
   },
   {
     path: "/geners/:id",
     name: "GenersContent",
     component: GenersContent,
     props: true,
-    meta: {
-      requiredAuth: true,
-    },
   },
   {
     path: "/subscription",
