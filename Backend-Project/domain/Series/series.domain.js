@@ -52,7 +52,11 @@ class SeriesDomain {
       .populate("Spoken_languages")
       .populate("Genres")
       .populate("Production_companies")
-      .populate("Seasons");
+      .populate("Seasons")
+      .populate({
+        path : "Seasons",
+        populate : { path : 'Episodes'}
+      });
     if (series_data.length > 0) {
       res.send(series_data);
     } else {

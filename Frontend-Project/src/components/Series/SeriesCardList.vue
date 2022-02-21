@@ -10,6 +10,23 @@
             class="bi bi-heart-fill Home_Series_categories_card_bottom_icon"
             v-on:click="addToWishList(i._id)"
           ></i>
+          <router-link
+            :to="{
+              name: 'EpisodeVideo',
+              params: {
+                id: i.Seasons[0].Episodes[0].SeriesID,
+                episodeid: i.Seasons[0].Episodes[0]._id,
+                seasonid: i.Seasons[0].Episodes[0].SeasonID,
+              },
+            }"
+          >
+            <i
+              class="
+                bi bi-play-circle-fill
+                Home_Series_categories_card_bottom_icon 
+              "
+            ></i>
+          </router-link>
         </div>
       </div>
     </slide>
@@ -115,6 +132,9 @@ export default {
     Slide,
     Navigation,
   },
+  mounted() {
+    console.log(this.data);
+  },
   methods: {
     async addToWishList(series_id) {
       await UserApi.addToWishList({
@@ -197,6 +217,7 @@ export default {
 .categories_card_bottom {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   text-align: center;
   background-color: #1f1f1f0a;
   padding-bottom: 5px;

@@ -282,11 +282,15 @@ export default {
   }
 }
 
-
-
-@media screen and (min-width: 1368px) {
+@media screen and (min-width: 788px) {
 .form_input {
-  margin-left: 500px;
+  margin-left: 120px;
+}
+}
+
+@media screen and (min-width: 1365px) {
+.form_input {
+  margin-left: 450px;
 }
 }
 @media screen and (min-width: 2420px) {
