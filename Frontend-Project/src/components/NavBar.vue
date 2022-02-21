@@ -281,4 +281,17 @@ export default {
     box-shadow: 0px 2px 4px 5px #b9b9b962;
   }
 }
+
+
+
+@media screen and (min-width: 1368px) {
+.form_input {
+  margin-left: 500px;
+}
+}
+@media screen and (min-width: 2420px) {
+.form_input {
+  margin-left: 1600px;
+}
+}
 </style>
