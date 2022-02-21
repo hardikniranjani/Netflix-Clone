@@ -35,6 +35,9 @@ export default createStore({
     ADD_WATCH_LATER(state, list) {
       state.user.watchLater = list;
     },
+    ADD_WISH_LIST(state,list){
+      state.user.wishlist = list;
+    }
     // MOVIES(state, movieData) {
     //   state.movies = { ...movieData };
     // },
@@ -64,6 +67,9 @@ export default createStore({
     ADD_WATCH_LATER({ commit }, list) {
       commit("ADD_WATCH_LATER", list);
     },
+    ADD_WISH_LIST({commit},list){
+      commit("ADD_WISH_LIST",list);
+    }
     // MOVIES({commit},movie_res){
     //   commit("MOVIES",movie_res);
     // },
@@ -88,11 +94,19 @@ export default createStore({
         else return [];
       } else return [];
     },
+    availableInWishList : function (state){
+      
+      return (id, media_type) => {
+        if(state.user.wishlist){
+          return state.user.wishlist[media_type].includes(id);
+        }
+        else return false;
+      }
+    },
     availableInWatchLater: function (state) {
       return (id, media_type) => {
         if (state.user.watchLater)
         {
-          console.log(state.user.watchLater[media_type].indexOf(id),media_type,id);
           return state.user.watchLater[media_type].includes(id);
         }
         else return false;

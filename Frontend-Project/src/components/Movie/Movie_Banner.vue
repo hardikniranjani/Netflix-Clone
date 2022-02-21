@@ -6,18 +6,19 @@
           <div id="banner__contents_details">
             <h1 id="banner__title">{{ Name }}</h1>
             <div id="banner__buttons">
-              <router-link id="banner__button_link"
+              <router-link
+                id="banner__button_link"
                 :to="{
                   name: 'MovieVideo',
                   params: { id: this.id },
                 }"
               >
-                <button id="banner__button">Play</button>
+                <button id="banner__button"><i class="bi bi-play-fill me-1"></i>Play</button>
               </router-link>
-              <button id="banner__button" v-on:click="addToWishList()">
-                My List
+              <button id="banner__button" @click="updateWishList()">
+                <i class="bi text-danger" :class="heartIconClass"></i>
               </button>
-              <button id="banner__button" v-on:click="updateWatchLater()" >
+              <button id="banner__button" @click="updateWatchLater()">
                 <i class="bi" :class="classList" ref="watchLater"></i>
               </button>
             </div>
@@ -43,7 +44,7 @@
     </div>
     <div class="mobile_view">
       <h4 class="ms-3">Description</h4>
-      <p  class="ms-3" id="banner__description_mobile">
+      <p class="ms-3" id="banner__description_mobile">
         {{ Description }}
       </p>
       <h4 class="ms-3">Category</h4>
@@ -64,14 +65,14 @@
 
 <script>
 import UserApi from "../../services/user.service";
-import swal from "sweetalert";
 export default {
   name: "Movie_Banner",
   data() {
     return {
       Banner_Movie: {},
       media_type: "Movies",
-      availableInWatchLater : false
+      availableInWatchLater: false,
+      availableInWishList: false,
     };
   },
   props: {
@@ -82,16 +83,46 @@ export default {
     movieData: {},
   },
   methods: {
+    Mynotification(text, type) {
+      this.$notify({
+        text: text,
+        type: type,
+        duration: 5000,
+        speed: 1000,
+      });
+    },
+    async removeFromWishList() {
+      await UserApi.removeFromWishlist({
+        media_type: this.media_type,
+        media_id: this.id,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.availableInWishList = false;
+          this.$store.dispatch("ADD_WISH_LIST", res.data.list);
+          this.Mynotification("Movie removed from your wish list.", "success");
+        })
+        .catch(() => {
+          this.availableInWishList = false;
+          this.Mynotification(
+            "Error while removing from your wish list.",
+            "danger"
+          );
+        });
+    },
     async addToWishList() {
       await UserApi.addToWishList({
         media_type: this.media_type,
         media_id: this.id,
       })
-        .then(() => {
-          swal("Successfully added to wish list!");
+        .then((res) => {
+          this.$store.dispatch("ADD_WISH_LIST", res.data.wishlist);
+          this.availableInWishList = true;
+          this.Mynotification("Movie added to your wish list.", "success");
         })
         .catch((err) => {
-          console.log(err);
+          this.availableInWishList = false;
+          this.Mynotification(err, "danger");
         });
     },
     async addToWatchLater() {
@@ -100,53 +131,72 @@ export default {
         media_id: this.id,
       })
         .then((res) => {
-          console.log(res.data);
           this.availableInWatchLater = true;
-          this.$store.dispatch("ADD_WATCH_LATER",res.data.updatedLibrary);
-          this.availableInWatchLater = true;
-          swal("Successfully added to watch later!");
+          this.$store.dispatch("ADD_WATCH_LATER", res.data.updatedLibrary);
+          this.Mynotification("Successfully added to watch later!", "success");
         })
         .catch((err) => {
+          this.availableInWatchLater = true;
           console.log(err);
+          this.Mynotification("Error while adding to watch later.", "danger");
         });
     },
-    async removeFromWatchLater(){
+    async removeFromWatchLater() {
       await UserApi.removeFromWatchLater({
         media_type: this.media_type,
         media_id: this.id,
-      }).then((res)=>{
-        console.log(res.data);
+      }).then((res) => {
         this.availableInWatchLater = false;
-        this.$store.dispatch("ADD_WATCH_LATER",res.data.list);
+        this.$store.dispatch("ADD_WATCH_LATER", res.data.list);
         this.availableInWatchLater = false;
-
-        swal("Removed from watch later !!");
-      })
+        this.Mynotification("Removed from watch later !!", "success");
+      });
     },
-    updateWatchLater(){
-      console.log(this.availableInWatchLater);
-      if(this.availableInWatchLater){
+    updateWatchLater() {
+      if (this.availableInWatchLater) {
         this.removeFromWatchLater();
-      }
-      else {
+      } else {
         this.addToWatchLater();
       }
-    }
+    },
+    updateWishList() {
+      if (this.availableInWishList) {
+        this.removeFromWishList();
+      } else {
+        this.addToWishList();
+      }
+    },
   },
-  computed : {
-    classList(){
-      
-      return this.availableInWatchLater ? "bi-bookmark-check" : "bi-bookmark";
-    }
+
+  computed: {
+    classList() {
+      return this.availableInWatchLater
+        ? "bi-bookmark-check text-danger"
+        : "bi-bookmark text-light";
+    },
+    heartIconClass() {
+      return this.availableInWishList
+        ? "bi-heart-fill text-danger"
+        : "bi-heart text-light";
+    },
   },
- 
+
   async updated() {
     var banner = document.getElementById("banner");
     banner.style.backgroundImage = "url(" + this.src + ")";
-    let isAvailable = this.$store.getters.availableInWatchLater(parseInt(this.id),"Movies");
-    console.log(isAvailable,this.$refs["watchLater"]["classList"].value);
-    this.availableInWatchLater = isAvailable;
-    
+    let isAvailableInWatchLater = this.$store.getters.availableInWatchLater(
+      parseInt(this.id),
+      "Movies"
+    );
+    // console.log(isAvailable, this.$refs["watchLater"]["classList"].value);
+    this.availableInWatchLater = isAvailableInWatchLater;
+
+    let isAvailableInWishList = this.$store.getters.availableInWishList(
+      parseInt(this.id),
+      "Movies"
+    );  
+
+    this.availableInWishList = isAvailableInWishList;
   },
   mounted() {
     var banner = document.getElementById("banner");
@@ -159,6 +209,7 @@ export default {
 </style>
 
 <style scoped>
+
 #banner__contents_details {
   margin-top: -170px;
 }
@@ -180,7 +231,7 @@ export default {
 @media screen and (max-width: 788px) {
   .mobile_view {
     display: block;
-    margin-top:-12px;
+    margin-top: -12px;
   }
   #banner__description {
     display: none;
@@ -223,7 +274,7 @@ export default {
     overflow: hidden;
   }
   #banner__button {
-    display:flex;
+    display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
@@ -238,20 +289,20 @@ export default {
     background-color: rgba(51, 51, 51, 0.5);
     padding-bottom: 0.5rem;
   }
-  #banner__fadeBottom{
-  margin-top: -75px;
-  width:100vw;
-  height: 5.5rem;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(37,37,37, .61),
-    #111
-  );
-}
-#banner__button_link{
-  text-decoration: none;
-  color:inherit;
-}
+  #banner__fadeBottom {
+    margin-top: -75px;
+    width: 100vw;
+    height: 5.5rem;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(37, 37, 37, 0.61),
+      #111
+    );
+  }
+  #banner__button_link {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 </style>

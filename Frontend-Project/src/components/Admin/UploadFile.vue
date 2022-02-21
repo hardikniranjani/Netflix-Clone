@@ -1,7 +1,11 @@
 <template>
   <span v-if="Content_Type == 'Movie'">
     <label v-if="media_type == 'Banner'">
-      <img v-if="loading" :src="require('../../assets/loading.gif')" class="loading_class">
+      <img
+        v-if="loading"
+        :src="require('../../assets/loading.gif')"
+        class="loading_class"
+      />
       <i v-else class="bi bi-file-arrow-up-fill file_icon">
         <input
           class="input-file file_upload"
@@ -19,7 +23,11 @@
     </label>
 
     <label v-else-if="media_type == 'Video'">
-      <img v-if="loading" :src="require('../../assets/loading.gif')" class="loading_class">
+      <img
+        v-if="loading"
+        :src="require('../../assets/loading.gif')"
+        class="loading_class"
+      />
       <i v-else class="bi bi-cloud-upload-fill file_icon">
         <input
           class="file_upload"
@@ -37,7 +45,11 @@
     </label>
 
     <label v-else-if="media_type == 'BackDrop'">
-      <img v-if="loading" :src="require('../../assets/loading.gif')" class="loading_class">
+      <img
+        v-if="loading"
+        :src="require('../../assets/loading.gif')"
+        class="loading_class"
+      />
       <i v-else class="bi bi-upload file_icon">
         <input
           class="file_upload"
@@ -94,10 +106,10 @@
 import MovieApi from "../../services/movie.service";
 export default {
   name: "UploadFile",
-  data(){
+  data() {
     return {
-      loading : false
-    }
+      loading: false,
+    };
   },
   props: {
     media_type: String,
@@ -111,42 +123,53 @@ export default {
       formData.append(fieldName, fileList[0]);
       if (fieldName == "video") {
         this.loading = true;
-        MovieApi.uploadMovieVideo(this.id, formData).then((res) => {
-          console.log(res)
-          this.$emit(
-            "mediaChange",
-            "Video_path",
-            res.data.movie.Video_path,
-            this.id
-          );
-        })
-        .finally(()=>{
-          this.loading = false;
-        })
-        this.$notify({
-          text : 'Video uploaded Successfully!!',
-          type : 'success',
-          duration : 5000,
-          speed : 2000
-        })
+        MovieApi.uploadMovieVideo(this.id, formData)
+          .then((res) => {
+            console.log(res);
+            this.$emit(
+              "mediaChange",
+              "Video_path",
+              res.data.movie.Video_path,
+              this.id
+            );
+            this.$notify({
+              text: "Video uploaded Successfully!!",
+              type: "success",
+              duration: 5000,
+              speed: 1000,
+            });
+          })
+          .catch(()=>{
+            this.$notify({
+              text: "Erro while uploading a video",
+              type: "danger",
+              duration: 5000,
+              speed: 1000,
+            });
+          })
+          .finally(() => {
+            this.loading = false;
+          });
       } else {
         this.loading = true;
-        MovieApi.uploadMovieImage(this.id, fieldName, formData).then((res) => {
-          this.$emit(
-            "mediaChange",
-            fieldName,
-            res.data.movie[fieldName],
-            this.id
-          );
-          this.$notify({
-          text : 'Image uploaded Successfully!!',
-          type : 'success',
-          duration : 5000,
-          speed : 2000
-        })
-        }).finally(()=>{
-          this.loading = false;
-        })
+        MovieApi.uploadMovieImage(this.id, fieldName, formData)
+          .then((res) => {
+            this.$emit(
+              "mediaChange",
+              fieldName,
+              res.data.movie[fieldName],
+              this.id
+            );
+            this.$notify({
+              text: "Image uploaded Successfully!!",
+              type: "success",
+              duration: 5000,
+              speed: 2000,
+            });
+          })
+          .finally(() => {
+            this.loading = false;
+          });
       }
     },
   },
