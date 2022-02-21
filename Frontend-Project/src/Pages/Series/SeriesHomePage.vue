@@ -7,32 +7,32 @@
     </div>
     <div v-if="Allseries.length > 0">
       <h3 class="Home_List_Title">Series</h3>
-      <SeriesCardList class="ms-5" :data="Allseries" />
+      <SeriesCardList class="Home_List_Title" :data="Allseries" />
     </div>
 
     <div v-if="Adventure_Series.length > 0">
       <h3 class="Home_List_Title">Adventure Series</h3>
-      <SeriesCardList class="ms-5" :data="Adventure_Series" />
+      <SeriesCardList class="Home_List_Title" :data="Adventure_Series" />
     </div>
 
     <div v-if="Drama_Series.length > 0">
       <h3 class="Home_List_Title">Drama Series</h3>
-      <SeriesCardList class="ms-5" :data="Drama_Series" />
+      <SeriesCardList class="Home_List_Title" :data="Drama_Series" />
     </div>
 
     <div v-if="Thriller_Series.length > 0">
       <h3 class="Home_List_Title">Thriller Series</h3>
-      <SeriesCardList class="ms-5" :data="Thriller_Series" />
+      <SeriesCardList class="Home_List_Title" :data="Thriller_Series" />
     </div>
 
     <div v-if="Action_Series.length > 0">
       <h3 class="Home_List_Title">Action Series</h3>
-      <SeriesCardList class="ms-5" :data="Action_Series" />
+      <SeriesCardList class="Home_List_Title" :data="Action_Series" />
     </div>
 
     <div v-if="Horror_Series.length > 0">
       <h3 class="Home_List_Title">Horror Series</h3>
-      <SeriesCardList class="ms-5" :data="Horror_Series" />
+      <SeriesCardList class="Home_List_Title" :data="Horror_Series" />
     </div>
 
     <div class="Series_footer"><Footer /></div>
@@ -116,8 +116,8 @@ export default {
 </style>
 <style scoped>
 .SeriesHomePage {
-  width: 100vw;
-  height: 100vh;
+    width: 100%;
+  height: 100%;
 }
 
 .nav {
@@ -136,11 +136,11 @@ export default {
 }
 @media screen and (max-width: 788px) {
   .series_title {
-    margin-bottom:2rem;
-    margin-top:-4rem;
-  font-size: 2rem;
-  font-weight: 800 !important;
-  padding-bottom: 0.3rem;
-}
+    margin-bottom: 2rem;
+    margin-top: -4rem;
+    font-size: 2rem;
+    font-weight: 800 !important;
+    padding-bottom: 0.3rem;
+  }
 }
 </style>

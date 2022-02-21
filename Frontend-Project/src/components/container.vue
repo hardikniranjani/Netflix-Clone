@@ -15,7 +15,7 @@
             </span> </span></p>
       </div>
       <div class="mainContainer_lower mt-4">
-          <button class="btn btn-outline-primary" @click="createOrder"> Purchase</button>
+          <button class="btn btn-outline-primary" @click="redirect"> Purchase</button>
       </div>
   </div>
 

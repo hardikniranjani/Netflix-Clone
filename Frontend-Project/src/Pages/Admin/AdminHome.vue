@@ -118,9 +118,13 @@ export default {
   flex-direction: column;
 }
 .Admin_SideBar_span {
+  font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-decoration: none;
+  font-weight: 650px;
+  font-size:1.2rem;
   color: inherit;
-  text-align: center;
+  padding-left:100px !important;
+  text-align: start !important;
   transition: all 0.4s;
   padding: 10px;
 }
@@ -133,8 +137,7 @@ export default {
 
 .Admin__Home__Sidebar {
   object-fit: contain;
-  width: 150px;
-  flex: 0.1;
+  flex: 0.2;
 }
 
 .Admin__Home__Content {
