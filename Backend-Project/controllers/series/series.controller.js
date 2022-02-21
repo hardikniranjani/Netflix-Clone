@@ -1,7 +1,7 @@
 const express = require("express");
 const SeriesDomain = require("../../domain/Series/series.domain");
 const router = express.Router();
-const verifyToken = require('../../authentication/auth.middleware');
+const verifyToken = require('../../middleware/auth.middleware');
 const checkRole = require('../../middleware/middleware');
 class seriesController {
   // get all Series

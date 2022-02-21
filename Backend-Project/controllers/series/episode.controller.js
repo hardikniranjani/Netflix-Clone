@@ -1,7 +1,7 @@
 const express = require("express");
 const EpisodeDomain = require("../../domain/Series/episode.domain");
 const router = express.Router();
-const verifyToken = require("../../authentication/auth.middleware");
+const verifyToken = require("../../middleware/auth.middleware");
 const checkRole = require("../../middleware/middleware");
 
 class EpisodeController {

@@ -2,7 +2,7 @@ const express = require("express");
 const SeasonDomain = require("../../domain/Series/season.domain");
 const router = express.Router();
 const checkRole = require('../../middleware/middleware');
-const verifyToken = require('../../authentication/auth.middleware');
+const verifyToken = require('../../middleware/auth.middleware');
 
 class SeasonController {
   // get all Season

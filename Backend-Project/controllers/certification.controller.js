@@ -2,7 +2,7 @@ const express = require("express");
 const CertificationDomain = require("../domain/certification.domain");
 const checkRole = require('../middleware/middleware');
 const router = express.Router();
-const verifyToken = require("../authentication/auth.middleware");
+const verifyToken = require("../middleware/auth.middleware");
 class CertificationController {
   // ++++++ For Movies +++++++ //
 

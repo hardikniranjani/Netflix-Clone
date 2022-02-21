@@ -2,7 +2,7 @@ const express = require("express");
 const MovieDomain = require("../domain/movie.domain");
 const router = express.Router();
 const checkRole = require('../middleware/middleware');
-const verifyToken = require('../authentication/auth.middleware');
+const verifyToken = require('../middleware/auth.middleware');
 class MovieController {
   // get all Movie
   static async getAllMovie(req, res) {

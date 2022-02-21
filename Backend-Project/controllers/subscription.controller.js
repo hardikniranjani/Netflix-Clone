@@ -2,7 +2,7 @@ const express = require("express");
 const SubscriptionDomain = require("../domain/Subscription.domain");
 const router = express.Router();
 const checkRole = require('../middleware/middleware');
-const verifyToken = require("../authentication/auth.middleware");
+const verifyToken = require("../middleware/auth.middleware");
 
 class SubscriptionController {
   // get all Subscription
