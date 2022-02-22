@@ -13,9 +13,9 @@
     />
     <div class="Admin__Series__Body">
       <div class="body_content">
-        <h3>Episodes</h3>
+        <h3 class="Home_List_Title">Episodes</h3>
         <div class="Series_body_episodeList">
-          <AdminEpisodeCardList :data="SeasonData.Episodes" />
+          <AdminEpisodeCardList class="Home_List_Title" :data="SeasonData.Episodes" />
         </div>
       </div>
     </div>
