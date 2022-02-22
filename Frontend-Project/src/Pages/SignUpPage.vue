@@ -152,7 +152,6 @@ export default {
           this.token
         )
         .then((res) => {
-          console.log(res.headers["x-access-token"]);
           alert("Registered Successfully!");
           this.$store.dispatch("ADD_USER", res.data);
           this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
