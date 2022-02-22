@@ -56,10 +56,6 @@
           </div>
         </fieldset>
       </form>
-
-      <div class="login__footer">
-        <p class="p-4 mb-0 text-white">@Ott Platform</p>
-      </div>
     </div>
   </div>
 </template>

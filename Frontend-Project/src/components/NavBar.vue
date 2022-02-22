@@ -92,7 +92,7 @@
       </span>
       <span class="mobile_view">
         <div class="navbar_bottom_mobile">
-          <li class="nav-item">
+          <li v-if="isLoggedIn" class="nav-item">
             <router-link class="link" :to="{ name: 'UserAccount' }">
               <a
                 class="nav_3 nav-link my_account"
@@ -104,7 +104,7 @@
 
           <button
             type="button"
-            class="logout_btn_mobile btn btn-danger mt-2"
+            class="logout_btn_mobile btn btn-danger mt-5"
             style="background-color: #d81f26"
             @click="loginOrlogout"
           >
@@ -305,6 +305,9 @@ export default {
 @media screen and (min-width: 788px) {
   .form_input {
     margin-left: 120px;
+  }
+  .logout_btn{
+    margin-left: 150px;
   }
 }
 
