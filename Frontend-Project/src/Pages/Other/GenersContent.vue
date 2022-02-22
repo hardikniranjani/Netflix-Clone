@@ -3,17 +3,19 @@
     <div class="nav"><NavBar /></div>
     <div class="body">
       <div>
-        <h1 class="d-flex justify-content-center Geners_title" >{{ Geners.GenresName }}</h1>
+        <h1 class="d-flex justify-content-center Geners_title">
+          {{ Geners.GenresName }}
+        </h1>
       </div>
       <div v-if="Movies.length > 0">
         <h2 class="Home_List_Title">Movies</h2>
-        <MovieCardList class="ms-5"  :data="Movies" />
+        <MovieCardList class="Home_List_Title" :data="Movies" />
       </div>
       <div v-else></div>
 
       <div v-if="Series.length > 0">
         <h2 class="Home_List_Title">Series</h2>
-        <SeriesCardList class="ms-5" :data="Series" />
+        <SeriesCardList class="Home_List_Title" :data="Series" />
       </div>
       <div v-else></div>
     </div>
@@ -48,7 +50,7 @@ export default {
     NavBar,
     Footer,
     MovieCardList,
-    SeriesCardList
+    SeriesCardList,
   },
   mounted() {
     document.title = `Netflix - Genres`;
@@ -92,7 +94,6 @@ export default {
 </script>
 
 <style scoped src="../../Style/card.css">
-
 </style>
 <style scoped>
 .Gener {
@@ -114,18 +115,18 @@ export default {
 .genres_footer {
   margin-top: 120px;
 }
-.Geners_title{
+.Geners_title {
   font-size: 3rem;
   font-weight: 800;
   padding-bottom: 0.3rem;
 }
 @media screen and (max-width: 788px) {
   .Geners_title {
-    margin-bottom:2rem;
-    margin-top:-4rem;
-  font-size: 2rem;
-  font-weight: 800 !important;
-  padding-bottom: 0.3rem;
-}
+    margin-bottom: 2rem;
+    margin-top: -4rem;
+    font-size: 2rem;
+    font-weight: 800 !important;
+    padding-bottom: 0.3rem;
+  }
 }
 </style>

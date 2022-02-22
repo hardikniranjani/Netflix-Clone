@@ -195,7 +195,7 @@ export default {
 
 <style>
 .table {
-  background-color: #141414;
+  background-color: #000000 !important;
   color: #d2d2d2;
 }
 

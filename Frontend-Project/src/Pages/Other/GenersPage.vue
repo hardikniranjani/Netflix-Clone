@@ -58,6 +58,7 @@ export default {
 }
 .AllGeners {
   display: flex;
+  margin-left:50px;
   flex-wrap: wrap;
   text-decoration: none;
 }
@@ -82,7 +83,7 @@ export default {
 }
 @media screen and (max-width: 788px) {
   .AllGeners {
-    margin-right: 50px;
+    margin-right: 85px;
     align-items: center;
     display: flex;
     flex-direction: column;

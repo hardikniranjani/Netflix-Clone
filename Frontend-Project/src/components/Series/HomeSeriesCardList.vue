@@ -1,5 +1,5 @@
 <template>
-  <carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+  <carousel :settings="settings" :breakpoints="breakpoints" >
     <slide class="categories_card_main_series" v-for="i in data" :key="i">
       <div class="carousel__item">
         <router-link :to="{ name: 'SeriesPage', params: { id: i._id } }">
@@ -10,6 +10,23 @@
             class="bi bi-heart-fill Home_Series_categories_card_bottom_icon"
             v-on:click="addToWishList(i._id)"
           ></i>
+                    <router-link
+            :to="{
+              name: 'EpisodeVideo',
+              params: {
+                id: i.Seasons[0].Episodes[0].SeriesID,
+                episodeid: i.Seasons[0].Episodes[0]._id,
+                seasonid: i.Seasons[0].Episodes[0].SeasonID,
+              },
+            }"
+          >
+            <i
+              class="
+                bi bi-play-circle-fill
+                Home_Series_categories_card_bottom_icon 
+              "
+            ></i>
+          </router-link>
         </div>
       </div>
     </slide>
@@ -30,7 +47,7 @@ export default {
     return {
       media_type: "Series",
       settings: {
-        itemsToShow: 6.1,
+        itemsToShow: 6,
         snapAlign: "center",
       },
       breakpoints: {
@@ -91,7 +108,7 @@ export default {
         },
         // 1366 and up
         1366: {
-          itemsToShow: 5.9,
+          itemsToShow: 5.8,
           snapAlign: "start",
         },
         // 1440 and up
@@ -141,7 +158,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .carousel__item {
   max-height: 200px;
   width: 100%;
@@ -214,6 +231,7 @@ export default {
   width: 105%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   text-align: center;
   background-color: #1f1f1f49;
   padding-bottom: 5px;

@@ -6,54 +6,54 @@
     </div>
     <div v-if="Adventure_Movies.length > 0">
       <h3 class="Home_List_Title">Adventure Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Adventure_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Adventure_Movies" />
     </div>
 
     <div v-if="Romantic_Movies.length > 0">
       <h3 class="Home_List_Title">Romantic Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Romantic_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Romantic_Movies" />
     </div>
 
     <div v-if="Drama_Movies.length > 0">
       <h3 class="Home_List_Title">Drama Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Drama_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Drama_Movies" />
     </div>
 
     <div v-if="Crime_Mystry_Movies.length > 0">
       <h3 class="Home_List_Title">Crime Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Crime_Mystry_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Crime_Mystry_Movies" />
     </div>
 
     <div v-if="Thriller_Movies.length > 0">
       <h3 class="Home_List_Title">Thriller Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Thriller_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Thriller_Movies" />
     </div>
 
     <div v-if="Anime_Movies.length > 0">
       <h3 class="Home_List_Title">Anime Movies</h3>
-      <MovieCardList class="Home_List_Title"  :data="Anime_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Anime_Movies" />
     </div>
 
     <div v-if="Action_Movies.length > 0">
       <h3 class="Home_List_Title">Action Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Action_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Action_Movies" />
     </div>
 
     <div v-if="Comedy_Movies.length > 0">
       <h3 class="Home_List_Title">Comedy Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Comedy_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Comedy_Movies" />
     </div>
 
     <div v-if="Fantasy_Movies.length > 0">
       <h3 class="Home_List_Title">Fantasy Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Fantasy_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Fantasy_Movies" />
     </div>
 
     <div v-if="Horror_Movies.length > 0">
       <h3 class="Home_List_Title">Horror Movie</h3>
-      <MovieCardList class="Home_List_Title"  :data="Horror_Movies" />
+      <MovieCardList class="Home_List_Title" :data="Horror_Movies" />
     </div>
-<div class="card-1 mt-5 mb-0 w-100"></div>
+    <div class="card-1 mt-5 mb-0 w-100"></div>
     <div class="movie_footer"><Footer /></div>
   </div>
 </template>
@@ -175,17 +175,15 @@ export default {
 </script>
 
 <style scoped src="../../Style/card.css">
-
-
 </style>
 <style scoped>
-.card-1{
-    position: relative;
-    display: inline-grid;
-    grid-template-columns: 50% 40%;
-    text-align: left;
-    align-items: center;
-    padding: 25px 45px 50px;
+.card-1 {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 50% 40%;
+  text-align: left;
+  align-items: center;
+  padding: 25px 45px 50px;
 }
 .MovieHomePage {
   width: 100%;
@@ -200,18 +198,18 @@ export default {
 .movie_footer {
   margin-top: 120px !important;
 }
-.movie_title{
-   font-size: 3rem;
+.movie_title {
+  font-size: 3rem;
   font-weight: 800;
   padding-bottom: 0.3rem;
 }
 @media screen and (max-width: 788px) {
   .movie_title {
-    margin-bottom:2rem;
-    margin-top:-4rem;
-  font-size: 2rem;
-  font-weight: 800 !important;
-  padding-bottom: 0.3rem;
-}
+    margin-bottom: 2rem;
+    margin-top: -4rem;
+    font-size: 2rem;
+    font-weight: 800 !important;
+    padding-bottom: 0.3rem;
+  }
 }
 </style>

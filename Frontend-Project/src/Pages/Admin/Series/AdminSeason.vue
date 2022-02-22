@@ -118,11 +118,6 @@ export default {
   background-color: #d81f26;
 }
 
-.Admin__Home__Sidebar {
-  object-fit: contain;
-  width: 350px;
-  flex: 0.4;
-}
 
 .Admin__Home__Content {
   flex: 0.8;

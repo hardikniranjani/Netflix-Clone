@@ -1,5 +1,5 @@
 <template>
-  <carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+  <carousel :settings="settings" :breakpoints="breakpoints">
     <slide class="categories_card_main_series" v-for="i in data" :key="i">
       <div class="carousel__item">
         <router-link :to="{ name: 'SeriesPage', params: { id: i._id } }">
@@ -47,7 +47,7 @@ export default {
     return {
       media_type: "Series",
       settings: {
-        itemsToShow: 6.1,
+        itemsToShow: 7,
         snapAlign: "center",
       },
       breakpoints: {
@@ -103,12 +103,12 @@ export default {
         },
         // 1024 and up
         1024: {
-          itemsToShow: 4.4,
+          itemsToShow: 5.3,
           snapAlign: "start",
         },
         // 1366 and up
         1366: {
-          itemsToShow: 5.9,
+          itemsToShow: 7,
           snapAlign: "start",
         },
         // 1440 and up
@@ -200,11 +200,12 @@ export default {
   display: flex;
   padding-left: 20px;
 }
-.categories_card_main {
+.categories_card_main_series {
   object-fit: contain;
+    margin-left:-2px;
   transition: all 0.4s;
 }
-.categories_card_main:hover {
+.categories_card_main_series:hover {
   transform: scale(1.09);
   padding: 10px;
   cursor: pointer;
@@ -234,7 +235,7 @@ export default {
   color: #d81f26;
 }
 
-.categories_card_main:hover .categories_card_bottom {
+.categories_card_main_series:hover .categories_card_bottom {
   opacity: 1;
   cursor: pointer;
 }
