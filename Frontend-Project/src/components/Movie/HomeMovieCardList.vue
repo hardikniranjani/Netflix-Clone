@@ -132,13 +132,21 @@ export default {
     Navigation,
   },
   methods: {
+    Mynotification(text, type) {
+      this.$notify({
+        text : text,
+        type : type,
+        duration : 5000,
+        speed : 1000
+      });
+    },
     async addToWishList(movie_id) {
       await UserApi.addToWishList({
         media_type: this.media_type,
         media_id: movie_id,
       })
         .then(() => {
-          swal("Successfully added to wish list!");
+          this.Mynotification("Successfully added to wish list!","success");
         })
         .catch((err) => {
           console.log(err);

@@ -320,7 +320,7 @@ export default {
 }
 @media screen and (min-width: 1465px) {
 .form_input {
-  margin-left: 740px;
+  margin-left: 600px;
 }
 }
 @media screen and (min-width: 1565px) {

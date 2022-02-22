@@ -34,7 +34,17 @@
               :modelValue="Password1"
               @change="handleChangePassword1"
             />
-            <span>{{ errors.Password1 }}</span>
+            <span  v-if="errors.Password1"> <ul>
+                <li :class="lengthOfPassword(Password1)">
+                  Minimum 8 and Maximum 10 characters are required.
+                </li>
+                <li :class="upperCaseOfPassword(Password1)">
+                  Atleast One Upper Case character is required.
+                </li>
+                <li :class="lowerCaseOfPassoword(Password1)">Atleast One Lower Case character is required.</li>
+                <li :class="digitOfPassword(Password1)">Atleast One Number is required.</li>
+                <li :class="specialCharOfPassword(Password1)">Atleast One Special Character is required.</li>
+              </ul></span>
 
             <input
               class="form-control my-3 ps-3"
@@ -44,7 +54,17 @@
               :modelValue="Password2"
               @change="handleChangePassword2"
             />
-            <span>{{ errors.Password2 }}</span>
+           <span  v-if="errors.Password2"> <ul>
+                <li :class="lengthOfPassword(Password2)">
+                  Minimum 8 and Maximum 10 characters are required.
+                </li>
+                <li :class="upperCaseOfPassword(Password2)">
+                  Atleast One Upper Case character is required.
+                </li>
+                <li :class="lowerCaseOfPassoword(Password2)">Atleast One Lower Case character is required.</li>
+                <li :class="digitOfPassword(Password2)">Atleast One Number is required.</li>
+                <li :class="specialCharOfPassword(Password2)">Atleast One Special Character is required.</li>
+              </ul></span>
             <div v-if="loading">
               <img
                 class="my-2"
@@ -82,8 +102,8 @@ export default {
   },
   data() {
     const validationSchema = object({
-      Password1: string().required(),
-      Password2: string().required(),
+      Password1: string().required().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+_!@#$%^&*., ?])[A-Za-z\d-+_!@#$%^&*., ?]{8,10}$/),
+      Password2: string().required().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+_!@#$%^&*., ?])[A-Za-z\d-+_!@#$%^&*., ?]{8,10}$/),
     });
 
     const { handleSubmit, setFieldValue, errors } = useForm({
@@ -130,7 +150,43 @@ export default {
       loading : false
     };
   },
-
+  computed: {
+    lengthOfPassword() {
+      return (password) => {
+        return password["length"] > 10 || password["length"] < 8
+        ? "text-danger"
+        : "text-success";
+      }
+    },
+    upperCaseOfPassword() {
+      let upperCasePattern = /(?=.*[A-Z])/;
+      return (password)=>{
+        return  upperCasePattern.test(password)
+        ? "text-success"
+        : "text-danger";
+      }
+    },
+    lowerCaseOfPassoword() {
+      let lowerCasePattern = /(?=.*[a-z])/;
+      return (password)=>{
+        return lowerCasePattern.test(password)
+        ? "text-success"
+        : "text-danger";
+      }
+    },
+    digitOfPassword() {
+      let digitPattern = /(?=.*\d)/;
+      return (password)=>{
+        return digitPattern.test(password) ? "text-success" : "text-danger";
+      }
+    },
+    specialCharOfPassword() {
+      let specialCharPattern = /(?=.*[-+_!@#$%^&*., ?])/;
+      return (password)=>{
+        return specialCharPattern.test(password) ? "text-success" : "text-danger";
+      }
+    },
+  },
   methods: {
     login() {
       this.$router.replace({ name: "LogInPage" });

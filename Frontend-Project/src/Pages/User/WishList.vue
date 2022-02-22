@@ -3,11 +3,12 @@
     <div class="nav"><NavBar /></div>
     <div class="WishList_body container">
       <div class="d-flex justify-content-between">
-        <h2 class="text-center">My WishList</h2>
+        <h2 class="text-center">WishList</h2>
         <button
           class="btn btn-danger"
           style="background-color: #d81f26"
           @click="clearWishList()"
+          :class="dataIsAvailable"
         >
           Clear List
         </button>
@@ -19,12 +20,12 @@
         </span>
         <span v-if="Series.length > 0">
           <h4>Series</h4>
-          <UserSeriesCardList :data="Series"  @updateWishList="updateList" />
+          <UserSeriesCardList :data="Series" @updateWishList="updateList" />
         </span>
       </div>
       <div v-else>
         <h2 class="text-center mt-5" style="color: #d81f26">
-          You Don't have List
+          Faviourite list is Empty.
         </h2>
       </div>
     </div>
@@ -68,7 +69,6 @@ export default {
     },
     getUserWishList() {
       UserApi.getWishList().then((res) => {
-
         let userMovies = res.data.movies.map((obj) => {
           return obj._id;
         });
@@ -94,6 +94,13 @@ export default {
           this.Movies = [];
         });
       }
+    },
+  },
+  computed: {
+    dataIsAvailable() {
+      return this.Movies.length > 0 || this.Series.length > 0
+        ? "active"
+        : "disabled";
     },
   },
 };
