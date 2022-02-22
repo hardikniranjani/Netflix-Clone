@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav admin_navbar navbar navbar-expand-lg w-100">
     <div class="nav__left">
       <img
         class="nav_logo"
@@ -94,13 +94,12 @@ export default {
     };
   },
   created() {
-
-
     let svg = createAvatar(style, {
       seed: `${this.$store.state.user.Name}`,
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
+    this.navActive();
   },
   updated() {
     let svg = createAvatar(style, {
@@ -108,6 +107,7 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
+    this.navActive();
   },
   methods: {
     home() {
@@ -120,6 +120,12 @@ export default {
       this.$store.dispatch("REMOVE_TOKEN");
       this.$router.replace({ name: "LogInPage" });
     },
+        navActive() {
+      window.addEventListener("scroll", function () {
+        var nav = document.querySelector(".admin_navbar");
+        nav.classList.toggle("nav_active", window.scrollY > 0);
+      });
+    },
   },
 };
 </script>
@@ -130,6 +136,13 @@ export default {
 <style scoped>
 .logout_btn {
   margin-left: 35px;
+}
+
+.admin_navbar{
+  padding-left:70px;
+}
+.admin_navbar.nav_active {
+  background-color: #000000ec;
 }
 #Profile_image1 {
   border-radius: 8px;
