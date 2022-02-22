@@ -77,12 +77,13 @@
 </template>
 
 <script>
-import UserApi from "../../services/user.service";
-import Notifications from '../../mixin/notificationMixin';
+
+
 import wishListMixin from '../../mixin/wishListMixin';
+import watchLaterMixin from '../../mixin/watchLaterMixin';
 export default {
   name: "Movie_Banner",
-  mixins : [Notifications,wishListMixin],
+  mixins : [wishListMixin,watchLaterMixin],
   data() {
     return {
       Banner_Movie: {},
@@ -97,52 +98,7 @@ export default {
     id: String,
     movieData: {},
   },
-  methods: {
-    
-    async addToWatchLater() {
-      await UserApi.addToWatchLater({
-        media_type: this.media_type,
-        media_id: this.id,
-      })
-        .then((res) => {
-          this.availableInWatchLater = true;
-          this.$store.dispatch("ADD_WATCH_LATER", res.data.updatedLibrary);
-          Notifications("Successfully added to watch later!", "success");
-        })
-        .catch((err) => {
-          this.availableInWatchLater = true;
-          console.log(err);
-         Notifications("Error while adding to watch later.", "danger");
-        });
-    },
-    async removeFromWatchLater() {
-      await UserApi.removeFromWatchLater({
-        media_type: this.media_type,
-        media_id: this.id,
-      }).then((res) => {
-        this.availableInWatchLater = false;
-        this.$store.dispatch("ADD_WATCH_LATER", res.data.list);
-        this.availableInWatchLater = false;
-        Notifications("Removed from watch later !!", "success");
-      });
-    },
-    updateWatchLater() {
-      if (this.availableInWatchLater) {
-        this.removeFromWatchLater();
-      } else {
-        this.addToWatchLater();
-      }
-    },
-    
-  },
-
-  computed: {
-     classList() {
-      return this.availableInWatchLater
-        ? "bi-bookmark-check text-danger"
-        : "bi-bookmark text-light";
-    },
-  },
+ 
 
   async updated() {
     var banner = document.getElementById("banner");
