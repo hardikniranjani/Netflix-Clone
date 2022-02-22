@@ -9,17 +9,19 @@ export default {
   },
   computed: {
     heartIconClass() {
+      
       return this.availableInWishList
         ? "bi-heart-fill text-danger"
         : "bi-heart text-light";
     },
   },
   updated() {
+    console.log(this.id);
     let isAvailableInWishList = this.$store.getters.availableInWishList(
       parseInt(this.id),
       this.media_type
     );
-
+      
     this.availableInWishList = isAvailableInWishList;
   },
   methods: {
@@ -36,7 +38,6 @@ export default {
         media_id: this.id,
       })
         .then((res) => {
-          console.log(res.data);
           this.availableInWishList = false;
           this.$store.dispatch("ADD_WISH_LIST", res.data.list);
           Notifications(`${this.media_type} removed from your wish list.`, "success");

@@ -1,27 +1,31 @@
 <template>
-    <div class="categories_card_bottom">
-      <i class="bi bi-heart-fill Home_Movie_categories_card_bottom_icon"> </i>
-      <!-- <router-link
-      class="Home_Movie_categories_card_bottom_icon"
-      :to="{
-        name: 'MovieVideo',
-      }"
-    > -->
-      <i 
-        class="bi bi-play-circle-fill Home_Movie_categories_card_bottom_icon"
-      ></i>
-      <!-- </router-link> -->
+  <div class="categories_card_bottom">
+    <i class="bi Home_Movie_categories_card_bottom_icon" :class="heartIconClass" @click="updateWishList"> </i>
 
-      <i v-if='media_type == "Movies"' class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon"></i>
-    </div>
+    <i
+      class="bi bi-play-circle-fill Home_Movie_categories_card_bottom_icon"
+    ></i>
+
+    <i
+      v-if="media_type == 'Movies'"
+      class="bi  Home_Movie_categories_card_bottom_icon"
+      :class="classList"
+      @click="updateWatchLater"
+    ></i>
+  </div>
 </template>
 
 <script>
+import wishListMixin from '../mixin/wishListMixin';
+import watchLaterMixin from '../mixin/watchLaterMixin';
 export default {
   name: "IconComponent",
+  data(){},
+  mixins : [wishListMixin,watchLaterMixin],
   props: {
-      media_type: String,
-  }
+    media_type: String,
+    id : Number
+  },
 };
 </script>
 

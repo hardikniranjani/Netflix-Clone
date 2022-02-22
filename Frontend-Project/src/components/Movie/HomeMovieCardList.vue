@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Home_Movie_categories_card" :src="i.backdrop_path" />
         </router-link>
-        <IconComponent :media_type="this.media_type" />
+        <IconComponent :media_type="this.media_type" :id="i._id"/>
       </div>
     </slide>
     <template #addons>
