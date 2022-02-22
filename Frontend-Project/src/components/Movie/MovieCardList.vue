@@ -5,6 +5,7 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Movie_categories_card" :src="i.Banner" />
         </router-link>
+        <IconComponent :media_type="this.media_type" :id="i._id" />
       </div>
     </slide>
     <template #addons>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import IconComponent from "../../components/IconComponent.vue"
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 
@@ -107,6 +109,7 @@ export default {
     Carousel,
     Slide,
     Navigation,
+    IconComponent
   },
 };
 </script>

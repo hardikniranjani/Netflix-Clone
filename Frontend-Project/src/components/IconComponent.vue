@@ -1,27 +1,32 @@
 <template>
-    <div class="categories_card_bottom">
-      <i class="bi bi-heart-fill Home_Movie_categories_card_bottom_icon"> </i>
-      <!-- <router-link
+  <div class="categories_card_bottom">
+    <i class="bi bi-heart-fill Home_Movie_categories_card_bottom_icon"> </i>
+    <router-link
       class="Home_Movie_categories_card_bottom_icon"
       :to="{
         name: 'MovieVideo',
+        params: { id: this.id },
       }"
-    > -->
-      <i 
+    >
+      <i
         class="bi bi-play-circle-fill Home_Movie_categories_card_bottom_icon"
       ></i>
-      <!-- </router-link> -->
+    </router-link>
 
-      <i v-if='media_type == "Movies"' class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon"></i>
-    </div>
+    <i
+      v-if="media_type == 'Movies'"
+      class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon"
+    ></i>
+  </div>
 </template>
 
 <script>
 export default {
   name: "IconComponent",
   props: {
-      media_type: String,
-  }
+    media_type: String,
+    id: String,
+  },
 };
 </script>
 
