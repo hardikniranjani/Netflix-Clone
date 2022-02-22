@@ -6,7 +6,7 @@
           <div id="banner__contents_details">
             <h1 id="banner__title">{{ Name }}</h1>
             <div id="banner__buttons">
-              <span class="mobile_view">
+              <span  class="mobile_view">
                 <router-link
                 id="banner__button_link"
                 :to="{
@@ -14,7 +14,7 @@
                   params: { id: this.id },
                 }"
               >
-                <button id="banner__button"><i class="bi bi-play-fill me-1"></i></button>
+                <button v-if="this.$store.state.user.Name" id="banner__button"><i class="bi bi-play-fill me-1"></i></button>
               </router-link>
               </span>
               <span id="leptop_view_title">
@@ -25,7 +25,7 @@
                   params: { id: this.id },
                 }"
               >
-                <button id="banner__button"><i class="bi bi-play-fill me-1"></i>Play</button>
+                <button v-if="this.$store.state.user.Name" id="banner__button"><i class="bi bi-play-fill me-1"></i>Play</button>
               </router-link></span> 
               
               <button id="banner__button" @click="updateWishList()">

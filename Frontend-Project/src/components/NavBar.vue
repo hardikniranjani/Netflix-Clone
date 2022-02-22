@@ -146,6 +146,7 @@ export default {
   },
   mounted() {
     this.navActive();
+    this.logInOut_btn();
   },
   updated() {
     let svg = createAvatar(style, {
@@ -154,6 +155,7 @@ export default {
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
     this.navActive();
+    this.logInOut_btn();
   },
   methods: {
     home() {
@@ -180,6 +182,14 @@ export default {
         this.logout();
       }else {
         this.login();
+      }
+    },
+    logInOut_btn(){
+      if(!this.$store.state.user.Name){
+          
+        var button = document.querySelector(".logout_btn");
+        button.classList.toggle("logInOut_btn");
+      
       }
     }
   },
@@ -306,7 +316,7 @@ export default {
   .form_input {
     margin-left: 120px;
   }
-  .logout_btn{
+  .logInOut_btn{
     margin-left: 150px;
   }
 }
