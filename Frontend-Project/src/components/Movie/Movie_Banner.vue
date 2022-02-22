@@ -16,7 +16,7 @@
                 <button id="banner__button"><i class="bi bi-play-fill me-1"></i>Play</button>
               </router-link>
               <button id="banner__button" @click="updateWishList()">
-                <i class="bi text-danger" :class="heartIconClass"></i>
+                <i class="bi" :class="heartIconClass"></i>
               </button>
               <button id="banner__button" @click="updateWatchLater()">
                 <i class="bi" :class="classList" ref="watchLater"></i>

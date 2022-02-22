@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       type: "Series",
-         settings: {
+      settings: {
         itemsToShow: 6.1,
         snapAlign: "center",
       },
@@ -117,12 +117,15 @@ export default {
   },
   methods: {
     async removeList(data1) {
+      console.log(data1)
       await UserApi.removeFromWishlist({
         media_id: data1,
         media_type: this.type,
       })
-        .then(() => {
-          location.reload();
+        .then(({ data }) => {
+          console.log(data)
+          // this.$store.dispatch("ADD_WISH_LIST", data.list);
+          this.$emit("updateWishList");
         })
         .catch((err) => {
           console.log(err.message);

@@ -37,7 +37,6 @@
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import UserApi from "../../services/user.service";
-import swal from "sweetalert";
 export default {
   name: "SeriesCardList",
   data() {
@@ -137,7 +136,12 @@ export default {
         media_id: episode_id,
       })
         .then(() => {
-          swal("Successfully added to watch later!");
+          this.$notify({
+            text: "Successfully added to watch later!!",
+            type: "success",
+            duration: 5000,
+            speed: 1000,
+          });
         })
         .catch((err) => {
           console.log(err);

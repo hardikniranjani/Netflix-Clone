@@ -22,7 +22,7 @@
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import UserApi from "../../services/user.service";
- import { CloseIcon } from "@iconicicons/vue";
+import { CloseIcon } from "@iconicicons/vue";
 export default {
   name: "UserMovieCardList",
   data() {
@@ -107,7 +107,7 @@ export default {
     };
   },
   components: {
-     CloseIcon,
+    CloseIcon,
     Carousel,
     Slide,
     Navigation,
@@ -117,12 +117,15 @@ export default {
   },
   methods: {
     async removeList(data1) {
+
       await UserApi.removeFromWishlist({
         media_id: data1,
-        media_type: this.type,
+        media_type: this.media_type,
       })
         .then(() => {
-          location.reload();
+
+          // this.$store.dispatch("ADD_WISH_LIST", data.list);
+          this.$emit("updateWishList");
         })
         .catch((err) => {
           console.log(err.message);

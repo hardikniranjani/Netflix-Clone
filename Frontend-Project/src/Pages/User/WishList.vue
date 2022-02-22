@@ -15,11 +15,11 @@
       <div v-if="Movies.length > 0 || Series.length > 0">
         <span v-if="Movies.length > 0">
           <h4 class="mt-5">Movies</h4>
-          <UserMovieCardList :data="Movies" />
+          <UserMovieCardList :data="Movies" @updateWishList="updateList" />
         </span>
         <span v-if="Series.length > 0">
           <h4>Series</h4>
-          <UserSeriesCardList :data="Series" />
+          <UserSeriesCardList :data="Series"  @updateWishList="updateList" />
         </span>
       </div>
       <div v-else>
@@ -56,17 +56,40 @@ export default {
   },
   mounted() {
     document.title = `Netflix - MyWishList`;
-
-    UserApi.getWishList().then((res) => {
-      this.Series = res.data.series;
-      this.Movies = res.data.movies;
-    });
+    // let wishlist = this.$store.state.user.wishlist;
+    // console.log(wishlist)
+    // this.Series = wishlist.Series.length ? wishlist.Series : [];
+    // this.Movies = wishlist.Movies.length ? wishlist.Movies : [];
+    this.getUserWishList();
   },
   methods: {
+    updateList() {
+      this.getUserWishList();
+    },
+    getUserWishList() {
+      UserApi.getWishList().then((res) => {
+
+        let userMovies = res.data.movies.map((obj) => {
+          return obj._id;
+        });
+        let userSeries = res.data.series.filter((obj) => obj._id);
+        let list = {
+          _id: res.data._id,
+          Movies: userMovies,
+          Series: userSeries,
+          IsActive: true,
+        };
+        this.$store.dispatch("ADD_WISH_LIST", list);
+        this.Series = res.data.series;
+        this.Movies = res.data.movies;
+      });
+    },
     clearWishList() {
       var result = confirm("Are you sure you want to clear your list?");
       if (result) {
-        UserApi.deleteWishList().then(() => {
+        UserApi.deleteWishList().then((res) => {
+          console.log(res.data);
+          this.getUserWishList();
           this.Series = [];
           this.Movies = [];
         });

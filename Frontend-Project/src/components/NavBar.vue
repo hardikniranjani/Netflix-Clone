@@ -4,7 +4,7 @@
       class="nav_logo"
       src="../assets/logo.svg"
       alt="netflix_logo"
-      v-on:click="home"
+      @click="home"
     />
     <button
       class="navbar-toggler"
@@ -15,7 +15,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon usernav_ico"></span>
+      <span class="navbar-toggler-icon usernav_ico" style="color: white"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -60,7 +60,7 @@
           </router-link>
         </li>
 
-        <li class="nav-item">
+        <li v-if="isLoggedIn" class="nav-item">
           <router-link class="link" :to="{ name: 'WishList' }">
             <a
               class="nav_3 nav-link"
@@ -74,18 +74,19 @@
         <form class="form-inline my-2 my-lg-0 form_input"></form>
         <div class="navbar_bottom">
           <div
+           v-if="isLoggedIn"
             class="ms-3 mt-2"
             id="Profile_image1"
-            v-on:click="userAccount"
+            @click="userAccount"
             v-html="user_icon"
           ></div>
           <button
             type="button"
             class="logout_btn btn btn-danger mt-2"
             style="background-color: #d81f26"
-            v-on:click="logout()"
+            @click="loginOrlogout"
           >
-            Logout
+            {{logButton}}
           </button>
         </div>
       </span>
@@ -105,9 +106,9 @@
             type="button"
             class="logout_btn_mobile btn btn-danger mt-2"
             style="background-color: #d81f26"
-            v-on:click="logout()"
+            @click="loginOrlogout"
           >
-            Logout
+            {{logButton}}
           </button>
         </div>
       </span>
@@ -121,6 +122,15 @@ import * as style from "@dicebear/adventurer-neutral";
 
 export default {
   name: "NavBar",
+  computed :  {
+    isLoggedIn(){
+      let user = this.$store.state.user;
+      return user._id ? true : false;
+    },
+    logButton(){
+      return this.isLoggedIn ? "Logout" : "Login";
+    }
+  },
   data() {
     const user_icon = this.$store.state.avatar;
     return {
@@ -149,6 +159,9 @@ export default {
     home() {
       this.$router.push({ name: "HomePage" });
     },
+    login(){
+       this.$router.push({ name: "LogInPage" });
+    },
     userAccount() {
       this.$router.push({ name: "UserAccount" });
     },
@@ -162,6 +175,13 @@ export default {
         nav.classList.toggle("nav_active", window.scrollY > 0);
       });
     },
+    loginOrlogout(){
+      if(this.isLoggedIn){
+        this.logout();
+      }else {
+        this.login();
+      }
+    }
   },
 };
 </script>
@@ -230,14 +250,14 @@ export default {
     padding-left: 20px;
     background-color: #000000ec;
   }
-  .usernav_ico{
-    border:1px solid black;
-    border-radius:5px;
+  .usernav_ico {
+    border: 1px solid black;
+    border-radius: 5px;
   }
 
-.usernav_ico:focus{
-  border:none;
-}
+  .usernav_ico:focus {
+    border: none;
+  }
   .navbar_bottom_mobile {
     display: flex;
     margin-left: -10px;
@@ -283,15 +303,15 @@ export default {
 }
 
 @media screen and (min-width: 788px) {
-.form_input {
-  margin-left: 120px;
-}
+  .form_input {
+    margin-left: 120px;
+  }
 }
 
 @media screen and (min-width: 1365px) {
-.form_input {
-  margin-left: 450px;
-}
+  .form_input {
+    margin-left: 450px;
+  }
 }
 @media screen and (min-width: 1439px) {
 .form_input {
@@ -300,17 +320,18 @@ export default {
 }
 @media screen and (min-width: 1465px) {
 .form_input {
-  margin-left: 580px;
+  margin-left: 740px;
 }
 }
 @media screen and (min-width: 1565px) {
 .form_input {
-  margin-left: 680px;
+  margin-left: 780px;
 }
 }
 @media screen and (min-width: 1665px) {
 .form_input {
-  margin-left: 780px;
+  margin-left: 880px;
+  
 }
 }
 @media screen and (min-width: 1765px) {
@@ -319,8 +340,8 @@ export default {
 }
 }
 @media screen and (min-width: 2420px) {
-.form_input {
-  margin-left: 1600px;
-}
+  .form_input {
+    margin-left: 1600px;
+  }
 }
 </style>

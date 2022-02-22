@@ -156,11 +156,9 @@ class UserDomain {
         res.status(500).send(err.message);
       });
 
-    res
-      .status(200)
-      .send({
-        msg: "Password Changed Successfully. Kindly do login again. You will be redirected to Login Page after 5 seconds.",
-      });
+    res.status(200).send({
+      msg: "Password Changed Successfully. Kindly do login again. You will be redirected to Login Page after 5 seconds.",
+    });
   }
 
   // create new user, signup path
@@ -820,7 +818,9 @@ class UserDomain {
       .populate("Movies");
 
     if (findWishList.length == 0)
-      return res.status(404).send({ msg: "Empty Wishlist" });
+      return res
+        .status(200)
+        .send({ _id: findWishList[0]._id, series: [], movies: [] });
 
     const seriesArray = findWishList[0].Series.map((obj) => {
       if (obj.IsActive == true) {
@@ -851,6 +851,7 @@ class UserDomain {
     });
 
     res.status(200).send({
+      _id: findWishList[0]._id,
       series: seriesArray,
       movies: movieArray,
     });

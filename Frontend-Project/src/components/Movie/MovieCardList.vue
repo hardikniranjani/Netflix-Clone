@@ -5,27 +5,7 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Movie_categories_card" :src="i.Banner" />
         </router-link>
-        <div class="categories_card_bottom_movie">
-          <i
-            class="bi bi-heart-fill Home_Movie_categories_card_bottom_icon"
-            v-on:click="addToWishList(i._id)"
-          >
-          </i>
-          <router-link
-            class="Home_Movie_categories_card_bottom_icon"
-            :to="{
-              name: 'MovieVideo',
-              params: { id: i._id },
-            }"
-          >
-            <i class="bi bi-play-circle-fill"></i>
-          </router-link>
-
-          <i
-            class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon"
-            v-on:click="addToWatchLater(i._id)"
-          ></i>
-        </div>
+        
       </div>
     </slide>
     <template #addons>
@@ -37,8 +17,7 @@
 <script>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
-import UserApi from "../../services/user.service";
-import swal from "sweetalert";
+
 export default {
   name: "MovieCardList",
  data() {
@@ -130,33 +109,7 @@ export default {
     Slide,
     Navigation,
   },
-  methods: {
-    async addToWishList(movie_id) {
-      await UserApi.addToWishList({
-        media_type: this.media_type,
-        media_id: movie_id,
-      })
-        .then(() => {
-          swal("Successfully added to wish list!");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
 
-    async addToWatchLater(movie_id) {
-      await UserApi.addToWatchLater({
-        media_type: this.media_type,
-        media_id: movie_id,
-      })
-        .then(() => {
-          swal("Successfully added to watch later!");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
 };
 </script>
 <style scoped>
