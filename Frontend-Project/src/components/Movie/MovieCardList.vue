@@ -89,7 +89,7 @@ export default {
         },
         // 1440 and up
         1440: {
-          itemsToShow: 6.3,
+          itemsToShow: 7.8,
           snapAlign: "start",
         },
         // 2560 and up
