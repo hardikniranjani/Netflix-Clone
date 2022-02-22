@@ -1,5 +1,5 @@
 <template>
-  <carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+  <carousel :settings="settings" :breakpoints="breakpoints" >
     <slide class="categories_card_main_movie" v-for="i in data" :key="i">
       <div class="carousel__item">
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">

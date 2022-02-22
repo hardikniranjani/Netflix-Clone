@@ -1,19 +1,14 @@
 <template>
   <div>
-    <!-- <CardList /> -->
     <router-view />
-    <notifications position="top center" width="500px"/>
+    <notifications position="top center"  />
   </div>
 </template>
 
 <script>
 
-//  import CardList from "./Pages/Cardlist.vue"
 export default {
   name: "App",
-  components: {
-    // CardList
-  }
 };
 </script>
 
@@ -37,5 +32,6 @@ export default {
   background-color: #fafafad3;
   border-radius: 20px;
 }
+
 </style>
  
