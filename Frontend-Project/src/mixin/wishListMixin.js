@@ -39,7 +39,7 @@ export default {
           console.log(res.data);
           this.availableInWishList = false;
           this.$store.dispatch("ADD_WISH_LIST", res.data.list);
-          Notifications("Movie removed from your wish list.", "success");
+          Notifications(`${this.media_type} removed from your wish list.`, "success");
         })
         .catch((err) => {
           console.log(err);
@@ -55,7 +55,7 @@ export default {
         .then((res) => {
           this.$store.dispatch("ADD_WISH_LIST", res.data.wishlist);
           this.availableInWishList = true;
-          Notifications("Movie added to your wish list.", "success");
+          Notifications(`${this.media_type} added to your wish list.`, "success");
         })
         .catch((err) => {
           this.availableInWishList = false;

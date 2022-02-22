@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <CardList /> -->
     <router-view />
     <notifications position="top center" width="500px"/>
   </div>
@@ -8,12 +7,8 @@
 
 <script>
 
-//  import CardList from "./Pages/Cardlist.vue"
 export default {
   name: "App",
-  components: {
-    // CardList
-  }
 };
 </script>
 
