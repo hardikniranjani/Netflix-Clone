@@ -175,14 +175,14 @@ export default {
 }
 .carousel__prev {
   opacity: 0;
-  height: 90% !important;
-  margin-top: -5px !important;
+  height: 80% !important;
+  margin-top: -20px !important;
   margin-left: 30px;
 }
 .carousel__next {
   opacity: 0;
-  height: 90% !important;
-  margin-top: -5px !important;
+  height: 80% !important;
+  margin-top: -20px !important;
   margin-right: 25px;
 }
 .carousel__next:hover,
