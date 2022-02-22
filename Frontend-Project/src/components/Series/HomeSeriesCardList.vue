@@ -5,6 +5,7 @@
         <router-link :to="{ name: 'SeriesPage', params: { id: i._id } }">
           <img class="Home_Series_categories_card" :src="i.backdrop_path" />
         </router-link>
+        <IconComponent :media_type="this.media_type" />
       </div>
     </slide>
     <template #addons>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import IconComponent from "../../components/IconComponent.vue"
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import UserApi from "../../services/user.service";
@@ -108,6 +110,7 @@ export default {
     Carousel,
     Slide,
     Navigation,
+    IconComponent
   },
   methods: {
     scroll_left() {
