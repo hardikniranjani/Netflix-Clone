@@ -8,8 +8,9 @@
           class="btn btn-danger"
           style="background-color: #d81f26"
           @click="clearwatchLater()"
+          :class="dataIsAvailable"
         >
-          Clear WatchLater
+          Clear
         </button>
       </div>
       <div v-if="Movies.length > 0 || Episodes.length > 0">
@@ -69,6 +70,13 @@ export default {
           location.reload();
         });
       }
+    },
+  },
+   computed: {
+    dataIsAvailable() {
+      return this.Movies.length > 0 || this.Episodes.length > 0
+        ? "active"
+        : "disabled";
     },
   },
 };
