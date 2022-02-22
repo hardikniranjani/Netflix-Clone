@@ -193,13 +193,7 @@ class UserDomain {
     try {
       const result = await newUser.save();
 
-      const token = await this.generateToken(
-        {
-          _id: newUser._id,
-          role: "user",
-        },
-        "7200m"
-      );
+      const token = (await this.generateToken({_id: newUser._id,role: "user",},"7200m")).token;
       res.header("x-access-token", token).send(result);
     } catch (e) {
       res.send(e.message);

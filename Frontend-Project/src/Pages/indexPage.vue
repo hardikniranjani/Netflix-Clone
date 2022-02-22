@@ -26,8 +26,9 @@
         </p>
         <div v-if="showAlert">
           <Alert
+            class="Alert_massage"
             v-if="alertMsg"
-            :message="alertMsg.msg"
+            :message="alertMsg"
             :typeAlert="typeOfAlert"
             :icon="icon"
           />
@@ -198,14 +199,14 @@ export default {
       this.loading = true;
       UserApi.signUpEmail(Email.value)
         .then((res) => {
-          this.alertMsg = res.data;
+          this.alertMsg = res.data.msg;
           this.typeOfAlert = "primary";
           this.showAlert = true;
           this.icon = "success";
         })
         .catch((err) => {
-          this.typeOfAlert = "danger";
           this.alertMsg = err.response.data;
+          this.typeOfAlert = "danger"; 
           this.showAlert = true;
           this.icon = "warning";
         })
@@ -269,4 +270,20 @@ export default {
   cursor: pointer;
   font-weight: 600px;
 }
+.Alert_massage{
+  height:10px;
+}
+ @media screen and (max-width: 788px) {
+   .index_expolre{
+  color:#E50914;
+  font-size:0.9rem;
+  transition: 0.3s;
+}
+.index_expolre:hover{
+  color:#E50914;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600px;
+}
+ }
 </style>
