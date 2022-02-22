@@ -1,11 +1,11 @@
 <template>
-<carousel :settings="settings" :breakpoints="breakpoints">
+  <carousel :settings="settings" :breakpoints="breakpoints">
     <slide class="categories_card_main_movie" v-for="i in data" :key="i">
       <div class="carousel__item">
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Movie_categories_card" :src="i.Banner" />
         </router-link>
-              </div>
+      </div>
     </slide>
     <template #addons>
       <navigation />
@@ -19,7 +19,7 @@ import { Carousel, Slide, Navigation } from "vue3-carousel";
 
 export default {
   name: "MovieCardList",
- data() {
+  data() {
     return {
       media_type: "Movies",
       settings: {
@@ -103,12 +103,11 @@ export default {
   props: {
     data: Array,
   },
-    components: {
+  components: {
     Carousel,
     Slide,
     Navigation,
   },
-
 };
 </script>
 <style scoped>
@@ -161,11 +160,11 @@ export default {
   padding-left: 20px;
 }
 .categories_card_main_movie {
-    object-fit: contain;
+  object-fit: contain;
   padding-bottom: 20px;
-  margin-left:-2px;
+  margin-left: -2px;
   transition: all 0.4s;
-  }
+}
 .categories_card_main_movie:hover {
   transform: scale(1.08);
   cursor: pointer;

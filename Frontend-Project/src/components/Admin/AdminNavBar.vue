@@ -52,14 +52,14 @@
         v-on:click="AdminAccount"
         v-html="user_icon"
       ></div>
-           <button
-                   type="button"
-            class="logout_btn btn btn-danger mt-2"
-            style="background-color: #d81f26"
-            v-on:click="logout()"
-          >
-            Logout
-          </button>
+      <button
+        type="button"
+        class="logout_btn btn btn-danger mt-2"
+        style="background-color: #d81f26"
+        v-on:click="logout()"
+      >
+        Logout
+      </button>
     </div>
   </div>
 </template>
@@ -103,7 +103,7 @@ export default {
       this.$store.dispatch("REMOVE_TOKEN");
       this.$router.replace({ name: "LogInPage" });
     },
-        navActive() {
+    navActive() {
       window.addEventListener("scroll", function () {
         var nav = document.querySelector(".admin_navbar");
         nav.classList.toggle("nav_active", window.scrollY > 0);
@@ -121,8 +121,9 @@ export default {
   margin-left: 15px;
 }
 
-.admin_navbar{
-  padding-left:70px;
+.admin_navbar {
+  margin-left: -20px;
+  padding-left: 100px;
 }
 .admin_navbar.nav_active {
   background-color: #000000ec;
@@ -139,7 +140,7 @@ export default {
 }
 .Profile_dropdown {
   margin-top: 7px;
-  margin-right:20px;
+  margin-right: 20px;
 }
 
 .router-link-exact-active {

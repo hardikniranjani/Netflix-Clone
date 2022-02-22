@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-view />
-    <notifications position="top center" width="500px"/>
+    <notifications position="top center"  />
   </div>
 </template>
 
@@ -32,5 +32,6 @@ export default {
   background-color: #fafafad3;
   border-radius: 20px;
 }
+
 </style>
  
