@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav admin_navbar navbar navbar-expand-lg w-100">
     <div class="nav__left">
       <img
         class="nav_logo"
@@ -52,31 +52,14 @@
         v-on:click="AdminAccount"
         v-html="user_icon"
       ></div>
-      <!-- dropdown menu -->
-      <div class="dropdown Profile_dropdown">
-        <button
-          class="dropdown_profile btn w-100 dropdown-toggle"
-          type="button"
-          style="color: rgba(221, 221, 221, 0.87)"
-          data-bs-toggle="dropdown"
-        ></button>
-        <div
-          class="dropdown-menu align-center"
-          style="background-color: #00000054"
-        >
-          <p class="text-white text-center">
-            Hello! {{ this.$store.state.user.Name }}
-          </p>
-          <button
-            type="button"
-            class="logout_btn btn btn-danger"
+           <button
+                   type="button"
+            class="logout_btn btn btn-danger mt-2"
             style="background-color: #d81f26"
             v-on:click="logout()"
           >
             Logout
           </button>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -94,13 +77,12 @@ export default {
     };
   },
   created() {
-
-
     let svg = createAvatar(style, {
       seed: `${this.$store.state.user.Name}`,
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
+    this.navActive();
   },
   updated() {
     let svg = createAvatar(style, {
@@ -108,10 +90,11 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
+    this.navActive();
   },
   methods: {
     home() {
-      this.$router.push({ name: "AdminHomePage" });
+      this.$router.push({ name: "AdminMoviePage" });
     },
     AdminAccount() {
       this.$router.push({ name: "AdminAccount" });
@@ -119,6 +102,12 @@ export default {
     logout() {
       this.$store.dispatch("REMOVE_TOKEN");
       this.$router.replace({ name: "LogInPage" });
+    },
+        navActive() {
+      window.addEventListener("scroll", function () {
+        var nav = document.querySelector(".admin_navbar");
+        nav.classList.toggle("nav_active", window.scrollY > 0);
+      });
     },
   },
 };
@@ -129,7 +118,14 @@ export default {
 
 <style scoped>
 .logout_btn {
-  margin-left: 35px;
+  margin-left: 15px;
+}
+
+.admin_navbar{
+  padding-left:70px;
+}
+.admin_navbar.nav_active {
+  background-color: #000000ec;
 }
 #Profile_image1 {
   border-radius: 8px;
@@ -143,6 +139,7 @@ export default {
 }
 .Profile_dropdown {
   margin-top: 7px;
+  margin-right:20px;
 }
 
 .router-link-exact-active {

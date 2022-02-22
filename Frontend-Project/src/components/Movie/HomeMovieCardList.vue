@@ -5,27 +5,6 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Home_Movie_categories_card" :src="i.backdrop_path" />
         </router-link>
-        <!-- <div class="categories_card_bottom">
-          <i
-            class="bi bi-heart-fill Home_Movie_categories_card_bottom_icon"
-            v-on:click="addToWishList(i._id)"
-          >
-          </i>
-          <router-link
-            class="Home_Movie_categories_card_bottom_icon"
-            :to="{
-              name: 'MovieVideo',
-              params: { id: i._id },
-            }"
-          >
-            <i class="bi bi-play-circle-fill"></i>
-          </router-link>
-
-          <i
-            class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon"
-            v-on:click="addToWatchLater(i._id)"
-          ></i>
-        </div> -->
       </div>
     </slide>
     <template #addons>
@@ -189,17 +168,17 @@ export default {
   background-color: #1f1f1f6b;
   border-radius: 0px;
   width: 5%;
-  height: 66%;
+  height: 90% !important;
   border: none;
 }
 .carousel__prev {
   opacity: 0;
-  margin-top: -21px;
+  margin-top: -5px !important;
   margin-left: 35px;
 }
 .carousel__next {
   opacity: 0;
-  margin-top: -21px;
+  margin-top: -5px !important;
   margin-right: 30px;
 }
 .carousel__next:hover,

@@ -14,7 +14,7 @@
     </div>
     <div class="container index__body_mid">
       <h1 class="head1 display-3 mx-auto my-auto text-white">
-        Unlimited movies, TV shows and more.
+        Unlimited movies, TV shows and more.<span class="index_expolre" @click="homepage">Explore></span>
       </h1>
 
       <h4 class="head2 mx-auto my-auto text-white mt-2">
@@ -244,6 +244,9 @@ export default {
     home() {
       this.$router.replace({ name: "IndexPage" });
     },
+    homepage(){
+      this.$router.push({ name: "HomePage" });
+    }
   },
 };
 </script>
@@ -255,4 +258,15 @@ export default {
 </style>
 
 <style scoped>
+.index_expolre{
+  color:#E50914;
+  font-size:1.3rem;
+  transition: 0.3s;
+}
+.index_expolre:hover{
+  color:#E50914;
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: 600px;
+}
 </style>

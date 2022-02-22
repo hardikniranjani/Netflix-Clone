@@ -152,7 +152,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .carousel__item {
   max-height: 200px;
   width: 100%;
