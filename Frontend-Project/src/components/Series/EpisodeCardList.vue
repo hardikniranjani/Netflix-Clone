@@ -20,7 +20,7 @@
         </router-link>
         <h7 class="categories_card_bottom">{{ episode.EpisodeName }}</h7>
         <div class="categories_card_bottom">
-          <i
+          <i v-if="this.$store.state.user.Name"
             class="bi bi-plus-circle Movie_categories_card_bottom_icon"
             v-on:click="addToWatchLater(episode._id)"
           ></i>
