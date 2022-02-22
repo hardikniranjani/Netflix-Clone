@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'SeriesPage', params: { id: i._id } }">
           <img class="Home_Series_categories_card" :src="i.backdrop_path" />
         </router-link>
-        <div class="categories_card_bottom">
+        <!-- <div class="categories_card_bottom">
           <i
             class="bi bi-heart-fill Home_Series_categories_card_bottom_icon"
             v-on:click="addToWishList(i._id)"
@@ -27,7 +27,7 @@
               "
             ></i>
           </router-link>
-        </div>
+        </div> -->
       </div>
     </slide>
     <template #addons>

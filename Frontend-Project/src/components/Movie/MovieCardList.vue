@@ -5,8 +5,7 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Movie_categories_card" :src="i.Banner" />
         </router-link>
-        
-      </div>
+              </div>
     </slide>
     <template #addons>
       <navigation />

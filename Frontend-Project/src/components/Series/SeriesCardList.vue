@@ -5,29 +5,6 @@
         <router-link :to="{ name: 'SeriesPage', params: { id: i._id } }">
           <img class="Series_categories_card" :src="i.Banner" />
         </router-link>
-        <div class="categories_card_bottom">
-          <i
-            class="bi bi-heart-fill Home_Series_categories_card_bottom_icon"
-            v-on:click="addToWishList(i._id)"
-          ></i>
-          <router-link
-            :to="{
-              name: 'EpisodeVideo',
-              params: {
-                id: i.Seasons[0].Episodes[0].SeriesID,
-                episodeid: i.Seasons[0].Episodes[0]._id,
-                seasonid: i.Seasons[0].Episodes[0].SeasonID,
-              },
-            }"
-          >
-            <i
-              class="
-                bi bi-play-circle-fill
-                Home_Series_categories_card_bottom_icon 
-              "
-            ></i>
-          </router-link>
-        </div>
       </div>
     </slide>
     <template #addons>

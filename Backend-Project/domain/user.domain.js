@@ -411,7 +411,7 @@ class UserDomain {
 
   // get all users
   async getAllUsers(req, res) {
-    const result = await UserModel.find({ IsActive: true });
+    const result = await UserModel.find({ IsActive: true, Role:"user" });
 
     if (result) res.status(200).send({ allUser: result });
     else res.status(404).send("Can't find User");

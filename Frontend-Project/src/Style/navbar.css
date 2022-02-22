@@ -1,7 +1,7 @@
 .nav{
     position: fixed;
     top: 0;
-    padding: 20px 40px;
+    padding: 20px 0px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -14,7 +14,6 @@
  
   .nav__left{
     display: flex;
-    margin-left: 10px;
   }
   .nav .active {
     background-color: #14141463;

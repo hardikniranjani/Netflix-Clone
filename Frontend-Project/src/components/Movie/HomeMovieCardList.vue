@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Home_Movie_categories_card" :src="i.backdrop_path" />
         </router-link>
-        <div class="categories_card_bottom">
+        <!-- <div class="categories_card_bottom">
           <i
             class="bi bi-heart-fill Home_Movie_categories_card_bottom_icon"
             v-on:click="addToWishList(i._id)"
@@ -25,7 +25,7 @@
             class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon"
             v-on:click="addToWatchLater(i._id)"
           ></i>
-        </div>
+        </div> -->
       </div>
     </slide>
     <template #addons>
