@@ -78,14 +78,16 @@
 
 <script>
 import UserApi from "../../services/user.service";
+import Notifications from '../../mixin/notificationMixin';
+import wishListMixin from '../../mixin/wishListMixin';
 export default {
   name: "Movie_Banner",
+  mixins : [Notifications,wishListMixin],
   data() {
     return {
       Banner_Movie: {},
       media_type: "Movies",
       availableInWatchLater: false,
-      availableInWishList: false,
     };
   },
   props: {
@@ -96,48 +98,7 @@ export default {
     movieData: {},
   },
   methods: {
-    Mynotification(text, type) {
-      this.$notify({
-        text: text,
-        type: type,
-        duration: 5000,
-        speed: 1000,
-      });
-    },
-    async removeFromWishList() {
-      await UserApi.removeFromWishlist({
-        media_type: this.media_type,
-        media_id: this.id,
-      })
-        .then((res) => {
-          console.log(res.data);
-          this.availableInWishList = false;
-          this.$store.dispatch("ADD_WISH_LIST", res.data.list);
-          this.Mynotification("Movie removed from your wish list.", "success");
-        })
-        .catch(() => {
-          this.availableInWishList = false;
-          this.Mynotification(
-            "Error while removing from your wish list.",
-            "danger"
-          );
-        });
-    },
-    async addToWishList() {
-      await UserApi.addToWishList({
-        media_type: this.media_type,
-        media_id: this.id,
-      })
-        .then((res) => {
-          this.$store.dispatch("ADD_WISH_LIST", res.data.wishlist);
-          this.availableInWishList = true;
-          this.Mynotification("Movie added to your wish list.", "success");
-        })
-        .catch((err) => {
-          this.availableInWishList = false;
-          this.Mynotification(err, "danger");
-        });
-    },
+    
     async addToWatchLater() {
       await UserApi.addToWatchLater({
         media_type: this.media_type,
@@ -146,12 +107,12 @@ export default {
         .then((res) => {
           this.availableInWatchLater = true;
           this.$store.dispatch("ADD_WATCH_LATER", res.data.updatedLibrary);
-          this.Mynotification("Successfully added to watch later!", "success");
+          Notifications("Successfully added to watch later!", "success");
         })
         .catch((err) => {
           this.availableInWatchLater = true;
           console.log(err);
-          this.Mynotification("Error while adding to watch later.", "danger");
+         Notifications("Error while adding to watch later.", "danger");
         });
     },
     async removeFromWatchLater() {
@@ -162,7 +123,7 @@ export default {
         this.availableInWatchLater = false;
         this.$store.dispatch("ADD_WATCH_LATER", res.data.list);
         this.availableInWatchLater = false;
-        this.Mynotification("Removed from watch later !!", "success");
+        Notifications("Removed from watch later !!", "success");
       });
     },
     updateWatchLater() {
@@ -172,25 +133,14 @@ export default {
         this.addToWatchLater();
       }
     },
-    updateWishList() {
-      if (this.availableInWishList) {
-        this.removeFromWishList();
-      } else {
-        this.addToWishList();
-      }
-    },
+    
   },
 
   computed: {
-    classList() {
+     classList() {
       return this.availableInWatchLater
         ? "bi-bookmark-check text-danger"
         : "bi-bookmark text-light";
-    },
-    heartIconClass() {
-      return this.availableInWishList
-        ? "bi-heart-fill text-danger"
-        : "bi-heart text-light";
     },
   },
 
@@ -204,12 +154,7 @@ export default {
     // console.log(isAvailable, this.$refs["watchLater"]["classList"].value);
     this.availableInWatchLater = isAvailableInWatchLater;
 
-    let isAvailableInWishList = this.$store.getters.availableInWishList(
-      parseInt(this.id),
-      "Movies"
-    );  
-
-    this.availableInWishList = isAvailableInWishList;
+    
   },
   mounted() {
     var banner = document.getElementById("banner");
