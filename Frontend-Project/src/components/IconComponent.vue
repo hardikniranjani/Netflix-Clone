@@ -1,23 +1,5 @@
 <template>
-  <div class="categories_card_bottom">
-<<<<<<< HEAD
-    <i class="bi bi-heart-fill Home_Movie_categories_card_bottom_icon"> </i>
-    <router-link
-      class="Home_Movie_categories_card_bottom_icon"
-      :to="{
-        name: 'MovieVideo',
-        params: { id: this.id },
-      }"
-    >
-      <i
-        class="bi bi-play-circle-fill Home_Movie_categories_card_bottom_icon"
-      ></i>
-    </router-link>
-
-    <i
-      v-if="media_type == 'Movies'"
-      class="bi bi-plus-circle Home_Movie_categories_card_bottom_icon"
-=======
+  <div v-if="this.$store.state.user.Name" class="categories_card_bottom">
     <i class="bi Home_Movie_categories_card_bottom_icon" :class="heartIconClass" @click="updateWishList"> </i>
 
     <i
@@ -29,7 +11,6 @@
       class="bi  Home_Movie_categories_card_bottom_icon"
       :class="classList"
       @click="updateWatchLater"
->>>>>>> bbb79adf704474a59589b3ae7a3a557e4a249c7b
     ></i>
   </div>
 </template>
@@ -43,11 +24,7 @@ export default {
   mixins : [wishListMixin,watchLaterMixin],
   props: {
     media_type: String,
-<<<<<<< HEAD
-    id: String,
-=======
     id : Number
->>>>>>> bbb79adf704474a59589b3ae7a3a557e4a249c7b
   },
 };
 </script>
@@ -74,7 +51,7 @@ export default {
   transition: all 0.35s;
 }
 .Home_Movie_categories_card_bottom_icon:hover {
-  color: #d81f26;
+  color: #d81f26 !important;
 }
 
 .categories_card_main_movie:hover .categories_card_bottom {

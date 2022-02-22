@@ -5,11 +5,7 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Home_Movie_categories_card" :src="i.backdrop_path" />
         </router-link>
-<<<<<<< HEAD
-        <IconComponent :media_type="this.media_type" :id="i._id" />
-=======
         <IconComponent :media_type="this.media_type" :id="i._id"/>
->>>>>>> bbb79adf704474a59589b3ae7a3a557e4a249c7b
       </div>
     </slide>
     <template #addons>
@@ -155,7 +151,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .carousel__item {
   max-height: 200px;
   width: 100%;
@@ -175,18 +171,19 @@ export default {
   background-color: #1f1f1f6b;
   border-radius: 0px;
   width: 5%;
-  height: 90% !important;
   border: none;
 }
 .carousel__prev {
   opacity: 0;
+  height: 90% !important;
   margin-top: -5px !important;
-  margin-left: 35px;
+  margin-left: 30px;
 }
 .carousel__next {
   opacity: 0;
+  height: 90% !important;
   margin-top: -5px !important;
-  margin-right: 30px;
+  margin-right: 25px;
 }
 .carousel__next:hover,
 .carousel__prev:hover {

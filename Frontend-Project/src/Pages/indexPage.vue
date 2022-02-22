@@ -260,13 +260,13 @@ export default {
 
 <style scoped>
 .index_expolre{
-  color:#E50914;
+  color:white;
   font-size:1.3rem;
   transition: 0.3s;
 }
 .index_expolre:hover{
+  
   color:#E50914;
-  font-size: 1.4rem;
   cursor: pointer;
   font-weight: 600px;
 }

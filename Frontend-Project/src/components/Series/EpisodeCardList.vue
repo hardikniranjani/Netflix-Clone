@@ -69,17 +69,17 @@ export default {
         },
         // 500px and up
         500: {
-          itemsToShow: 7,
+          itemsToShow: 5,
           snapAlign: "start",
         },
         // 600px and up
         600: {
-          itemsToShow: 2.7,
+          itemsToShow: 5.2,
           snapAlign: "start",
         },
         // 700px and up
         700: {
-          itemsToShow: 3.2,
+          itemsToShow: 5,
           snapAlign: "start",
         },
         // 768px and up
@@ -89,12 +89,12 @@ export default {
         },
         // 800px and up
         800: {
-          itemsToShow: 3.4,
+          itemsToShow: 4.7,
           snapAlign: "start",
         },
         // 900px and up
         900: {
-          itemsToShow: 3.9,
+          itemsToShow: 4.9,
           snapAlign: "start",
         },
         // 1024 and up

@@ -6,7 +6,7 @@
           <div id="banner__contents_details">
             <h1 id="banner__title">{{ Name }}</h1>
             <div id="banner__buttons">
-              <button id="banner__button" v-on:click="updateWishList">
+              <button v-if="this.$store.state.user.Name" id="banner__button" v-on:click="updateWishList">
                 <i class="bi" :class="heartIconClass"></i>
               </button>
             </div>
@@ -114,7 +114,7 @@ export default {
 @media screen and (max-width: 788px) {
   .mobile_view {
     display: block;
-    margin-top: -120px;
+    margin-top: -135px;
   }
   .mobile_view h4 {
     margin-left: 20px;
@@ -148,8 +148,9 @@ export default {
     background-size: cover;
   }
   #banner__title {
+    margin-top:30px;
     font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.5rem !important;
     font-weight: 800;
     padding-bottom: 0.3rem;
   }

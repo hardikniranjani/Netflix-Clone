@@ -5,7 +5,7 @@
       <h2 class="d-flex justify-content-center movie_title">Movies</h2>
     </div>
     <div v-if="Adventure_Movies.length > 0">
-      <h3 class="Home_List_Title">Adventure Movie</h3>
+       <Explore name="Adventure Movie"/>
       <MovieCardList class="Home_List_Title" :data="Adventure_Movies" />
     </div>
 
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import Explore from "../../components/Explore.vue"
 import NavBar from "../../components/NavBar.vue";
 import Footer from "../../components/Footer.vue";
 import MovieApi from "../../services/movie.service";
@@ -87,6 +88,7 @@ export default {
     NavBar,
     Footer,
     MovieCardList,
+    Explore
   },
   async mounted() {
     let Allmovies_res = await MovieApi.getAllMovie();
