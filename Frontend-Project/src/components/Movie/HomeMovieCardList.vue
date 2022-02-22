@@ -1,10 +1,11 @@
 <template>
-  <carousel :settings="settings" :breakpoints="breakpoints" >
+  <carousel :settings="settings" :breakpoints="breakpoints">
     <slide class="categories_card_main_movie" v-for="i in data" :key="i">
       <div class="carousel__item">
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Home_Movie_categories_card" :src="i.backdrop_path" />
         </router-link>
+        <IconComponent :media_type="this.media_type" />
       </div>
     </slide>
     <template #addons>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import IconComponent from "../../components/IconComponent.vue"
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import UserApi from "../../services/user.service";
@@ -109,14 +111,15 @@ export default {
     Carousel,
     Slide,
     Navigation,
+     IconComponent
   },
   methods: {
     Mynotification(text, type) {
       this.$notify({
-        text : text,
-        type : type,
-        duration : 5000,
-        speed : 1000
+        text: text,
+        type: type,
+        duration: 5000,
+        speed: 1000,
       });
     },
     async addToWishList(movie_id) {
@@ -125,7 +128,7 @@ export default {
         media_id: movie_id,
       })
         .then(() => {
-          this.Mynotification("Successfully added to wish list!","success");
+          this.Mynotification("Successfully added to wish list!", "success");
         })
         .catch((err) => {
           console.log(err);
