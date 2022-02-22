@@ -52,31 +52,14 @@
         v-on:click="AdminAccount"
         v-html="user_icon"
       ></div>
-      <!-- dropdown menu -->
-      <div class="dropdown Profile_dropdown">
-        <button
-          class="dropdown_profile btn w-100 dropdown-toggle"
-          type="button"
-          style="color: rgba(221, 221, 221, 0.87)"
-          data-bs-toggle="dropdown"
-        ></button>
-        <div
-          class="dropdown-menu align-center"
-          style="background-color: #00000054"
-        >
-          <p class="text-white text-center">
-            Hello! {{ this.$store.state.user.Name }}
-          </p>
-          <button
-            type="button"
-            class="logout_btn btn btn-danger"
+           <button
+                   type="button"
+            class="logout_btn btn btn-danger mt-2"
             style="background-color: #d81f26"
             v-on:click="logout()"
           >
             Logout
           </button>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -111,7 +94,7 @@ export default {
   },
   methods: {
     home() {
-      this.$router.push({ name: "AdminHomePage" });
+      this.$router.push({ name: "AdminMoviePage" });
     },
     AdminAccount() {
       this.$router.push({ name: "AdminAccount" });
@@ -135,7 +118,7 @@ export default {
 
 <style scoped>
 .logout_btn {
-  margin-left: 35px;
+  margin-left: 15px;
 }
 
 .admin_navbar{
@@ -156,6 +139,7 @@ export default {
 }
 .Profile_dropdown {
   margin-top: 7px;
+  margin-right:20px;
 }
 
 .router-link-exact-active {
