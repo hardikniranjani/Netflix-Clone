@@ -6,7 +6,9 @@
         <div id="banner__contents">
           <div id="Home_banner__contents_details">
             <h1 id="banner__title">{{ Banner_Movie.MovieName }}</h1>
-            <div id="banner__buttons"></div>
+            <div id="banner__buttons">
+               <!-- <button v-if="this.$store.state.user.Name" id="banner__button" :onclick ="movie_play(Banner_Movie)"><i class="bi bi-play-fill me-1">Play</i></button> -->
+            </div>
             <div v-if="showAlert">
               <Alert />
             </div>
@@ -98,6 +100,12 @@ export default {
     id: String,
   },
 
+  // conputed: {
+  //   movie_play(data){
+  //      this.$router.push({ name: "MovieVideo",params: { id: data._id } });
+  //      console.log(data)
+  //   },
+  // },
   methods: {
     async addToWatchLater() {
       await UserApi.addToWatchLater({
