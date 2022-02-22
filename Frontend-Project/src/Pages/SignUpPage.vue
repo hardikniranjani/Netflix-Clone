@@ -44,7 +44,25 @@
               :modelValue="Password"
               @change="handleChangePassword"
             />
-            <span>{{ errors.Password }}</span>
+            <span v-if="errors.Password">
+              <ul>
+                <li :class="lengthOfPassword(Password)">
+                  Minimum 8 and Maximum 10 characters are required.
+                </li>
+                <li :class="upperCaseOfPassword(Password)">
+                  Atleast One Upper Case character is required.
+                </li>
+                <li :class="lowerCaseOfPassoword(Password)">
+                  Atleast One Lower Case character is required.
+                </li>
+                <li :class="digitOfPassword(Password)">
+                  Atleast One Number is required.
+                </li>
+                <li :class="specialCharOfPassword(Password)">
+                  Atleast One Special Character is required.
+                </li>
+              </ul></span
+            >
             <button class="btn btn-danger my-3">Sign up</button>
           </div>
         </fieldset>
@@ -57,9 +75,10 @@
 import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
 import userService from "../services/user.service";
-
+import passwordMixin from "../mixin/passwordMixin";
 export default {
   name: "SignUpPage",
+  mixins: [passwordMixin],
   props: {
     token: String,
   },
@@ -68,9 +87,14 @@ export default {
   },
   data() {
     const validationSchema = object({
-      Name: string().required().min(2).matches(/^[A-z]+$/,"Must have characters only"),
+      Name: string()
+        .required()
+        .min(2)
+        .matches(
+         /^[A-z]+$/,"Must hava characters only."
+        ),
       Email: string().required().email(),
-      Password: string().required(),
+      Password: string().required().matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+_!@#$%^&*., ?])[A-Za-z\d-+_!@#$%^&*., ?]{8,10}$/),
     });
     const { handleSubmit, setFieldValue, errors } = useForm({
       validationSchema,

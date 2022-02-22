@@ -85,8 +85,10 @@ import { string, object } from "yup";
 import { useField, useForm } from "vee-validate";
 import UserApi from "../services/user.service";
 import AlertMessage from "../components/AlertMessage.vue";
+import passwordMixin from "../mixin/passwordMixin";
 export default {
   name: "SetPassword",
+  mixins : [passwordMixin],
   components: {
     AlertMessage,
   },
@@ -145,43 +147,6 @@ export default {
       icon: "",
       loading : false
     };
-  },
-  computed: {
-    lengthOfPassword() {
-      return (password) => {
-        return password["length"] > 10 || password["length"] < 8
-        ? "text-danger"
-        : "text-success";
-      }
-    },
-    upperCaseOfPassword() {
-      let upperCasePattern = /(?=.*[A-Z])/;
-      return (password)=>{
-        return  upperCasePattern.test(password)
-        ? "text-success"
-        : "text-danger";
-      }
-    },
-    lowerCaseOfPassoword() {
-      let lowerCasePattern = /(?=.*[a-z])/;
-      return (password)=>{
-        return lowerCasePattern.test(password)
-        ? "text-success"
-        : "text-danger";
-      }
-    },
-    digitOfPassword() {
-      let digitPattern = /(?=.*\d)/;
-      return (password)=>{
-        return digitPattern.test(password) ? "text-success" : "text-danger";
-      }
-    },
-    specialCharOfPassword() {
-      let specialCharPattern = /(?=.*[-+_!@#$%^&*., ?])/;
-      return (password)=>{
-        return specialCharPattern.test(password) ? "text-success" : "text-danger";
-      }
-    },
   },
   methods: {
     login() {
