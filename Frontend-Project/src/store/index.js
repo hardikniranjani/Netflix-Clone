@@ -8,7 +8,6 @@ export default createStore({
     token: "",
     user: {},
     avatar: "",
-    search_str: "",
     // movies:{},
     // series:{},
   },
@@ -25,25 +24,18 @@ export default createStore({
     REMOVE_TOKEN(state) {
       state.token = "";
       state.user = {};
+      state.avatar = "";
     },
     AVATAR(state, avatarData) {
       state.avatar = avatarData;
     },
-    SEARCH_STRING(state, str) {
-      state.search_str = str;
-    },
+    
     ADD_WATCH_LATER(state, list) {
       state.user.watchLater = list;
     },
     ADD_WISH_LIST(state,list){
       state.user.wishlist = list;
     }
-    // MOVIES(state, movieData) {
-    //   state.movies = { ...movieData };
-    // },
-    // SERIES(state, seriesData) {
-    //   state.series = { ...seriesData };
-    // }
   },
   actions: {
     ADD_TOKEN({ commit }, token) {
@@ -61,9 +53,7 @@ export default createStore({
     ADD_HISTORY({ commit }, history) {
       commit("ADD_HISTORY", history);
     },
-    SEARCH_STRING({ commit }, str) {
-      commit("SEARCH_STRING", str);
-    },
+   
     ADD_WATCH_LATER({ commit }, list) {
       commit("ADD_WATCH_LATER", list);
     },
