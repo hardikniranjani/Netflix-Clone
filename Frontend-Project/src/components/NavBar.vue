@@ -155,8 +155,9 @@ export default {
   mounted() {
     this.logInOut_btn();
     window.addEventListener("scroll", function () {
-      var nav = document.querySelector(".user_navbar");
-      nav.classList.toggle("nav_active", window.scrollY > 0);
+      this.document
+        .querySelector(".user_navbar")
+        .classList.toggle("nav_active", this.window.scrollY > 0);
     });
   },
   updated() {
@@ -172,9 +173,6 @@ export default {
     },
     login() {
       this.$router.push({ name: "LogInPage" });
-    },
-    IndexPage(){
-      this.$router.replace({ name: "IndexPage" });
     },
     userAccount() {
       this.$router.push({ name: "UserAccount" });

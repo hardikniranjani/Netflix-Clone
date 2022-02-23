@@ -38,6 +38,7 @@ import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import UserApi from "../../services/user.service";
 import { CloseIcon } from "@iconicicons/vue";
+import Notification from "../../mixin/notificationMixin";
 export default {
   name: "UserEpisodeCardList",
   data() {
@@ -138,11 +139,16 @@ export default {
         media_id: data1,
         media_type: this.type,
       })
-        .then(() => {
-          location.reload();
+        .then((res) => {
+          // location.reload();
+          this.$store.dispatch("ADD_WATCH_LATER",res.data.list);
+          Notification("Removed From Watch Later.","Success");
+          this.$emit("updateWatchLater");
         })
         .catch((err) => {
           console.log(err.message);
+          Notification("Error while removing from watch later.","danger");
+          this.$emit("updateWatchLater"); 
         });
     },
 

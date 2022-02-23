@@ -69,6 +69,7 @@ export default {
     },
     getUserWishList() {
       UserApi.getWishList().then((res) => {
+        console.log(res.data);
         let userMovies = res.data.movies.map((obj) => {
           return obj._id;
         });
