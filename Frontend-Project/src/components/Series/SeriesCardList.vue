@@ -37,22 +37,22 @@ export default {
         },
         // 375px and up
         375: {
-          itemsToShow: 1.6,
+          itemsToShow: 1.9,
           snapAlign: "start",
         },
         // 390px and up
         390: {
-          itemsToShow: 1.7,
+          itemsToShow: 1.9,
           snapAlign: "start",
         },
         // 400px and up
         400: {
-          itemsToShow: 1.8,
+          itemsToShow: 2,
           snapAlign: "start",
         },
         // 500px and up
         500: {
-          itemsToShow: 2.3,
+          itemsToShow: 2.9,
           snapAlign: "start",
         },
         // 600px and up
@@ -67,7 +67,7 @@ export default {
         },
         // 768px and up
         768: {
-          itemsToShow: 3.4,
+          itemsToShow: 3.9,
           snapAlign: "start",
         },
         // 800px and up
@@ -85,6 +85,11 @@ export default {
           itemsToShow: 5.3,
           snapAlign: "start",
         },
+        // 1200 and up
+        1200: {
+          itemsToShow: 6,
+          snapAlign: "start",
+        },
         // 1366 and up
         1366: {
           itemsToShow: 7,
@@ -92,7 +97,7 @@ export default {
         },
         // 1440 and up
         1440: {
-          itemsToShow: 6.3,
+          itemsToShow: 7.2,
           snapAlign: "start",
         },
         // 2560 and up
