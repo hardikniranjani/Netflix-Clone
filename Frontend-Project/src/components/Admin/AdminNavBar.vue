@@ -90,7 +90,6 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
-    this.navActive();
   },
   methods: {
     home() {

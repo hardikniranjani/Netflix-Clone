@@ -9,6 +9,7 @@
         <!-- movie name -->
         <input
           class="form-control mb-2 p-2"
+          style="border:none; color:lightgray"
           type="text"
           placeholder="Enter Movie Name"
           name="MovieName"
@@ -138,6 +139,7 @@
 </template>
 
 <script>
+import Notifications from "../../../mixin/notificationMixin"
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import LanguageAPI from "../../../services/spoken_language.service";
 import GenresAPI from "../../../services/genre.service";
@@ -147,6 +149,7 @@ import { useField, useForm } from "vee-validate";
 import MovieApi from "../../../services/movie.service";
 export default {
   name: "AdminAddMovie",
+  mixins:[Notifications],
   components: {
     AdminNavBar,
   },
@@ -248,6 +251,7 @@ export default {
     async createMovie(movie_data) {
       await MovieApi.createAnMovie(movie_data).then((res) => {
         console.log(res);
+        Notifications("Successfully created movie", "success")
       });
     },
   },

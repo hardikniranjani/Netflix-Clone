@@ -1,13 +1,13 @@
 <template>
   <div class="categories">
     <div class="categories_card_main" v-for="i in Movies" :key="i">
-               <router-link
-            class="Home_Movie_categories_card_bottom_icon"
-            :to="{
-              name: 'MovieVideo',
-              params: { id: i._id },
-            }"
-          >
+      <router-link
+        class="Home_Movie_categories_card_bottom_icon"
+        :to="{
+          name: 'MovieVideo',
+          params: { id: i._id },
+        }"
+      >
         <img
           class="Movie_WatchHistory_categories_card"
           :src="i.backdrop_path"
@@ -15,7 +15,7 @@
       </router-link>
       <div class="categories_card_bottom">
         <div class="categories_card_bottom_icon">
-            <CloseIcon v-on:click="removeHistory(i._id)" />
+          <CloseIcon v-on:click="removeHistory(i._id)" />
         </div>
       </div>
     </div>
@@ -40,7 +40,6 @@ export default {
   props: {
     data: Array,
   },
-  created() {},
   mounted() {
     this.addMovieData();
   },
@@ -60,8 +59,6 @@ export default {
           });
       });
     },
-
-
 
     async removeHistory(data) {
       await UserApi.removeFromHistory({

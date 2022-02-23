@@ -152,7 +152,7 @@
       </div>
     </div>
 
-    <div class="footer"><Footer /></div>
+    <div class="User_footer"><Footer /></div>
   </div>
 </template>
 
@@ -364,8 +364,8 @@ export default {
 .index__body_mid {
   margin-top: 150px;
 }
-.footer {
-  margin-top: 470px;
+.User_footer {
+  margin-top: 70px;
 }
 
 @media screen and (max-width: 788px) {
@@ -412,6 +412,103 @@ export default {
   }
   .subscritption_body_details_plan {
     flex: 0.19;
+  }
+}
+</style>
+
+<style>
+.card-2{
+    position: relative;
+    display: inline-grid;
+    grid-template-columns: 50% 40%;
+    text-align: left;
+    align-items: center;
+    padding: 25px 45px 50px;
+}
+
+.footer_main{
+    max-width: 70%;
+    margin: 1rem auto;
+    overflow: auto;
+}
+
+.footer_main ,
+.footer_main a{
+    color: #999999;
+    font-size: 0.9rem;
+}
+
+.footer_main p{
+    margin-bottom: 1.5rem;
+}
+
+.footer_main .footer-cols{
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    grid-gap: 2rem;
+}
+
+.footer_main li{
+    line-height: 2.4;
+}
+.footer-cols > ul > li> a{
+  text-decoration: none;
+}
+.footer-cols > ul > li> a:hover{
+  text-decoration: underline;
+
+}
+
+@media screen and (max-width: 788px) {
+  /* .footer_main{
+    max-width: 100%;
+    margin: 0rem auto;
+  } */
+  .footer_main {
+    max-width: 100%;
+  
+    margin: 0rem 2rem;
+    overflow: auto;
+  }
+  .footer_main,
+  .footer_main a {
+    color: #999999;
+    font-size: 0.7rem;
+  }
+
+  .footer_main p {
+    margin-bottom: 1.5rem;
+  }
+
+  .footer_main .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+  }
+
+  .footer_main li {
+    line-height: 1.4;
+  }
+}
+@media screen and (min-width: 766px) {
+.footer_main .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+  }
+}
+@media screen and (min-device-width: 988px)  {
+  .footer_main .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .footer_main .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
   }
 }
 </style>

@@ -127,31 +127,8 @@
                                 margin-top: 20px;
                                 color: lightgray;
                               "
-                            >
-                              <!-- Forgot password ?
-                              <router-link
-                                style="text-decoration: none; font-size: 0.9rem"
-                                :to="{ name: 'ForgotPassword' }"
-                                >Click Here
-                              </router-link> -->
-                            </p>
+                            ></p>
                           </div>
-
-                          <!-- <p
-                            style="
-                              text-align: center;
-                              z-index: 2;
-                              margin-left: 40px;
-                              color: lightgray;
-                            "
-                          >
-                            New here ? Click here to
-                            <router-link
-                              style="text-decoration: none"
-                              :to="{ name: 'IndexPage' }"
-                              >Create your account
-                            </router-link>
-                          </p> -->
                         </div>
                       </div>
                     </fieldset>
@@ -284,9 +261,7 @@ export default {
       userService
         .getAnUser({ email: data.Email, password: data.Password })
         .then((res) => {
-          // let flag = this.compareDates(res.data.Plan_Expiry_Date_Time);
-          let flag = true;
-          if (flag) {
+          
             this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
             this.$store.dispatch("ADD_USER", res.data);
             location.reload();
@@ -295,22 +270,12 @@ export default {
             } else {
               this.$router.replace({ name: "AdminMoviePage" });
             }
-          } else {
-            this.$router.replace({ name: "SubscriptionPlan" });
-          }
+          
         })
         .catch((err) => {
           console.log(err);
           this.$router.replace({ name: "LogInPage" });
         });
-    },
-    forgotPasword() {
-      this.$router.replace({ name: "ForgotPassword" });
-      location.reload();
-    },
-    signup() {
-      this.$router.replace({ name: "IndexPage" });
-      location.reload();
     },
   },
 
@@ -382,13 +347,16 @@ export default {
 @media screen and (max-width: 788px) {
   .mobile_view {
     display: block;
-    margin-top: -12px;
+    margin-top: -22px;
   }
   #banner__description {
     display: none;
   }
   #leptop_view_title {
     display: none;
+  }
+  #banner__button{
+    margin-top:50px !important;
   }
   #banner__contents {
     height: 25%;
@@ -410,6 +378,8 @@ export default {
     background-size: cover;
   }
   #banner__title {
+    margin-top:50px;
+    margin-bottom:20px;
     font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.3rem;
     font-weight: 800;

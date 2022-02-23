@@ -52,7 +52,6 @@ export default {
   
   mixins : [wishListMixin,watchLaterMixin],
   props: {
-    data:{},
     media_type: {
       type : String,
       required : true
@@ -62,13 +61,9 @@ export default {
       required : true
     },
     data : {
-      type : Object,
-      
+      type : Object,  
     }
   },
-  // mounted (){
-  //   console.log(this.data)
-  // }
 };
 </script>
 

@@ -77,9 +77,11 @@ import { useField, useForm } from "vee-validate";
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import Footer from "../../..//components/Footer.vue";
 import CountryApi from "../../../services/country.service";
+import Notifications from "../../../mixin/notificationMixin";
 
 export default {
   name: "AdminEditCountry",
+  mixins:[Notifications],
   components: {
     AdminNavBar,
     Footer,
@@ -151,6 +153,7 @@ export default {
         country_data: data1,
       })
         .then(() => {
+          Notifications("Successfully Update Country data", "success")
         })
         .catch((err) => {
           console.log(err);

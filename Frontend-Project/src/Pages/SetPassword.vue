@@ -167,7 +167,7 @@ export default {
           this.showAlert = true;
           setTimeout(() => {
             this.$router.replace({ name: "LogInPage" })
-          }, 8*1000);
+          }, 4*1000);
         })
         .catch((err) => {
           this.msg = err.response.data.msg;

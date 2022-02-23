@@ -41,9 +41,6 @@ export default {
     MovieBanner,
   },
   async mounted() {
-    // let Allmovies_res = await MovieApi.getAllMovie();
-    //   this.AllMovies = Allmovies_res.data;
-
     await MovieApi.findMovieBySearch({
       queryperam: "_id",
       queryName: `${this.id}`,
@@ -87,4 +84,5 @@ export default {
 .Movie_footer {
   margin-top: 70px;
 }
+
 </style>

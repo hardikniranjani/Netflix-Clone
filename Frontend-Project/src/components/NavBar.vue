@@ -1,10 +1,18 @@
 <template>
   <nav class="nav navbar navbar-expand-lg w-100 user_navbar" style="z-index: 4">
     <img
+      v-if="this.$store.state.user.Name"
       class="nav_logo"
       src="../assets/logo.svg"
       alt="netflix_logo"
       @click="home"
+    />
+    <img
+      v-else
+      class="nav_logo"
+      src="../assets/logo.svg"
+      alt="netflix_logo"
+      @click="IndexPage"
     />
     <button
       class="navbar-toggler"
@@ -74,7 +82,7 @@
         <form class="form-inline my-2 my-lg-0 form_input"></form>
         <div class="navbar_bottom">
           <div
-           v-if="isLoggedIn"
+            v-if="isLoggedIn"
             class="ms-3 mt-2"
             id="Profile_image1"
             @click="userAccount"
@@ -86,7 +94,7 @@
             style="background-color: #d81f26"
             @click="loginOrlogout"
           >
-            {{logButton}}
+            {{ logButton }}
           </button>
         </div>
       </span>
@@ -108,7 +116,7 @@
             style="background-color: #d81f26"
             @click="loginOrlogout"
           >
-            {{logButton}}
+            {{ logButton }}
           </button>
         </div>
       </span>
@@ -122,14 +130,14 @@ import * as style from "@dicebear/adventurer-neutral";
 
 export default {
   name: "NavBar",
-  computed :  {
-    isLoggedIn(){
+  computed: {
+    isLoggedIn() {
       let user = this.$store.state.user;
       return user._id ? true : false;
     },
-    logButton(){
+    logButton() {
       return this.isLoggedIn ? "Logout" : "Login";
-    }
+    },
   },
   data() {
     const user_icon = this.$store.state.avatar;
@@ -145,12 +153,11 @@ export default {
     this.$store.dispatch("AVATAR", svg);
   },
   mounted() {
-    // this.navActive();
     this.logInOut_btn();
     window.addEventListener("scroll", function () {
-        var nav = document.querySelector(".user_navbar");
-        nav.classList.toggle("nav_active", window.scrollY > 0);
-      });
+      var nav = document.querySelector(".user_navbar");
+      nav.classList.toggle("nav_active", window.scrollY > 0);
+    });
   },
   updated() {
     let svg = createAvatar(style, {
@@ -158,14 +165,16 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
-    this.logInOut_btn();
   },
   methods: {
     home() {
       this.$router.push({ name: "HomePage" });
     },
-    login(){
-       this.$router.push({ name: "LogInPage" });
+    login() {
+      this.$router.push({ name: "LogInPage" });
+    },
+    IndexPage(){
+      this.$router.replace({ name: "IndexPage" });
     },
     userAccount() {
       this.$router.push({ name: "UserAccount" });
@@ -174,22 +183,20 @@ export default {
       this.$store.dispatch("REMOVE_TOKEN");
       this.$router.replace({ name: "IndexPage" });
     },
-    
-    loginOrlogout(){
-      if(this.isLoggedIn){
+
+    loginOrlogout() {
+      if (this.isLoggedIn) {
         this.logout();
-      }else {
+      } else {
         this.login();
       }
     },
-    logInOut_btn(){
-      if(!this.$store.state.user.Name){
-          
+    logInOut_btn() {
+      if (!this.$store.state.user.Name) {
         var button = document.querySelector(".logout_btn");
         button.classList.toggle("logInOut_btn");
-      
       }
-    }
+    },
   },
 };
 </script>
@@ -314,7 +321,7 @@ export default {
   .form_input {
     margin-left: 120px;
   }
-  .logInOut_btn{
+  .logInOut_btn {
     margin-left: 150px;
   }
 }
@@ -325,30 +332,29 @@ export default {
   }
 }
 @media screen and (min-width: 1439px) {
-.form_input {
-  margin-left: 520px;
-}
+  .form_input {
+    margin-left: 520px;
+  }
 }
 @media screen and (min-width: 1465px) {
-.form_input {
-  margin-left: 600px;
-}
+  .form_input {
+    margin-left: 600px;
+  }
 }
 @media screen and (min-width: 1565px) {
-.form_input {
-  margin-left: 780px;
-}
+  .form_input {
+    margin-left: 780px;
+  }
 }
 @media screen and (min-width: 1665px) {
-.form_input {
-  margin-left: 880px;
-  
-}
+  .form_input {
+    margin-left: 880px;
+  }
 }
 @media screen and (min-width: 1765px) {
-.form_input {
-  margin-left: 880px;
-}
+  .form_input {
+    margin-left: 880px;
+  }
 }
 @media screen and (min-width: 2420px) {
   .form_input {

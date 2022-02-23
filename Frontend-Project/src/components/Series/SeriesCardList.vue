@@ -117,9 +117,6 @@ export default {
     Navigation,
     IconComponent
   },
-  mounted() {
-    console.log(this.data);
-  },
   methods: {
     async addToWishList(series_id) {
       await UserApi.addToWishList({

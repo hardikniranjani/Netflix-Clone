@@ -220,7 +220,6 @@ export default {
           }, 5 * 1000);
         });
       this.error = "";
-      // this.$router.replace({ name: "SignUpPage" });
     });
     return {
       Email,
@@ -260,7 +259,8 @@ export default {
 
 <style scoped>
 .index_expolre{
-  color:white;
+  color: #fafafa;
+  font-weight:bold;
   font-size:1.3rem;
   transition: 0.3s;
 }
@@ -281,7 +281,6 @@ export default {
 }
 .index_expolre:hover{
   color:#E50914;
-  font-size: 1rem;
   cursor: pointer;
   font-weight: 600px;
 }

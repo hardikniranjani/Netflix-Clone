@@ -143,8 +143,10 @@ export default {
         media_id: data1,
         media_type: this.type,
       })
-        .then(() => {
-          location.reload();
+        .then((res) => {
+          console.log(res.data);
+          this.$store.dispatch("ADD_WATCH_LATER", res.data.list)
+          // location.reload();
         })
         .catch((err) => {
           console.log(err.message);

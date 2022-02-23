@@ -74,9 +74,11 @@
 
 <script>
 // import AdminApi from "../../services/admin.service";
+
 import CountryApi from "../../../services/country.service";
 export default {
   name: "AdminCountryPage",
+  
   data() {
     return {
       Countries: [],
@@ -87,6 +89,7 @@ export default {
 
     CountryApi.getAllCountry().then((res) => {
       this.Countries = res.data;
+      
     });
   },
 };

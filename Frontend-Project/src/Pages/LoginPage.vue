@@ -159,10 +159,10 @@ export default {
           if (flag) {
             this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
             this.$store.dispatch("ADD_USER", res.data);
-            if (res.data.Role == "user") {
-              this.$router.replace({ name: "HomePage" });
-            } else {
+            if (res.data.Role == "admin") {
               this.$router.replace({ name: "AdminMoviePage" });
+            } else { 
+              this.$router.replace({ name: "HomePage" });
             }
           } else {
             this.$router.replace({ name: "SubscriptionPlan" });

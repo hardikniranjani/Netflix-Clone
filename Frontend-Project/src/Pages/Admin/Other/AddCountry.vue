@@ -12,40 +12,46 @@
             >
 
             <input
-              class="form_input form-control m-3 p-2"
+              id="Number_input"
+              class="form_input form-control ms-3 mt-2 p-2"
               type="number"
-              placeholder="Code"
-              :error="errors.GenreName"
-              :modelValue="GenreName"
-              @change="handleChangeGenre"
+              placeholder="CountryCode"
+              :error="errors.CountryCode"
+              v-model="CountryCode"
+              @change="handleChange"
+              name="CountryCode"
             />
-            <span v-if="errors.GenreName" class="ms-3 form_error_massage">{{
-              errors.GenreName
+            <span v-if="errors.CountryCode" class="ms-3 form_error_massage">{{
+              errors.CountryCode
             }}</span>
 
             <input
               class="form_input form-control m-3 p-2"
               type="text"
               placeholder="Name"
-              :error="errors.GenreName"
-              :modelValue="GenreName"
-              @change="handleChangeGenre"
+              name="CountryName"
+              :error="errors.CountryName"
+              v-model="CountryName"
+              @change="handleChange"
             />
-            <span v-if="errors.GenreName" class="ms-3 form_error_massage">{{
-              errors.GenreName
+            <span v-if="errors.CountryName" class="ms-3 form_error_massage">{{
+              errors.CountryName
             }}</span>
 
             <input
               class="form_input form-control m-3 p-2"
               type="text"
               placeholder="ShortForm"
-              :error="errors.GenreName"
-              :modelValue="GenreName"
-              @change="handleChangeGenre"
+              name="CountryShortForm"
+              :error="errors.CountryShortForm"
+              v-model="CountryShortForm"
+              @change="handleChange"
             />
-            <span v-if="errors.GenreName" class="ms-3 form_error_massage">{{
-              errors.GenreName
-            }}</span>
+            <span
+              v-if="errors.CountryShortForm"
+              class="ms-3 form_error_massage"
+              >{{ errors.CountryShortForm }}</span
+            >
 
             <button class="form_input_button btn btn-danger m-3 p-2 w-100">
               Add
@@ -64,8 +70,10 @@ import { useField, useForm } from "vee-validate";
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import Footer from "../../..//components/Footer.vue";
 import CountryApi from "../../../services/country.service";
+import Notifications from "../../../mixin/notificationMixin";
 export default {
   name: "AdminAddCountry",
+  mixins: [Notifications],
   components: {
     AdminNavBar,
     Footer,
@@ -75,7 +83,9 @@ export default {
   },
   data() {
     const validationSchema = object({
-      GenreName: string().required(),
+      CountryCode: string(),
+      CountryName: string(),
+      CountryShortForm: string(),
     });
 
     const { handleSubmit, setFieldValue, errors } = useForm({
@@ -83,11 +93,13 @@ export default {
       initialValues: {},
     });
 
-    const handleChangeGenre = (event) => {
-      setFieldValue("GenreName", event.target.value);
+    const handleChange = (event) => {
+      setFieldValue(event.target.name, event.target.value);
     };
 
-    const { value: GenreName } = useField("GenreName");
+    const { value: CountryCode } = useField("CountryCode");
+    const { value: CountryName } = useField("CountryName");
+    const { value: CountryShortForm } = useField("CountryShortForm");
 
     const submit = handleSubmit((value) => {
       this.error = "";
@@ -95,9 +107,11 @@ export default {
     });
 
     return {
-      GenreName,
+      CountryCode,
+      CountryName,
+      CountryShortForm,
       submit,
-      handleChangeGenre,
+      handleChange,
       errors,
       error: "",
     };
@@ -105,8 +119,9 @@ export default {
 
   methods: {
     async AddCountry(data1) {
-      await CountryApi.createCountry({ data1 })
+      await CountryApi.createCountry({ country_data: data1 })
         .then(() => {
+          Notifications("Successfully Add Country ", "success");
         })
         .catch((err) => {
           console.log(err);

@@ -38,11 +38,6 @@ export default {
   props: {
     id: String,
   },
-  methods: {
-    getInstance(art) {
-      console.log(art);
-    },
-  },
   async updated() {
    
     this.$refs.myvideo["currentTime"] = parseInt(this.$store.getters.mediaDuration(
