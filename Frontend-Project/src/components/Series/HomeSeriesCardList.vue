@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'SeriesPage', params: { id: i._id } }">
           <img class="Home_Series_categories_card" :src="i.backdrop_path" />
         </router-link>
-        <IconComponent :media_type="media_type" :id="i._id"/>
+        <IconComponent :media_type="media_type" :id="i._id" :data="i"/>
       </div>
     </slide>
     <template #addons>

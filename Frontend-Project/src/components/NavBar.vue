@@ -145,8 +145,12 @@ export default {
     this.$store.dispatch("AVATAR", svg);
   },
   mounted() {
-    this.navActive();
+    // this.navActive();
     this.logInOut_btn();
+    window.addEventListener("scroll", function () {
+        var nav = document.querySelector(".user_navbar");
+        nav.classList.toggle("nav_active", window.scrollY > 0);
+      });
   },
   updated() {
     let svg = createAvatar(style, {
@@ -154,7 +158,6 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
-    this.navActive();
     this.logInOut_btn();
   },
   methods: {
@@ -171,12 +174,7 @@ export default {
       this.$store.dispatch("REMOVE_TOKEN");
       this.$router.replace({ name: "IndexPage" });
     },
-    navActive() {
-      window.addEventListener("scroll", function () {
-        var nav = document.querySelector(".user_navbar");
-        nav.classList.toggle("nav_active", window.scrollY > 0);
-      });
-    },
+    
     loginOrlogout(){
       if(this.isLoggedIn){
         this.logout();

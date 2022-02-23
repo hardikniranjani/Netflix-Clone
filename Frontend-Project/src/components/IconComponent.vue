@@ -60,8 +60,14 @@ export default {
       type : Number,
       required : true
     },
+    data : {
+      type : Object,
+      
+    }
   },
-  
+  // mounted (){
+  //   console.log(this.data)
+  // }
 };
 </script>
 
