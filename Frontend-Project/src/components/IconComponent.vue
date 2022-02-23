@@ -49,22 +49,20 @@ import wishListMixin from "../mixin/wishListMixin";
 import watchLaterMixin from "../mixin/watchLaterMixin";
 export default {
   name: "IconComponent",
-  
-  mixins : [wishListMixin,watchLaterMixin],
+
+  mixins: [wishListMixin, watchLaterMixin],
   props: {
-    data:{},
     media_type: {
-      type : String,
-      required : true
+      type: String,
+      required: true,
     },
-    id : {
-      type : Number,
-      required : true
+    id: {
+      type: Number,
+      required: true,
     },
-    data : {
-      type : Object,
-      
-    }
+    data: {
+      type: Object,
+    },
   },
   // mounted (){
   //   console.log(this.data)

@@ -16,12 +16,11 @@
       <div v-if="Movies.length > 0 || Episodes.length > 0">
         <span v-if="Movies.length > 0">
           <h4 class="mt-5">Movies</h4>
-          <MovieWatchLater :data="Movies" />
+          <MovieWatchLater :data="Movies" @updateWatchLater="updateWatchLaterList"/>
         </span>
         <span v-if="Episodes.length > 0">
           <h4>Episodes</h4>
-          <UserEpisodeCardList :data="Episodes" />
-        
+          <UserEpisodeCardList :data="Episodes" @updateWatchLater="updateWatchLaterList"/>
         </span>
       </div>
       <div v-else>
@@ -55,13 +54,19 @@ export default {
   },
   mounted() {
     document.title = `Netflix - WatchLater`;
-
-    UserApi.showWatchLater().then((res) => {
+    console.log(this.$store.state.user.watchLater)
+    this.getWatchLater();
+  },
+  methods: {
+    updateWatchLaterList(){
+      this.getWatchLater();
+    },
+    getWatchLater(){
+      UserApi.showWatchLater().then((res) => {
       this.Episodes = res.data.episodes;
       this.Movies = res.data.movies;
     });
-  },
-  methods: {
+    },
     clearwatchLater() {
       var result = confirm("Are you sure you want to delete Watch later?");
       if (result) {

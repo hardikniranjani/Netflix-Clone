@@ -82,7 +82,10 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
-    this.navActive();
+    window.addEventListener("scroll", function () {
+        var nav = document.querySelector(".admin_navbar");
+        nav.classList.toggle("nav_active", window.scrollY > 0);
+      });
   },
   updated() {
     let svg = createAvatar(style, {
@@ -90,7 +93,6 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
-    this.navActive();
   },
   methods: {
     home() {
@@ -102,12 +104,6 @@ export default {
     logout() {
       this.$store.dispatch("REMOVE_TOKEN");
       this.$router.replace({ name: "LogInPage" });
-    },
-    navActive() {
-      window.addEventListener("scroll", function () {
-        var nav = document.querySelector(".admin_navbar");
-        nav.classList.toggle("nav_active", window.scrollY > 0);
-      });
     },
   },
 };

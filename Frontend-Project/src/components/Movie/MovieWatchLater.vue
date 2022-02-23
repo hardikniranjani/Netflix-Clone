@@ -22,7 +22,6 @@
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import UserApi from "../../services/user.service";
-import MovieApi from "../../services/movie.service";
 import { CloseIcon } from "@iconicicons/vue";
 export default {
   name: "MovieWatchLater",
@@ -117,34 +116,19 @@ export default {
   props: {
     data: Array,
   },
-  created() {},
-  mounted() {
-    this.addMovieData();
-  },
-  watch: {
-    data() {
-      this.addMovieData();
-    },
-  },
+  
   methods: {
-    async addMovieData() {
-      this.Movies = [];
-      this.data.forEach((obj) => {
-        MovieApi.getMovie(obj)
-          .then((res) => res.data)
-          .then((res) => {
-            this.Movies.push(res);
-          });
-      });
-    },
+    
 
     async removeWatchLater(data1) {
       await UserApi.removeFromWatchLater({
         media_id: data1,
         media_type: this.type,
       })
-        .then(() => {
-          location.reload();
+        .then((res) => {
+          this.$store.dispatch("ADD_WATCH_LATER",res.data.list);
+          // location.reload();
+          this.$emit("updateWatchLater");
         })
         .catch((err) => {
           console.log(err.message);
