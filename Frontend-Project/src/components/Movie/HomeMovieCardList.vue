@@ -18,8 +18,6 @@
 import IconComponent from "../../components/IconComponent.vue"
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
-import UserApi from "../../services/user.service";
-import swal from "sweetalert";
 export default {
   name: "HomeMovieCardList",
   data() {
@@ -112,41 +110,6 @@ export default {
     Slide,
     Navigation,
      IconComponent
-  },
-  methods: {
-    Mynotification(text, type) {
-      this.$notify({
-        text: text,
-        type: type,
-        duration: 5000,
-        speed: 1000,
-      });
-    },
-    async addToWishList(movie_id) {
-      await UserApi.addToWishList({
-        media_type: this.media_type,
-        media_id: movie_id,
-      })
-        .then(() => {
-          this.Mynotification("Successfully added to wish list!", "success");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-
-    async addToWatchLater(movie_id) {
-      await UserApi.addToWatchLater({
-        media_type: this.media_type,
-        media_id: movie_id,
-      })
-        .then(() => {
-          swal("Successfully added to watch later!");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
   },
 };
 </script>

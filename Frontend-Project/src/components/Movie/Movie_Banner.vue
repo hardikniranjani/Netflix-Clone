@@ -88,7 +88,6 @@ export default {
     return {
       Banner_Movie: {},
       media_type: "Movies",
-      availableInWatchLater: false,
     };
   },
   props: {
@@ -103,14 +102,7 @@ export default {
   async updated() {
     var banner = document.getElementById("banner");
     banner.style.backgroundImage = "url(" + this.src + ")";
-    let isAvailableInWatchLater = this.$store.getters.availableInWatchLater(
-      parseInt(this.id),
-      "Movies"
-    );
-    // console.log(isAvailable, this.$refs["watchLater"]["classList"].value);
-    this.availableInWatchLater = isAvailableInWatchLater;
-
-    
+  
   },
   mounted() {
     var banner = document.getElementById("banner");

@@ -20,12 +20,19 @@ import wishListMixin from '../mixin/wishListMixin';
 import watchLaterMixin from '../mixin/watchLaterMixin';
 export default {
   name: "IconComponent",
-  data(){},
+  
   mixins : [wishListMixin,watchLaterMixin],
   props: {
-    media_type: String,
-    id : Number
+    media_type: {
+      type : String,
+      required : true
+    },
+    id : {
+      type : Number,
+      required : true
+    },
   },
+  
 };
 </script>
 

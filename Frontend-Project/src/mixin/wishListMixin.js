@@ -2,27 +2,18 @@ import Notifications from "./notificationMixin";
 import UserApi from "../services/user.service";
 
 export default {
-  data() {
-    return {
-      availableInWishList: false,
-    };
-  },
   computed: {
+    availableInWishList() {
+      return this.$store.getters.availableInWishList(
+        parseInt(this.id),
+        this.media_type
+      );
+    },
     heartIconClass() {
-      
       return this.availableInWishList
         ? "bi-heart-fill text-danger"
         : "bi-heart text-light";
     },
-  },
-  updated() {
-    console.log(this.id);
-    let isAvailableInWishList = this.$store.getters.availableInWishList(
-      parseInt(this.id),
-      this.media_type
-    );
-      
-    this.availableInWishList = isAvailableInWishList;
   },
   methods: {
     updateWishList() {
@@ -38,13 +29,14 @@ export default {
         media_id: this.id,
       })
         .then((res) => {
-          this.availableInWishList = false;
           this.$store.dispatch("ADD_WISH_LIST", res.data.list);
-          Notifications(`${this.media_type} removed from your wish list.`, "success");
+          Notifications(
+            `${this.media_type} removed from your wish list.`,
+            "success"
+          );
         })
         .catch((err) => {
           console.log(err);
-          this.availableInWishList = false;
           Notifications("Error while removing from your wish list.", "danger");
         });
     },
@@ -55,11 +47,13 @@ export default {
       })
         .then((res) => {
           this.$store.dispatch("ADD_WISH_LIST", res.data.wishlist);
-          this.availableInWishList = true;
-          Notifications(`${this.media_type} added to your wish list.`, "success");
+
+          Notifications(
+            `${this.media_type} added to your wish list.`,
+            "success"
+          );
         })
         .catch((err) => {
-          this.availableInWishList = false;
           Notifications(err, "danger");
         });
     },

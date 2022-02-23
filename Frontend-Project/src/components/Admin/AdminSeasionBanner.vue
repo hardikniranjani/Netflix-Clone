@@ -19,9 +19,10 @@
 
 <script>
 import UserApi from "../../services/user.service";
-import swal from "sweetalert";
+import Notification from '../../mixin/notificationMixin';
 export default {
   name: "AdminSeasionBanner",
+  mixins : [Notification],
   data() {
     return {
       media_type: "Episode",
@@ -42,7 +43,7 @@ export default {
         media_id: this.id,
       })
         .then(() => {
-          swal("Successfully added to wish list!");
+          Notification("Successfully added to wish list!","success");
         })
         .catch((err) => {
           console.log(err);

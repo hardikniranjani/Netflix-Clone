@@ -70,6 +70,7 @@ export default createStore({
   getters: {
     HistoryMovies(state) {
       if (state.user.watchHistory) {
+        
         let Movies = state.user.watchHistory.Movies;
         if (Movies.length > 0)
           return state.user.watchHistory.Movies.map((obj) => obj._id);
@@ -78,7 +79,7 @@ export default createStore({
     },
     HistoryEpisodes(state) {
       if (state.user.watchHistory) {
-        let Episodes = state.user.watchHistory.Episodes;
+        let Episodes = state.user.watchHistory.Episode;
         if (Episodes.length > 0)
           return state.user.watchHistory.Episode.map((obj) => obj._id);
         else return [];

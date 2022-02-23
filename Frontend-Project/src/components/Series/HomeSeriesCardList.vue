@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'SeriesPage', params: { id: i._id } }">
           <img class="Home_Series_categories_card" :src="i.backdrop_path" />
         </router-link>
-        <IconComponent :media_type="this.media_type" />
+        <IconComponent :media_type="media_type" :id="i._id"/>
       </div>
     </slide>
     <template #addons>
@@ -18,10 +18,10 @@
 import IconComponent from "../../components/IconComponent.vue"
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
-import UserApi from "../../services/user.service";
-import swal from "sweetalert";
+
 export default {
   name: "HomeSeriesCardList",
+  
   data() {
     return {
       media_type: "Series",
@@ -112,29 +112,7 @@ export default {
     Navigation,
     IconComponent
   },
-  methods: {
-    scroll_left() {
-      let content = document.querySelector(".wrapper-box");
-      content.scrollLeft -= 800;
-    },
-    scroll_right() {
-      let content = document.querySelector(".wrapper-box");
-      content.scrollLeft += 800;
-    },
 
-    async addToWishList(series_id) {
-      await UserApi.addToWishList({
-        media_type: this.media_type,
-        media_id: series_id,
-      })
-        .then(() => {
-          swal("Successfully added to wish list!");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
 };
 </script>
 
