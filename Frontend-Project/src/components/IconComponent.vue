@@ -1,14 +1,43 @@
 <template>
-  <div class="categories_card_bottom">
-    <i class="bi Home_Movie_categories_card_bottom_icon" :class="heartIconClass" @click="updateWishList"> </i>
-
+  <div v-if="this.$store.state.user.Name" class="categories_card_bottom">
     <i
-      class="bi bi-play-circle-fill Home_Movie_categories_card_bottom_icon"
-    ></i>
-
+      class="bi Home_Movie_categories_card_bottom_icon"
+      :class="heartIconClass"
+      @click="updateWishList"
+    >
+    </i>
+    <router-link
+      v-if="media_type == 'Movies'"
+      class="link"
+      id="banner__button_link"
+      :to="{
+        name: 'MovieVideo',
+        params: { id: this.id },
+      }"
+    >
+      <i
+        class="bi bi-play-circle-fill Home_Movie_categories_card_bottom_icon"
+      ></i>
+    </router-link>
+    <router-link
+      v-if="media_type == 'Series'"
+      class="link"
+      :to="{
+        name: 'EpisodeVideo',
+        params: {
+          id: data.Seasons[0].Episodes[0].SeriesID,
+          episodeid: data.Seasons[0].Episodes[0]._id,
+          seasonid: data.Seasons[0].Episodes[0].SeasonID,
+        },
+      }"
+    >
+      <i
+        class="bi bi-play-circle-fill Home_Movie_categories_card_bottom_icon"
+      ></i>
+    </router-link>
     <i
       v-if="media_type == 'Movies'"
-      class="bi  Home_Movie_categories_card_bottom_icon"
+      class="bi Home_Movie_categories_card_bottom_icon"
       :class="classList"
       @click="updateWatchLater"
     ></i>
@@ -16,8 +45,8 @@
 </template>
 
 <script>
-import wishListMixin from '../mixin/wishListMixin';
-import watchLaterMixin from '../mixin/watchLaterMixin';
+import wishListMixin from "../mixin/wishListMixin";
+import watchLaterMixin from "../mixin/watchLaterMixin";
 export default {
   name: "IconComponent",
   
@@ -58,11 +87,15 @@ export default {
   transition: all 0.35s;
 }
 .Home_Movie_categories_card_bottom_icon:hover {
-  color: #d81f26;
+  color: #d81f26 !important;
 }
 
 .categories_card_main_movie:hover .categories_card_bottom {
   opacity: 1;
   cursor: pointer;
+}
+.link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>

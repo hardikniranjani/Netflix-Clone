@@ -5,6 +5,7 @@
         <router-link :to="{ name: 'MoviePage', params: { id: i._id } }">
           <img class="Movie_categories_card" :src="i.Banner" />
         </router-link>
+        <IconComponent :media_type="this.media_type" :id="i._id" />
       </div>
     </slide>
     <template #addons>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import IconComponent from "../../components/IconComponent.vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 
@@ -107,6 +109,7 @@ export default {
     Carousel,
     Slide,
     Navigation,
+    IconComponent,
   },
 };
 </script>
@@ -135,12 +138,14 @@ export default {
 }
 .carousel__prev {
   opacity: 0;
-  margin-top: -51px;
+  height: 100% !important;
+  margin-top: -18px !important;
   margin-left: 35px;
 }
 .carousel__next {
   opacity: 0;
-  margin-top: -21px;
+  height: 70% !important;
+  margin-top: -18px !important;
   margin-right: 30px;
 }
 .carousel__next:hover,
@@ -171,8 +176,9 @@ export default {
 }
 .Movie_categories_card {
   object-fit: contain;
-  width: 210px;
-  height: 250px;
+  object-fit: cover;
+  width: 170px;
+  height: 230px;
 }
 .categories_card_bottom_movie {
   width: 80% !important;

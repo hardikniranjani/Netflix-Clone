@@ -114,7 +114,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .carousel__item {
   max-height: 200px;
   width: 100%;
@@ -134,18 +134,19 @@ export default {
   background-color: #1f1f1f6b;
   border-radius: 0px;
   width: 5%;
-  height: 90% !important;
   border: none;
 }
 .carousel__prev {
   opacity: 0;
-  margin-top: -5px !important;
-  margin-left: 35px;
+  height: 80% !important;
+  margin-top: -20px !important;
+  margin-left: 30px;
 }
 .carousel__next {
   opacity: 0;
-  margin-top: -5px !important;
-  margin-right: 30px;
+  height: 80% !important;
+  margin-top: -20px !important;
+  margin-right: 25px;
 }
 .carousel__next:hover,
 .carousel__prev:hover {

@@ -6,32 +6,179 @@
           <div id="banner__contents_details">
             <h1 id="banner__title">{{ Name }}</h1>
             <div id="banner__buttons">
-              <span  class="mobile_view">
+              <!-- mobile view -->
+              <span class="mobile_view">
                 <router-link
-                id="banner__button_link"
-                :to="{
-                  name: 'MovieVideo',
-                  params: { id: this.id },
-                }"
-              >
-                <button v-if="this.$store.state.user.Name" id="banner__button"><i class="bi bi-play-fill me-1"></i></button>
-              </router-link>
+                  id="banner__button_link"
+                  :to="{
+                    name: 'MovieVideo',
+                    params: { id: this.id },
+                  }"
+                >
+                  <button
+                    v-if="this.$store.state.user.Name"
+                    id="banner__button"
+                  >
+                    <i class="bi bi-play-fill me-1"></i>
+                  </button>
+                </router-link>
+                <router-link
+                  id="banner__button_link"
+                  :to="{
+                    name: 'LogInPage',
+                  }"
+                >
+                  <button
+                    v-if="!this.$store.state.user.Name"
+                    id="banner__button"
+                  >
+                    <i class="bi bi-play-fill me-1"></i>
+                  </button>
+                </router-link>
               </span>
+              <!-- leptop view -->
               <span id="leptop_view_title">
                 <router-link
-                id="banner__button_link"
-                :to="{
-                  name: 'MovieVideo',
-                  params: { id: this.id },
-                }"
+                  id="banner__button_link"
+                  :to="{
+                    name: 'MovieVideo',
+                    params: { id: this.id },
+                  }"
+                >
+                  <button
+                    v-if="this.$store.state.user.Name"
+                    id="banner__button"
+                  >
+                    <i class="bi bi-play-fill me-1"></i>Play
+                  </button>
+                </router-link>
+                <!-- Login model for non login user -->
+                <div
+                  class="modal fade"
+                  id="modalLoginForm"
+                  tabindex="1"
+                  role="dialog"
+                  aria-labelledby="myModalLabel"
+                >
+                  <form @submit="submit">
+                    <fieldset>
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content form_input_model">
+                          <div class="modal-header text-center">
+                            <h4
+                              class="
+                                modal-title
+                                w-100
+                                font-weight-bold
+                                text-white
+                              "
+                            >
+                              Login
+                            </h4>
+                            <i
+                              class="bi bi-x-lg close form_input_close_btn"
+                              aria-label="Close"
+                              data-dismiss="modal"
+                            ></i>
+                          </div>
+                          <div class="modal-body mx-3">
+                            <div class="md-form">
+                              <input
+                                class="form-control my-3 ps-3 form_input"
+                                type="email"
+                                placeholder="Email"
+                                :error="errors.Email"
+                                :modelValue="Email"
+                                @change="handleChangeEmail"
+                              />
+                              <span>{{ errors.Email }}</span>
+                            </div>
+
+                            <div class="md-form mb-1">
+                              <input
+                                class="form-control my-3 ps-3 form_input"
+                                type="password"
+                                placeholder="Password"
+                                :error="errors.Password"
+                                :modelValue="Password"
+                                @change="handleChangePassword"
+                              />
+                              <span>{{ errors.Password }}</span>
+                            </div>
+                          </div>
+                          <div
+                            class="modal-footer d-flex justify-content-center"
+                          >
+                            <button
+                              class="
+                                btn btn-danger
+                                align-center
+                                form_input_button
+                              "
+                              style="margin-left: 00px"
+                            >
+                              Login
+                            </button>
+                            <p
+                              style="
+                                text-align: center;
+                                z-index: 2;
+                                font-size: 0.9rem;
+                                margin-top: 20px;
+                                color: lightgray;
+                              "
+                            >
+                              <!-- Forgot password ?
+                              <router-link
+                                style="text-decoration: none; font-size: 0.9rem"
+                                :to="{ name: 'ForgotPassword' }"
+                                >Click Here
+                              </router-link> -->
+                            </p>
+                          </div>
+
+                          <!-- <p
+                            style="
+                              text-align: center;
+                              z-index: 2;
+                              margin-left: 40px;
+                              color: lightgray;
+                            "
+                          >
+                            New here ? Click here to
+                            <router-link
+                              style="text-decoration: none"
+                              :to="{ name: 'IndexPage' }"
+                              >Create your account
+                            </router-link>
+                          </p> -->
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+                <button
+                  v-if="!this.$store.state.user.Name"
+                  id="banner__button"
+                  data-toggle="modal"
+                  data-target="#modalLoginForm"
+                >
+                  <i class="bi bi-play-fill me-1"></i>Play
+                </button>
+              </span>
+
+              <button
+                v-if="this.$store.state.user.Name"
+                id="banner__button"
+                @click="updateWishList()"
               >
-                <button v-if="this.$store.state.user.Name" id="banner__button"><i class="bi bi-play-fill me-1"></i>Play</button>
-              </router-link></span> 
-              
-              <button id="banner__button" @click="updateWishList()">
                 <i class="bi" :class="heartIconClass"></i>
               </button>
-              <button id="banner__button" @click="updateWatchLater()">
+              <button
+                v-if="this.$store.state.user.Name"
+                id="banner__button"
+                @click="updateWatchLater()"
+              >
                 <i class="bi" :class="classList" ref="watchLater"></i>
               </button>
             </div>
@@ -77,15 +224,49 @@
 </template>
 
 <script>
-
-
-import wishListMixin from '../../mixin/wishListMixin';
-import watchLaterMixin from '../../mixin/watchLaterMixin';
+import { string, object } from "yup";
+import userService from "../../services/user.service";
+import { useField, useForm } from "vee-validate";
+import wishListMixin from "../../mixin/wishListMixin";
+import watchLaterMixin from "../../mixin/watchLaterMixin";
 export default {
   name: "Movie_Banner",
-  mixins : [wishListMixin,watchLaterMixin],
+  mixins: [wishListMixin, watchLaterMixin],
   data() {
+    const validationSchema = object({
+      Email: string().required().email(),
+      Password: string().required(),
+    });
+
+    const { handleSubmit, setFieldValue, errors } = useForm({
+      validationSchema,
+      initialValues: {},
+    });
+
+    const handleChangeEmail = (event) => {
+      setFieldValue("Email", event.target.value);
+    };
+
+    const handleChangePassword = (event) => {
+      setFieldValue("Password", event.target.value);
+    };
+
+    const { value: Email } = useField("Email");
+    const { value: Password } = useField("Password");
+
+    const submit = handleSubmit((value) => {
+      this.error = "";
+      this.LoginUser(value);
+    });
+
     return {
+      Email,
+      Password,
+      submit,
+      errors,
+      handleChangeEmail,
+      handleChangePassword,
+      error: "",
       Banner_Movie: {},
       media_type: "Movies",
     };
@@ -97,12 +278,45 @@ export default {
     id: String,
     movieData: {},
   },
- 
+  methods: {
+    async LoginUser(data) {
+      this.loading = true;
+      userService
+        .getAnUser({ email: data.Email, password: data.Password })
+        .then((res) => {
+          // let flag = this.compareDates(res.data.Plan_Expiry_Date_Time);
+          let flag = true;
+          if (flag) {
+            this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
+            this.$store.dispatch("ADD_USER", res.data);
+            location.reload();
+            if (res.data.Role == "user") {
+              this.$router.replace({ name: "HomePage" });
+            } else {
+              this.$router.replace({ name: "AdminMoviePage" });
+            }
+          } else {
+            this.$router.replace({ name: "SubscriptionPlan" });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$router.replace({ name: "LogInPage" });
+        });
+    },
+    forgotPasword() {
+      this.$router.replace({ name: "ForgotPassword" });
+      location.reload();
+    },
+    signup() {
+      this.$router.replace({ name: "IndexPage" });
+      location.reload();
+    },
+  },
 
   async updated() {
     var banner = document.getElementById("banner");
     banner.style.backgroundImage = "url(" + this.src + ")";
-  
   },
   mounted() {
     var banner = document.getElementById("banner");
@@ -115,7 +329,38 @@ export default {
 </style>
 
 <style scoped>
+.form_input {
+  z-index: 2;
+  height: 50px;
+  color: #8c8c80;
+  background-color: #3333331f;
+  border: none;
+}
+.form_input:focus {
+  background-color: #333333b4;
+  color: #8c8c80;
+  border: none;
+  outline: none;
+}
+.form_input_button {
+  transition: all 0.4s;
+  height: 40px;
+}
 
+.form_input_button:hover {
+  background-color: #f40612;
+}
+
+.form_input_close_btn {
+  cursor: pointer;
+}
+.form_input_model {
+  margin-top: 100px;
+  background-color: #000000cb;
+}
+</style>
+
+<style scoped>
 #banner__contents_details {
   margin-top: -170px;
 }
