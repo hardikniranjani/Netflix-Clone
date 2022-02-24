@@ -2,7 +2,7 @@ export default {
   computed: {
     lengthOfPassword() {
       return (password) => {
-        return password["length"] > 10 || password["length"] < 8
+        return password["length"] > 20 || password["length"] < 6
           ? "text-danger"
           : "text-success";
       };

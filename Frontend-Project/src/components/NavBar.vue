@@ -23,7 +23,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon usernav_ico" style="color: white"></span>
+      <span class="bi bi-list usernav_ico me-2" style="color: white"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -127,9 +127,12 @@
 <script>
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/adventurer-neutral";
-
+// import SearchBar from "./SearchBar.vue";
 export default {
   name: "NavBar",
+  // components: {
+  //   SearchBar
+  // },
   computed: {
     isLoggedIn() {
       let user = this.$store.state.user;
@@ -173,6 +176,9 @@ export default {
     },
     login() {
       this.$router.push({ name: "LogInPage" });
+    },
+    IndexPage(){
+       this.$router.replace({ name: "IndexPage" });
     },
     userAccount() {
       this.$router.push({ name: "UserAccount" });

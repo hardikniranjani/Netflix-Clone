@@ -20,7 +20,7 @@
         </span>
         <span v-if="Episodes.length > 0">
           <h4>Episodes</h4>
-          <EpisodeCardList :data="Episodes" />
+          <UserEpisodeCardList :data="Episodes" />
         </span>
       </div>
       <div v-else>
@@ -39,7 +39,7 @@ import Footer from "../../components/Footer.vue";
 import { mapGetters } from "vuex";
 import UserApi from "../../services/user.service";
 import MovieWatchHistoryCardList from "../../components/Movie/MovieWatchHistoryCardList.vue";
-import EpisodeCardList from "../../components/Series/EpisodeCardList.vue";
+import UserEpisodeCardList from "../../components/Series/UserEpisodeCardList.vue";
 
 export default {
   name: "WatchHistory",
@@ -75,7 +75,7 @@ export default {
     NavBar,
     Footer,
     MovieWatchHistoryCardList,
-    EpisodeCardList,
+    UserEpisodeCardList,
   },
 
   computed: {

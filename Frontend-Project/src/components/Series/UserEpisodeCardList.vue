@@ -41,6 +41,7 @@ import { CloseIcon } from "@iconicicons/vue";
 import Notification from "../../mixin/notificationMixin";
 export default {
   name: "UserEpisodeCardList",
+  mixins: [Notification],
   data() {
     return {
       type: "Episode",
@@ -140,15 +141,12 @@ export default {
         media_type: this.type,
       })
         .then((res) => {
+          this.$store.dispatch("ADD_HISTORY", res.data.list);
+          Notification("Removed From WatchHistory.", "Success");
           // location.reload();
-          this.$store.dispatch("ADD_WATCH_LATER",res.data.list);
-          Notification("Removed From Watch Later.","Success");
-          this.$emit("updateWatchLater");
         })
         .catch((err) => {
           console.log(err.message);
-          Notification("Error while removing from watch later.","danger");
-          this.$emit("updateWatchLater"); 
         });
     },
 
@@ -157,11 +155,15 @@ export default {
         media_id: data1,
         media_type: this.type,
       })
-        .then(() => {
-          location.reload();
+        .then((res) => {
+          this.$store.dispatch("ADD_WATCH_LATER", res.data.list);
+          Notification("Removed From Watch Later.", "Success");
+          this.$emit("updateWatchLater");
         })
         .catch((err) => {
           console.log(err.message);
+          Notification("Error while removing from watch later.", "danger");
+          this.$emit("updateWatchLater");
         });
     },
   },
@@ -196,7 +198,6 @@ export default {
   margin-left: 35px;
 }
 .carousel__next {
-  
   margin-top: -21px;
   margin-right: 30px;
 }

@@ -1,6 +1,7 @@
 <template>
   <div v-if="this.$store.state.user.Name" class="categories_card_bottom">
-    <i
+    <i 
+      v-if="ValidMovieSeriesMediaTypes"
       class="bi Home_Movie_categories_card_bottom_icon"
       :class="heartIconClass"
       @click="updateWishList"
@@ -36,7 +37,7 @@
       ></i>
     </router-link>
     <i
-      v-if="media_type == 'Movies'"
+      v-if="ValidMediaTypes"
       class="bi Home_Movie_categories_card_bottom_icon"
       :class="classList"
       @click="updateWatchLater"
@@ -49,7 +50,7 @@ import wishListMixin from "../mixin/wishListMixin";
 import watchLaterMixin from "../mixin/watchLaterMixin";
 export default {
   name: "IconComponent",
-
+  
   mixins: [wishListMixin, watchLaterMixin],
   props: {
     media_type: {
@@ -63,10 +64,15 @@ export default {
     data: {
       type: Object,
     },
-    data : {
-      type : Object,  
-    }
   },
+  computed: {
+    ValidMediaTypes(){
+      return this.media_type === "Movies" || this.media_type === "Episode";
+    },
+    ValidMovieSeriesMediaTypes(){
+      return this.media_type === "Movies" || this.media_type === "Series";
+    }
+  }
 };
 </script>
 

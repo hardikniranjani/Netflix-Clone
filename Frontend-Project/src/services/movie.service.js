@@ -5,7 +5,7 @@ export default new (class Movie_Service {
   createAnMovie(movie_data) {
     return Http.post("/movies", movie_data, {
       headers: {
-        "x-access-token": token,
+        "x-access-token":  store.state.token,
       },
     });
   }
@@ -51,7 +51,7 @@ export default new (class Movie_Service {
   uploadMovieImage(movie_id,media_field, formdata) {
     return Http.post(`/movies/upload/image?movie_id=${movie_id}&media_field=${media_field}`, formdata, {
       headers: {
-        "x-access-token": token,
+        "x-access-token": store.state.token,
       },
     });
   }
@@ -59,7 +59,7 @@ export default new (class Movie_Service {
   uploadMovieVideo(movie_id, formdata) {
     return Http.post(`/movies/upload/video?movie_id=${movie_id}`, formdata, {
       headers: {
-        "x-access-token": token,
+        "x-access-token":  store.state.token,
       },
     });
   }
@@ -70,7 +70,7 @@ export default new (class Movie_Service {
       {},
       {
         headers: {
-          "x-access-token": token,
+          "x-access-token":  store.state.token,
         },
       }
     );

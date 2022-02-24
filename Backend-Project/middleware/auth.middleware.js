@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 function verifyToken(req, res, next) {
   
   const token = req.header("x-access-token");
+  console.log(token);
   if (!token)
     return res.status(401).send({msg : "Access Denied. Please Login again!!!"});
   try {

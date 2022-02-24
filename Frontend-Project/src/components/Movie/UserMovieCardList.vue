@@ -117,13 +117,11 @@ export default {
   },
   methods: {
     async removeList(data1) {
-
       await UserApi.removeFromWishlist({
         media_id: data1,
         media_type: this.media_type,
       })
         .then(() => {
-
           // this.$store.dispatch("ADD_WISH_LIST", data.list);
           this.$emit("updateWishList");
         })
@@ -206,7 +204,7 @@ export default {
   display: flex;
   justify-content: space-around;
   text-align: center;
-  background-color: #1f1f1f49;
+  background-color: #1f1f1f00;
   padding-bottom: 5px;
   transition: all 0.4s;
   opacity: 0;

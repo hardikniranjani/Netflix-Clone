@@ -54,7 +54,7 @@ export default {
   },
   mounted() {
     document.title = `Netflix - WatchLater`;
-    console.log(this.$store.state.user.watchLater)
+    // console.log(this.$store.state.user.watchLater)
     this.getWatchLater();
   },
   methods: {
@@ -70,8 +70,8 @@ export default {
     clearwatchLater() {
       var result = confirm("Are you sure you want to delete Watch later?");
       if (result) {
-        UserApi.deleteWatchLater().then((res) => {
-          console.log(res.data);
+        UserApi.deleteWatchLater().then(() => {
+          // console.log(res.data);
           location.reload();
         });
       }

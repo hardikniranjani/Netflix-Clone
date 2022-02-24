@@ -39,7 +39,6 @@ export default {
     id: String,
   },
   async updated() {
-   
     this.$refs.myvideo["currentTime"] = parseInt(this.$store.getters.mediaDuration(
       this.id,
       "Movies"

@@ -64,13 +64,17 @@
                     <fieldset>
                       <div class="modal-dialog" role="document">
                         <div class="modal-content form_input_model">
-                          <div class="modal-header text-center">
+                          <div class="modal-body mx-3">
+                            <div class="d-flex">
                             <h4
                               class="
                                 modal-title
                                 w-100
                                 font-weight-bold
                                 text-white
+                                d-flex
+                                justify-content-center
+                                my-3
                               "
                             >
                               Login
@@ -80,8 +84,7 @@
                               aria-label="Close"
                               data-dismiss="modal"
                             ></i>
-                          </div>
-                          <div class="modal-body mx-3">
+                            </div>
                             <div class="md-form">
                               <input
                                 class="form-control my-3 ps-3 form_input"
@@ -105,29 +108,16 @@
                               />
                               <span>{{ errors.Password }}</span>
                             </div>
-                          </div>
-                          <div
-                            class="modal-footer d-flex justify-content-center"
-                          >
+                            <div class="d-flex
+                                justify-content-center">
                             <button
                               class="
                                 btn btn-danger
                                 align-center
-                                form_input_button
-                              "
-                              style="margin-left: 00px"
-                            >
+                                form_input_button">
                               Login
                             </button>
-                            <p
-                              style="
-                                text-align: center;
-                                z-index: 2;
-                                font-size: 0.9rem;
-                                margin-top: 20px;
-                                color: lightgray;
-                              "
-                            ></p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -206,9 +196,10 @@ import userService from "../../services/user.service";
 import { useField, useForm } from "vee-validate";
 import wishListMixin from "../../mixin/wishListMixin";
 import watchLaterMixin from "../../mixin/watchLaterMixin";
+import Notifications from "../../mixin/notificationMixin"
 export default {
   name: "Movie_Banner",
-  mixins: [wishListMixin, watchLaterMixin],
+  mixins: [wishListMixin, watchLaterMixin,Notifications],
   data() {
     const validationSchema = object({
       Email: string().required().email(),
@@ -261,20 +252,18 @@ export default {
       userService
         .getAnUser({ email: data.Email, password: data.Password })
         .then((res) => {
-          
-            this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
-            this.$store.dispatch("ADD_USER", res.data);
-            location.reload();
-            if (res.data.Role == "user") {
-              this.$router.replace({ name: "HomePage" });
-            } else {
-              this.$router.replace({ name: "AdminMoviePage" });
-            }
-          
+          this.$store.dispatch("ADD_TOKEN", res.headers["x-access-token"]);
+          this.$store.dispatch("ADD_USER", res.data);
+          location.reload();
+          if (res.data.Role == "user") {
+            this.$router.replace({ name: "HomePage" });
+          } else {
+            this.$router.replace({ name: "AdminMoviePage" });
+          }
         })
         .catch((err) => {
           console.log(err);
-          this.$router.replace({ name: "LogInPage" });
+          Notifications("Email or Password wrong", "danger")
         });
     },
   },
@@ -355,8 +344,8 @@ export default {
   #leptop_view_title {
     display: none;
   }
-  #banner__button{
-    margin-top:50px !important;
+  #banner__button {
+    margin-top: 50px !important;
   }
   #banner__contents {
     height: 25%;
@@ -378,8 +367,8 @@ export default {
     background-size: cover;
   }
   #banner__title {
-    margin-top:50px;
-    margin-bottom:20px;
+    margin-top: 50px;
+    margin-bottom: 20px;
     font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.3rem;
     font-weight: 800;

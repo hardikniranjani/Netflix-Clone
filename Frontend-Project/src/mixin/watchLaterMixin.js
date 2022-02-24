@@ -6,7 +6,7 @@ export default {
     availableInWatchLater(){
       return this.$store.getters.availableInWatchLater(
         parseInt(this.id),
-        "Movies"
+        this.media_type
       );
     },
     classList() {
@@ -37,7 +37,6 @@ export default {
         media_type: this.media_type,
         media_id: this.id,
       }).then((res) => {
-        
         this.$store.dispatch("ADD_WATCH_LATER", res.data.list);
         
         Notifications("Removed from watch later !!", "success");

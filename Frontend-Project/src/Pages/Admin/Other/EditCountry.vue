@@ -36,6 +36,7 @@
               @change="handleChange"
               name="CountryName"
             />
+
             <span v-if="errors.CountryName" class="ms-3 form_error_massage">{{
               errors.CountryName
             }}</span>
@@ -51,12 +52,13 @@
               @change="handleChange"
               name="CountryShortForm"
             />
+
             <span
               v-if="errors.CountryShortForm"
               class="ms-3 form_error_massage"
               >{{ errors.CountryShortForm }}</span
             >
-            
+
             <button
               class="form_input_button btn btn-danger mt-3 ms-3 p-2 w-100"
               :class="[checkValuesChanged ? 'active' : 'disabled']"

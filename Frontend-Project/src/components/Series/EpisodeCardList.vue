@@ -19,12 +19,10 @@
           <img class="Episode_categories_card" :src="episode.Banner" />
         </router-link>
         <h7 class="categories_card_bottom">{{ episode.EpisodeName }}</h7>
-        <div class="categories_card_bottom">
-          <i v-if="this.$store.state.user.Name"
-            class="bi bi-plus-circle Movie_categories_card_bottom_icon"
-            v-on:click="addToWatchLater(episode._id)"
-          ></i>
-        </div>
+        <IconComponent
+          :media_type="this.media_type"
+          :id="episode._id"
+        />
       </div>
     </slide>
     <template #addons>
@@ -34,9 +32,9 @@
 </template>
 
 <script>
+import IconComponent from "../IconComponent.vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
-import UserApi from "../../services/user.service";
 export default {
   name: "SeriesCardList",
   data() {
@@ -127,26 +125,7 @@ export default {
     Carousel,
     Slide,
     Navigation,
-  },
-
-  methods: {
-    async addToWatchLater(episode_id) {
-      await UserApi.addToWatchLater({
-        media_type: this.media_type,
-        media_id: episode_id,
-      })
-        .then(() => {
-          this.$notify({
-            text: "Successfully added to watch later!!",
-            type: "success",
-            duration: 5000,
-            speed: 1000,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    IconComponent,
   },
 };
 </script>

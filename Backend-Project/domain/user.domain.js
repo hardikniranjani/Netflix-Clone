@@ -670,7 +670,6 @@ class UserDomain {
     let media_id = req.query.media_id;
     let media_type = req.query.media_type;
     const list = await watchLater.find({ User: User_id, IsActive: true });
-
     if (list.length == 0) {
       res.status(200).send({ msg: "No list is there." });
     } else {
