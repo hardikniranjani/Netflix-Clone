@@ -79,7 +79,8 @@
         </li>
       </ul>
       <span class="d-flex justify-content-between leptop_view">
-        <form class="form-inline my-2 my-lg-0 form_input"></form>
+        <SearchBar v-if="this.$store.state.user.Name" class="form-inline my-2 my-lg-0 form_input" />
+        <SearchBar v-if="!this.$store.state.user.Name" class="form-inline my-2 my-lg-0 form_input_nolog" />
         <div class="navbar_bottom">
           <div
             v-if="isLoggedIn"
@@ -127,12 +128,12 @@
 <script>
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/adventurer-neutral";
-// import SearchBar from "./SearchBar.vue";
+import SearchBar from "./SearchBar.vue";
 export default {
   name: "NavBar",
-  // components: {
-  //   SearchBar
-  // },
+  components: {
+    SearchBar,
+  },
   computed: {
     isLoggedIn() {
       let user = this.$store.state.user;
@@ -177,8 +178,8 @@ export default {
     login() {
       this.$router.push({ name: "LogInPage" });
     },
-    IndexPage(){
-       this.$router.replace({ name: "IndexPage" });
+    IndexPage() {
+      this.$router.replace({ name: "IndexPage" });
     },
     userAccount() {
       this.$router.push({ name: "UserAccount" });
@@ -243,11 +244,11 @@ export default {
 }
 
 .form_input {
-  margin-left: 450px;
+  margin-left: 50px !important;
 }
 .navbar_bottom {
   margin-top: -10px;
-  margin-left: 180px !important;
+  margin-left: 10px !important;
   display: flex;
 }
 
@@ -330,9 +331,36 @@ export default {
   }
 }
 
+@media screen and (min-width: 1000px) {
+  .form_input_nolog {
+    margin-left: -320px ;
+  }
+  .leptop_view {
+    margin-left: 320px !important;
+  }
+  .form_input_nolog{
+    left:120px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .form_input_nolog {
+    margin-left: 0px ;
+  }
+  .leptop_view {
+    margin-left: 320px !important;
+  }
+  .form_input_nolog{
+    left:120px;
+  }
+}
+@media screen and (min-width: 1300px) {
+  .form_input {
+    margin-left: 50px;
+  }
+}
 @media screen and (min-width: 1365px) {
   .form_input {
-    margin-left: 450px;
+    margin-left: 50px;
   }
 }
 @media screen and (min-width: 1439px) {
@@ -357,7 +385,7 @@ export default {
 }
 @media screen and (min-width: 1765px) {
   .form_input {
-    margin-left: 880px;
+    margin-left: 1080px;
   }
 }
 @media screen and (min-width: 2420px) {
