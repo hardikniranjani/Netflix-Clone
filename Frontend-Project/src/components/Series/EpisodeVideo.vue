@@ -27,13 +27,13 @@
       </div>
     </div>
     <video style="width: 100vw; height: 100vh" controls :key="this.src">
-      <source src="" type="video/mp4" />
+      <source :src="src" type="video/mp4" />
     </video>
   </div>
 </template>
 
 <script>
-import SeriesApi from "../../services/series.service";
+import EpisodeApi from '../../services/episode.service';
 export default {
   name: "EpisodeVideo",
   data() {
@@ -58,15 +58,12 @@ export default {
     }
   },
   async mounted() {
-    await SeriesApi.findSeriesBySearch({
-      queryperam: "_id",
-      queryName: `${this.id}`,
-    })
+    await EpisodeApi.getEpisode(this.id)
       .then((res) => {
-        this.Series = res.data[0];
-        this.Seasons = res.data[0].Seasons;
-
-        this.src = res.data[0].backdrop_path;
+      
+        console.log(res.data);
+        this.src = res.data[0].Video_path;
+        console.log(res.data[0].Video_path)
       })
       .catch((err) => {
         console.log(err);

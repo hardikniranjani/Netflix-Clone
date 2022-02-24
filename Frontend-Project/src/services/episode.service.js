@@ -2,9 +2,10 @@ import Http from "../httpcommon";
 import store from "../store";
 const { token } = store.state;
 export default new (class Episode_Service {
-  getEpisode() {
-    return Http.get(`/episode`);
+  getEpisode(id) {
+    return Http.get(`/episode?episode_id=${id}`);
   }
+  
 
   findEpisodeAndSort({ series_id, season_id, queryperam, ascending }) {
     return Http.get(
