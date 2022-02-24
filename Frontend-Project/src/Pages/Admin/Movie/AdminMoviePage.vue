@@ -7,7 +7,7 @@
         display-5
         border
         d-flex
-        justify-content-between
+        justify-content-around
       "
     >
       <div class="ms-2 mb-2">
@@ -17,7 +17,7 @@
           </button>
         </router-link>
       </div>
-      <div class="me-3 mb-2">Search bar</div>
+      
     </div>
     <table class="table table">
       <thead>

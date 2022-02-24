@@ -1,10 +1,10 @@
 <template>
   <div class="SubscriptionPlan">
     <div class="nav"><NavBar /></div>
-    <div class="SubscriptionPlan_body container">
-      <h2 class="mb-5 ms-2 Subscription_title ">Subscription Plan</h2>
+    <div class="SubscriptionPlan_body">
+      <h2 class="mb-5 ms-2 Subscription_title">Subscription Plan</h2>
       <div class="AllPlans">
-        <div v-for="i in Subscription" :key="i._id">
+        <div class="container_plan_list" v-for="i in Subscription" :key="i._id">
           <Container
             class="container_plan"
             :id="i._id"
@@ -45,7 +45,7 @@ export default {
   async mounted() {
     let subscription_res = await SubscriptionApi.getAllSubscription();
     this.Subscription = subscription_res.data.SubscriptionPlan;
-    console.log( this.Subscription )
+    console.log(this.Subscription);
   },
 };
 </script>
@@ -56,6 +56,7 @@ export default {
   height: 100%;
 }
 .AllPlans {
+  margin-left: 45px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -65,12 +66,13 @@ export default {
   margin: 10px;
   margin-right: 100px;
 }
-.Subscription_title{
-    transition: all 0.4s;
+.Subscription_title {
+  margin-left: 70px !important;
+  transition: all 0.4s;
   cursor: pointer;
 }
-.Subscription_title:hover{
- color: #D81F26
+.Subscription_title:hover {
+  color: #d81f26;
 }
 .nav {
   margin-top: 0px;
@@ -81,5 +83,21 @@ export default {
 }
 .footer {
   margin-top: 470px;
+}
+.container_plan_list {
+  width: 300px;
+  margin-left: 20px;
+  justify-content: center !important;
+  align-items: center !important;
+}
+@media screen and (max-width: 788px) {
+  .Subscription_title {
+    display: flex !important;
+    justify-content: center !important;
+  }
+  .AllPlans {
+    display: flex !important;
+    justify-content: center !important;
+  }
 }
 </style>

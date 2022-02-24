@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-center align-center display-5 border">Search bar</div>
+    <div class="text-center align-center display-5 border">User List</div>
     <table class="table table">
       <thead>
         <tr>

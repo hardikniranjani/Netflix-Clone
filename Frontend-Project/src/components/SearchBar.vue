@@ -1,33 +1,35 @@
 <template>
   <div class="flex-column mb-3 dropdown">
-    <input
-      autocomplete="off"
-      type="search"
-      class="form-control logInInput text-white"
-      placeholder="Search"
-      id="searchfield"
-      name="searchfield"
-      v-model="Search"
-    />
+      <input
+        autocomplete="off"
+        type="search"
+        class="form-control logInInput text-white"
+        placeholder="Search"
+        id="searchfield"
+        name="searchfield"
+        v-model="Search"
+      />
     <div
       class="card position-fixed reasult_card"
       v-if="searchData.length > 0"
       style="width: 18rem"
       aria-labelledby="searchfield"
     >
-      <router-link
+      <a
         class="card-body d-flex text-decoration-none justify-content-between"
         v-for="data in searchData"
         :key="data._id"
-        :to="{
-          name: 'MoviePage',
-          params: { id: data._id },
-        }"
+        :href="
+          $router.resolve({
+            name: 'MoviePage',
+            params: { id: data._id },
+          }).href
+        "
         @click="searchBoxResult()"
       >
         <p class="card-title text-primary">{{ data.MovieName }}</p>
         <img :src="data.backdrop_path" class="reasult_card_image" />
-      </router-link>
+      </a>
     </div>
   </div>
 </template>
@@ -62,7 +64,6 @@ export default {
   async mounted() {
     await Movie.getAllMovie()
       .then((res) => {
-        console.log(res.data);
         this.Datalist = res.data;
       })
       .catch((e) => e);
@@ -90,13 +91,22 @@ export default {
   z-index: 3 !important;
 }
 .logInInput {
-  border:none;
+  border: none;
   width: 18rem !important;
-  background-color: #000000b4;
-   transition: transform 400ms;
+  background-color: #00000050;
+  transition: transform 400ms;
+  outline: none !important;
+}
+.logInInput:focus {
+  background-color: #000000b7;
+  outline: none !important;
 }
 .logInInput.Border_active {
   border-bottom: 1px solid #fafafae3;
+  background-color: #00000049;
+}
+.logInInput.Border_active:focus {
+  border: none;
 }
 .reasult_card {
   background-color: #141414a8;

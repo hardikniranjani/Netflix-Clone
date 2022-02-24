@@ -7,7 +7,7 @@
         display-5
         border
         d-flex
-        justify-content-between
+        justify-content-around
       
       "
     >
@@ -16,7 +16,7 @@
           <button class="btn btn-danger" style="background-color:#D81F26">Add Country</button>
         </router-link>
       </div>
-      <div class="me-3">Search bar</div>
+      <!-- <div class="me-3">Search bar</div> -->
     </div>
     <table class="table table">
       <thead>

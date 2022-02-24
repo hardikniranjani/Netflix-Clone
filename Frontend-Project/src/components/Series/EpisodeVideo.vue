@@ -6,21 +6,27 @@
       </div>
       <div class="Episode_video_header_right">
         Episode
-        <select v-model="selected"  @change="changeEvent()" >
+        <select v-model="selected" @change="changeEvent()" class="episode_select">
           <optgroup v-for="s in Seasons" :key="s._id" :label="s.SeasonName">
-            <option v-for="episode in s.Episodes" :value="episode._id" :key="episode._id">
-              <router-link
-                :to="{
-                  name: 'EpisodeVideo',
-                  params: {
-                    id: episode.SeriesID,
-                    episodeid: episode._id,
-                    seasonid: episode.SeasonID,
-                  },
-                }"
-              >
+            <option
+              v-for="episode in s.Episodes"
+              :value="episode._id"
+              :key="episode._id"
+            >
+              <!-- <a
+                :href="
+                  $router.resolve({
+                    name: 'EpisodeVideo',
+                    params: {
+                      id: episode.SeriesID,
+                      episodeid: episode._id,
+                      seasonid: episode.SeasonID,
+                    },
+                  }).href
+                "
+              > -->
                 {{ episode.EpisodeName }}
-              </router-link>
+              <!-- </a> -->
             </option>
           </optgroup>
         </select>
@@ -38,7 +44,7 @@ export default {
   name: "EpisodeVideo",
   data() {
     return {
-      selected:"",
+      selected: "",
       Series: [],
       Seasons: [],
       src: "",
@@ -50,12 +56,9 @@ export default {
     seasonid: String,
   },
   methods: {
-    getInstance(art) {
-      console.log(art);
+    changeEvent() {
+      console.log(this.selected);
     },
-    changeEvent(){
-        console.log(this.selected);
-    }
   },
   async mounted() {
     await EpisodeApi.getEpisode(this.id)
@@ -107,5 +110,8 @@ export default {
   color: white;
   cursor: pointer;
   z-index: 2;
+}
+.episode_select{
+  background-color:#0000005d;
 }
 </style>

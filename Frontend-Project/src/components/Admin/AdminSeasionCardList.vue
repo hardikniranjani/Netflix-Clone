@@ -209,10 +209,11 @@ export default {
 }
 .categories_card_bottom {
   display: flex;
+  width: 100% !important;
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
-  background-color: #1f1f1f49;
+  background-color: #1f1f1fcc !important;
   padding-bottom: 5px;
   transition: all 0.4s;
   opacity: 0;

@@ -194,7 +194,8 @@ export default {
 }
 .Series_categories_card {
   object-fit: contain;
-  width: 210px;
+  object-fit: cover;
+  width: 165px;
   height: 250px;
 }
 .categories_card_bottom {

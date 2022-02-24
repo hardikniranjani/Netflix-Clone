@@ -182,8 +182,8 @@ export default {
 .Movie_categories_card {
   object-fit: contain;
   object-fit: cover;
-  width: 170px;
-  height: 230px;
+  width: 165px;
+  height: 250px;
 }
 .categories_card_bottom_movie {
   width: 80% !important;

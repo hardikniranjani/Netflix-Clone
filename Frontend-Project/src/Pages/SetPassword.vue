@@ -14,7 +14,6 @@
       </div>
       <form @submit="submit">
         <fieldset>
-          
           <div class="login__body_form p-5 mb-5" style="z-index: 2">
             <AlertMessage
             v-if="showAlert"

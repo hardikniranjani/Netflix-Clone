@@ -134,7 +134,7 @@ export default {
 </script>                                   
 
 
-    <style scoped>
+<style scoped>
 .carousel__item {
   max-height: 300px;
   width: 100%;

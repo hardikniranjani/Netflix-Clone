@@ -13,7 +13,7 @@ class MovieDomain {
   // create movie
   async createAnMovie(req, res) {
     var data = req.body;
-    console.log(data)
+    // console.log(data)
     const findMovie = await MovieModel.findOne({MovieName : data.MovieName});
 
     if (findMovie)
@@ -163,7 +163,6 @@ class MovieDomain {
             return obj;
         }
       })  
-      console.log(MoviesWithAllData);
       res.send(MoviesWithAllData.reverse());
     } else {
       res.send("not found");

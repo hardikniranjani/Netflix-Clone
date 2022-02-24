@@ -7,7 +7,7 @@
         display-5
         border
         d-flex
-        justify-content-between
+       justify-content-around
       "
     >
       <div class="ms-2 pb-2">
@@ -15,7 +15,7 @@
           Add Subscription
         </button>
       </div>
-      <div class="me-3">Search bar</div>
+      <!-- <div class="me-3">Search bar</div> -->
     </div>
     <table class="table table">
       <thead>

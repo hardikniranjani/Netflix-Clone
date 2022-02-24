@@ -132,7 +132,8 @@ export default {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  background-color: #d81f26;
+  /* background-color: #d81f26; */
+  border-bottom: 1px solid #d81f26;
 }
 
 .Admin__Home__Sidebar {
@@ -144,8 +145,11 @@ export default {
   flex: 1;
 }
 .router-link-exact-active {
-  color: #fafafa;
-  background-color: #d81f26;
+  color: #d81f26 !important;
+  font-weight: bold !important;
+  background-color: #d81f2509 !important;
+  border-radius: 10px;
+  border-bottom: 2px solid #d81f26;
 }
 
 .Admin_footer {

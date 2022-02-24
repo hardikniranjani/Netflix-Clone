@@ -165,4 +165,10 @@ export default {
   align-items: center;
   text-align: center;
 }
+
+/* @media screen and (max-width: 788px) {
+  .mainContainer{
+    margin-left:20px;
+  }
+} */
 </style>

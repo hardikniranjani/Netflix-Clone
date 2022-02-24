@@ -118,8 +118,9 @@ export default {
 }
 
 .admin_navbar {
-  margin-left: -20px;
-  padding-left: 100px;
+
+  padding-left: 70px;
+
 }
 .admin_navbar.nav_active {
   background-color: #000000ec;
