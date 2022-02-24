@@ -259,7 +259,8 @@ export default {
 
 <style scoped>
 .index_expolre{
-  color: #fafafa;
+  /* color: #fafafa; */
+  color:#E50914;
   font-weight:bold;
   font-size:1.3rem;
   transition: 0.3s;

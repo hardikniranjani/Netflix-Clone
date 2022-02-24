@@ -7,6 +7,7 @@
     >
       <div class="carousel__item">
         <router-link
+          v-if="this.$store.state.user.Name"
           :to="{
             name: 'EpisodeVideo',
             params: {
@@ -18,6 +19,7 @@
         >
           <img class="Episode_categories_card" :src="episode.Banner" />
         </router-link>
+        <img v-else class="Episode_categories_card" :src="episode.Banner" />
         <h7 class="categories_card_bottom">{{ episode.EpisodeName }}</h7>
         <IconComponent
           :media_type="this.media_type"
