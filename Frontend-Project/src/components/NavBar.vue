@@ -158,11 +158,9 @@ export default {
   mounted() {
     this.logInOut_btn();
     window.addEventListener("scroll", function () {
-      this.document
-        .querySelector(".user_navbar")
-        .classList.toggle("nav_active", this.window.scrollY > 0);
+      this.document.querySelector(".user_navbar").classList.toggle("nav_active", this.window.scrollY > 0);
     });
-  },
+    },
   updated() {
     let svg = createAvatar(style, {
       seed: `${this.$store.state.user.Name}`,

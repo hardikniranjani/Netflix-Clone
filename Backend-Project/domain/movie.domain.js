@@ -147,16 +147,24 @@ class MovieDomain {
     fs.unlinkSync(`${video.tempFilePath}`);
   }
 
-  
-  // get all Movie
+  async isMediaAvailable(mediaValueToFind){
+    return mediaValueToFind !== undefined || mediaValueToFind !== null;
+  }
 
+  // get all Movie
   async getAllMovie(req, res) {
-    var Movie_data = await MovieModel.find({ IsActive: true })
+    let Movie_data = await MovieModel.find({ IsActive: true })
       .populate("Genres")
       .populate("Spoken_languages")
       .populate("Production_companies");
     if (Movie_data.length > 0) {
-      res.send(Movie_data.reverse());
+      let MoviesWithAllData = Movie_data.filter((obj)=>{
+        if(this.isMediaAvailable(obj.Banner) && this.isMediaAvailable(obj.backdrop_path)){
+            return obj;
+        }
+      })  
+      console.log(MoviesWithAllData);
+      res.send(MoviesWithAllData.reverse());
     } else {
       res.send("not found");
     }
