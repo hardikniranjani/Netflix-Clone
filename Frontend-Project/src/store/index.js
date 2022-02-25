@@ -71,17 +71,28 @@ export default createStore({
     HistoryMovies(state) {
       if (state.user.watchHistory) {
         let Movies = state.user.watchHistory.Movies;
-        if (Movies.length > 0)
+        if (Movies.length > 0) {
+         
           return state.user.watchHistory.Movies.map((obj) => obj._id);
-        else return [];
+        } else return [];
       } else return [];
     },
     HistoryEpisodes(state) {
       if (state.user.watchHistory) {
         let Episodes = state.user.watchHistory.Episode;
-        if (Episodes.length > 0)
-          return state.user.watchHistory.Episode.map((obj) => obj._id);
-        else return [];
+        if (Episodes.length > 0) {
+      
+          return state.user.watchHistory.Episode.map(({ _id }) => {
+            
+            return {
+              _id: _id._id,
+              seasonid: _id.SeasonID,
+              seriesid: _id.SeriesID._id,
+              Banner: _id.Banner,
+              episode_name : _id.EpisodeName
+            };
+          });
+        } else return [];
       } else return [];
     },
     availableInWishList: function (state) {

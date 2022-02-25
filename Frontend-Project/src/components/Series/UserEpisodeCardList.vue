@@ -42,6 +42,9 @@ import Notification from "../../mixin/notificationMixin";
 export default {
   name: "UserEpisodeCardList",
   mixins: [Notification],
+  mounted(){
+    console.log(this.data)
+  },
   data() {
     return {
       type: "Episode",
@@ -129,6 +132,7 @@ export default {
     Slide,
     Navigation,
   },
+
   props: {
     data: Array,
     seasonid: String,

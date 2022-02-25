@@ -43,12 +43,12 @@ import UserEpisodeCardList from "../../components/Series/UserEpisodeCardList.vue
 
 export default {
   name: "WatchHistory",
-
   methods: {
     getUserHistory() {
       UserApi.showWatchHistory()
         .then(() => {
           // this.$store.dispatch("ADD_HISTORY", res.data);
+     
         })
         .catch((err) => {
           console.log(err.response.data);

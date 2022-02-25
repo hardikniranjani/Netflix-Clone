@@ -222,6 +222,9 @@ class UserDomain {
           populate: {
             path: "_id",
             model: "episode",
+            populate: {
+              path: "SeriesID",
+            },
           },
         },
       })
@@ -558,10 +561,11 @@ class UserDomain {
           .findOne({ User: User_id })
           .then((res) => {
             let past_Duration = res[media_type][index]["duration"];
-
+            
             let final_duration =
               past_Duration > duration ? past_Duration : duration;
             res[media_type][index]["duration"] = final_duration;
+
             return res;
           });
 
