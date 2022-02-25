@@ -29,13 +29,13 @@ export default createStore({
     AVATAR(state, avatarData) {
       state.avatar = avatarData;
     },
-    
+
     ADD_WATCH_LATER(state, list) {
       state.user.watchLater = list;
     },
-    ADD_WISH_LIST(state,list){
+    ADD_WISH_LIST(state, list) {
       state.user.wishlist = list;
-    }
+    },
   },
   actions: {
     ADD_TOKEN({ commit }, token) {
@@ -53,13 +53,13 @@ export default createStore({
     ADD_HISTORY({ commit }, history) {
       commit("ADD_HISTORY", history);
     },
-   
+
     ADD_WATCH_LATER({ commit }, list) {
       commit("ADD_WATCH_LATER", list);
     },
-    ADD_WISH_LIST({commit},list){
-      commit("ADD_WISH_LIST",list);
-    }
+    ADD_WISH_LIST({ commit }, list) {
+      commit("ADD_WISH_LIST", list);
+    },
     // MOVIES({commit},movie_res){
     //   commit("MOVIES",movie_res);
     // },
@@ -70,7 +70,6 @@ export default createStore({
   getters: {
     HistoryMovies(state) {
       if (state.user.watchHistory) {
-        
         let Movies = state.user.watchHistory.Movies;
         if (Movies.length > 0)
           return state.user.watchHistory.Movies.map((obj) => obj._id);
@@ -85,22 +84,18 @@ export default createStore({
         else return [];
       } else return [];
     },
-    availableInWishList : function (state){
-      
+    availableInWishList: function (state) {
       return (id, media_type) => {
-        if(state.user.wishlist){
+        if (state.user.wishlist) {
           return state.user.wishlist[media_type].includes(id);
-        }
-        else return false;
-      }
+        } else return false;
+      };
     },
     availableInWatchLater: function (state) {
       return (id, media_type) => {
-        if (state.user.watchLater)
-        {
+        if (state.user.watchLater) {
           return state.user.watchLater[media_type].includes(id);
-        }
-        else return false;
+        } else return false;
       };
     },
     mediaDuration: function (state) {
@@ -108,10 +103,12 @@ export default createStore({
         let mediaObj = state.user.watchHistory[media_type].filter(
           (obj) => obj._id == id
         );
-        let duration = parseInt(
-          JSON.parse(JSON.stringify(mediaObj))[0]["duration"]
-        );
-        return duration === undefined ? 0 : duration;
+        if (mediaObj.length > 0) {
+          let duration = parseInt(
+            JSON.parse(JSON.stringify(mediaObj))[0]["duration"]
+          );
+          return duration === undefined ? 0 : duration;
+        } else return 0;
       };
     },
   },

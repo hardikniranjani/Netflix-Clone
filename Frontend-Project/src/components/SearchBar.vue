@@ -64,6 +64,7 @@ export default {
   async mounted() {
     await Movie.getAllMovie()
       .then((res) => {
+        // console.log(res.data);
         this.Datalist = res.data;
       })
       .catch((e) => e);

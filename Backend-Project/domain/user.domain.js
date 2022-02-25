@@ -561,9 +561,7 @@ class UserDomain {
 
             let final_duration =
               past_Duration > duration ? past_Duration : duration;
-
             res[media_type][index]["duration"] = final_duration;
-
             return res;
           });
 

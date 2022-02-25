@@ -9,6 +9,11 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
+ function  isMediaAvailable(mediaValueToFind){
+    return mediaValueToFind !=='';
+  }
+
+
 class MovieDomain {
   // create movie
   async createAnMovie(req, res) {
@@ -147,10 +152,7 @@ class MovieDomain {
     fs.unlinkSync(`${video.tempFilePath}`);
   }
 
-  async isMediaAvailable(mediaValueToFind){
-    return mediaValueToFind !== undefined || mediaValueToFind !== null;
-  }
-
+ 
   // get all Movie
   async getAllMovie(req, res) {
     let Movie_data = await MovieModel.find({ IsActive: true })
@@ -159,10 +161,12 @@ class MovieDomain {
       .populate("Production_companies");
     if (Movie_data.length > 0) {
       let MoviesWithAllData = Movie_data.filter((obj)=>{
-        if(this.isMediaAvailable(obj.Banner) && this.isMediaAvailable(obj.backdrop_path)){
+        
+        if(isMediaAvailable(obj.Banner) && isMediaAvailable(obj.backdrop_path)){
             return obj;
         }
       })  
+      
       res.send(MoviesWithAllData.reverse());
     } else {
       res.send("not found");

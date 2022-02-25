@@ -155,12 +155,13 @@ export default {
     });
     this.user_icon = svg;
     this.$store.dispatch("AVATAR", svg);
-  },
-  mounted() {
-    this.logInOut_btn();
     window.addEventListener("scroll", function () {
       this.document.querySelector(".user_navbar").classList.toggle("nav_active", this.window.scrollY > 0);
     });
+  },
+  mounted() {
+    this.logInOut_btn();
+    
     },
   updated() {
     let svg = createAvatar(style, {

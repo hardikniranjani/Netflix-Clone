@@ -6,28 +6,29 @@
       <h1 class="form_title display-5">Add Movie</h1>
       <form class="add_movie_form" style="z-index: 2" @submit="submit">
         <div>
-        <!-- movie name -->
-        <input
-          class="form-control mb-2 p-2"
-          style="border:none; color:lightgray"
-          type="text"
-          placeholder="Enter Movie Name"
-          name="MovieName"
-          v-model="Movie.MovieName"
-        />
+          <!-- movie name -->
+          <input
+            class="form-control mb-2 p-2"
+            style="border: none; color: lightgray"
+            type="text"
+            placeholder="Enter Movie Name"
+            name="MovieName"
+            v-model="Movie.MovieName"
+          />
 
-        <span v-if="errors.MovieName" class="ms-3 text-danger">{{
-          errors.MovieName
-        }}</span>
+          <span v-if="errors.MovieName" class="ms-3 text-danger">{{
+            errors.MovieName
+          }}</span>
         </div>
         <label for="language" class="Page_title"
-          >Select Primary language 
+          >Select Primary language :
         </label>
         <select
           name="Original_language"
           id=""
           v-model="Movie.Original_language"
         >
+          <option value="" disabled selected>Select Primary Language</option>
           <option v-for="lang in language" :key="lang._id">
             {{ lang.Spoken_Language }}
           </option>
@@ -37,7 +38,6 @@
         }}</span>
 
         <div class="d-flex row ms-4 mt-2 mb-3">
-
           <label
             class="Page_title"
             style="margin-left: -25px; margin-bottom: 5px"
@@ -53,18 +53,16 @@
               name="Genres"
               class="box form-check-input input_checkbox"
               :value="genre._id"
-              
               @change="handleChange"
             />
             <label class="form-check-label">{{ genre.GenresName }}</label>
           </div>
-                    <span v-if="errors.Genres" class="ms-3 text-danger">{{
+          <span v-if="errors.Genres" class="ms-3 text-danger">{{
             errors.Genres
           }}</span>
         </div>
 
         <div class="d-flex row mt-2 mb-3" style="margin-left: -10px">
-
           <label
             class="Page_title"
             style="margin-left: 12px; margin-bottom: 5px"
@@ -85,7 +83,7 @@
             />
             <label class="form-check-label">{{ company.Name }}</label>
           </div>
-                    <span v-if="errors.Production_companies" class="ms-3 text-danger">{{
+          <span v-if="errors.Production_companies" class="ms-3 text-danger">{{
             errors.Production_companies
           }}</span>
         </div>
@@ -97,6 +95,7 @@
             type="date"
             name="ReleaseDate"
             v-model="Movie.ReleaseDate"
+            :min="minDate"
           />
           <label
             class="
@@ -105,14 +104,15 @@
               form-check-label
               ms-2
             "
+            
             >Release date
           </label>
         </div>
-                  <span v-if="errors.ReleaseDate" class="ms-3 text-danger">{{
-            errors.ReleaseDate
-          }}</span>
+        <span v-if="errors.ReleaseDate" class="ms-3 text-danger">{{
+          errors.ReleaseDate
+        }}</span>
         <!-- Discription -->
-       
+
         <textarea
           class="form-control mb-2 p-2"
           placeholder="Description"
@@ -121,7 +121,7 @@
           name="Description"
           v-model="Movie.Description"
         ></textarea>
- <span v-if="errors.Description" class="ms-3 text-danger">{{
+        <span v-if="errors.Description" class="ms-3 text-danger">{{
           errors.Description
         }}</span>
         <!-- subimt button -->
@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import Notifications from "../../../mixin/notificationMixin"
+import Notifications from "../../../mixin/notificationMixin";
 import AdminNavBar from "../../../components/Admin/AdminNavBar.vue";
 import LanguageAPI from "../../../services/spoken_language.service";
 import GenresAPI from "../../../services/genre.service";
@@ -149,7 +149,7 @@ import { useField, useForm } from "vee-validate";
 import MovieApi from "../../../services/movie.service";
 export default {
   name: "AdminAddMovie",
-  mixins:[Notifications],
+  mixins: [Notifications],
   components: {
     AdminNavBar,
   },
@@ -179,27 +179,24 @@ export default {
     const { value: MovieName } = useField("MovieName");
     const { value: Original_language } = useField("Original_language");
     const { value: Description } = useField("Description");
-    const { value: Genres} = useField("Genres");
+    const { value: Genres } = useField("Genres");
     const { value: ReleaseDate } = useField("ReleaseDate");
     const { value: Production_companies } = useField("Production_companies");
 
     const handleChange = (event) => {
-      
       const fieldName = event.target.name;
       const fieldValue = parseInt(event.target.value);
       const isChecked = event.target.checked;
-      if(!Movie[fieldName].value && isChecked){
+      if (!Movie[fieldName].value && isChecked) {
         Movie[fieldName].value = [fieldValue];
+      } else {
+        if (isChecked) {
+          Movie[fieldName].value.push(fieldValue);
+        } else {
+          let index = Movie[fieldName].value.indexOf(fieldValue);
+          Movie[fieldName].value.splice(index, 1);
+        }
       }
-      else {
-         if(isChecked){
-           Movie[fieldName].value.push(fieldValue);
-         }
-         else {
-           let index = Movie[fieldName].value.indexOf(fieldValue);
-           Movie[fieldName].value.splice(index,1);
-         }
-      }   
     };
 
     Movie.MovieName = MovieName;
@@ -209,12 +206,15 @@ export default {
     Movie.ReleaseDate = ReleaseDate;
     Movie.Production_companies = Production_companies;
 
-    const submit = handleSubmit((values) => {
-      this.error = "";
-      this.createMovie(values);
-    },(anyError)=>{
-      console.log(anyError);
-    });
+    const submit = handleSubmit(
+      (values) => {
+        this.error = "";
+        this.createMovie(values);
+      },
+      (anyError) => {
+        console.log(anyError);
+      }
+    );
     return {
       language: [],
       Genres_array: [],
@@ -236,10 +236,21 @@ export default {
   mounted() {
     document.title = `NetflixAdmin - AddMovies`;
   },
+  computed : {
+    minDate(){
+      let date = new Date(2022,1,28);
+      console.log(date)
+      let year = date.getFullYear();
+      let month = ("0" + (date.getMonth() + 1)).slice(-2);
+      let day = ("0" + (date.getDate())).slice(-2);
+      let min = year+"-"+month+"-"+day;
+      return min;
+    }
+  },
   beforeCreate() {
     LanguageAPI.getAllSpokenLanguage().then((res) => {
       this.language = res.data.languages;
-    });
+      });
     GenresAPI.getAllGenre().then((res) => {
       this.Genres_array = res.data;
     });
@@ -251,7 +262,7 @@ export default {
     async createMovie(movie_data) {
       await MovieApi.createAnMovie(movie_data).then((res) => {
         console.log(res);
-        Notifications("Successfully created movie", "success")
+        Notifications("Successfully created movie", "success");
       });
     },
   },
