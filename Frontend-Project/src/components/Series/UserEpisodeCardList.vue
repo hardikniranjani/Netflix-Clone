@@ -145,8 +145,9 @@ export default {
         media_type: this.type,
       })
         .then((res) => {
+          console.log(res.data.list);
           this.$store.dispatch("ADD_HISTORY", res.data.list);
-          Notification("Removed From WatchHistory.", "Success");
+          Notification("Removed From WatchHistory.", "success");
           // location.reload();
         })
         .catch((err) => {
